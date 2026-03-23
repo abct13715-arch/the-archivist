@@ -1,6 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 
-export type Listing = {
+export type TListing = {
   id: string;
   image: ImageSourcePropType;
   title: string;
@@ -9,9 +9,37 @@ export type Listing = {
   badge?: "AVAILABLE" | "RESERVED";
 };
 
-export type Review = {
+export type TReview = {
   id: string;
   name: string;
   text: string;
   rating: number;
+};
+
+export type TFeaturedCollection = {
+  id: string;
+  title: string;
+  description: string;
+  image: ImageSourcePropType;
+};
+
+export type TCollectionItem = {
+  id: string;
+  name: string;
+  image: ImageSourcePropType;
+  category: string;
+  price: string;
+};
+
+export type TCollectionDetail = {
+  id: string;
+  title: string;
+  collectionNumber: string;
+  badge: string;
+  heroImage: ImageSourcePropType;
+  quote: string;
+  quoteAuthor: string;
+  intentTitle: string;
+  intentDescription: string[];
+  items: TCollectionItem[];
 };

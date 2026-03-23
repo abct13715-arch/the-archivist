@@ -1,26 +1,57 @@
+import { Navbar } from "@/components";
+import { Colors } from "@/constants/theme";
 import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+  PlayfairDisplay_700Bold,
+  useFonts,
+} from "@expo-google-fonts/playfair-display";
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 import "react-native-reanimated";
 import "../global.css";
-
-import { useColorScheme } from "@/hooks/use-color-scheme";
 
 export const unstable_settings = {
   anchor: "(tabs)",
 };
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+const ArchivistTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: Colors.light.background,
+    card: Colors.light.surface,
+    text: Colors.light.text,
+    border: Colors.light.border,
+    primary: Colors.brand.secondary,
+  },
+};
 
+export default function RootLayout() {
+  const [loaded] = useFonts({ PlayfairDisplay_700Bold });
+  useEffect(() => {
+    if (loaded) SplashScreen.hideAsync();
+  }, [loaded]);
+  if (!loaded) return null;
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={ArchivistTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="collection/index"
+          options={{
+            headerShown: true,
+            header: () => <Navbar routeName="collection" />,
+          }}
+        />
+        <Stack.Screen
+          name="collection/[id]"
+          options={{
+            headerShown: true,
+            header: () => <Navbar routeName="collection/detail" />,
+          }}
+        />
       </Stack>
       <StatusBar style="dark" />
     </ThemeProvider>

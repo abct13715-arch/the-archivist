@@ -1,29 +1,10 @@
-import { Tabs } from "expo-router";
-import React, { useEffect } from "react";
-
 import { Navbar } from "@/components";
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
-import {
-  PlayfairDisplay_700Bold,
-  useFonts,
-} from "@expo-google-fonts/playfair-display";
-import * as SplashScreen from "expo-splash-screen";
-
-SplashScreen.preventAutoHideAsync();
+import { Tabs } from "expo-router";
 
 export default function TabLayout() {
-  const [loaded] = useFonts({ PlayfairDisplay_700Bold });
-
-  useEffect(() => {
-    if (loaded) SplashScreen.hideAsync();
-  }, [loaded]);
-
-  const colorScheme = useColorScheme();
-
-  if (!loaded) return null;
   return (
     <Tabs
       screenOptions={{

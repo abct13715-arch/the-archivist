@@ -28,9 +28,7 @@ export const Navbar = ({ routeName }: NavbarProps) => {
           className="flex-1 rounded-xl px-4 py-2 text-base"
         />
         <TouchableOpacity onPress={() => setIsSearchOpen(false)}>
-          <Text style={{ color: Colors.light.text }} className="text-base">
-            Cancel
-          </Text>
+          <Text className="text-base text-primary-900">Cancel</Text>
         </TouchableOpacity>
       </View>
     );
@@ -42,10 +40,10 @@ export const Navbar = ({ routeName }: NavbarProps) => {
         backgroundColor: Colors.light.surface,
         borderBottomColor: Colors.light.border,
       }}
-      className="w-full px-4 pt-20 pb-4 border-b flex-row justify-between items-center"
+      className="w-full px-4 pt-16 pb-4 border-b flex-row justify-between items-center"
     >
       <View className="flex-row items-center gap-3">
-        {routeName === "index" ? (
+        {["index", "browse", "profile", "cart"].includes(routeName) ? (
           <TouchableOpacity>
             <Ionicons name="menu-outline" size={30} color={Colors.light.icon} />
           </TouchableOpacity>
@@ -58,13 +56,7 @@ export const Navbar = ({ routeName }: NavbarProps) => {
             />
           </TouchableOpacity>
         )}
-        <Text
-          style={{
-            color: Colors.light.text,
-            fontFamily: "PlayfairDisplay_700Bold",
-          }}
-          className="text-2xl font-bold"
-        >
+        <Text className="text-2xl font-playfair text-primary-900">
           THE ARCHIVIST
         </Text>
       </View>

@@ -22,4 +22,9 @@ export const images = {
   p3: require("./p-3.png"),
   p4: require("./p-4.png"),
   icon: require("./icon.png"),
+  collectionBanner: require("./collection-banner.png"),
+  monolithWallClock: require("./monolith-wall-clock.png"),
+  rawPlinthStool: require("./raw-plinth-stool.png"),
+  foundryTableLamp: require("./table-lamp.png"),
+  shetlandWoolThrow: require("./wool-throw.png"),
 };
