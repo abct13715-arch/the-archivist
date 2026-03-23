@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useCollectionDetail } from "../data";
 import { CollectionItemCard } from "./collection-item-card";
+
 const ITEMS_PER_PAGE = 3;
 
 export const CollectionDetail = () => {
@@ -16,6 +17,7 @@ export const CollectionDetail = () => {
   }, [collection]);
   const visibleItems = collection.items.slice(0, visibleCount);
   const hasMore = visibleCount < collection.items.length;
+
   return (
     <ScrollView>
       <Image

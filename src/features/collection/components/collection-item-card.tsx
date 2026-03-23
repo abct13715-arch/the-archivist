@@ -25,7 +25,7 @@ export const CollectionItemCard = ({
     <TouchableOpacity onPress={onPress} className="py-8">
       <Image
         source={image}
-        style={{ width: "100%", height: 400 }}
+        style={{ width: "100%", aspectRatio: 1 }}
         contentFit="cover"
       />
       <View className="flex-row justify-between items-center py-3">

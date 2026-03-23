@@ -27,4 +27,9 @@ export const images = {
   rawPlinthStool: require("./raw-plinth-stool.png"),
   foundryTableLamp: require("./table-lamp.png"),
   shetlandWoolThrow: require("./wool-throw.png"),
+  series1: require("./series-1.png"),
+  series2: require("./series-2.png"),
+  series3: require("./series-3.png"),
+  series4: require("./series-4.png"),
+  series5: require("./series-5.png"),
 };

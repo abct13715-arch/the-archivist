@@ -1,5 +1,5 @@
 import { images } from "@/assets";
-import { TCollectionDetail } from "@/types";
+import { TCollection, TCollectionDetail } from "@/types";
 
 export const useCollectionDetail = (id: string): TCollectionDetail => {
   return {
@@ -44,6 +44,53 @@ export const useCollectionDetail = (id: string): TCollectionDetail => {
         image: images.shetlandWoolThrow,
         category: "TEXTILE / OAK",
         price: "$320",
+      },
+    ],
+  };
+};
+
+export const useCollection = (): TCollection => {
+  return {
+    collections: [
+      {
+        id: "brutalist-series",
+        seriesNumber: "01",
+        title: "The Brutalist Series",
+        description:
+          "Exploring the raw, unadorned beauty of concrete monoliths and structural honesty.",
+        image: images.series1,
+      },
+      {
+        id: "mid-century-modern",
+        seriesNumber: "02",
+        title: "Mid-Century Modern",
+        description:
+          "The golden era of organic curves and functional elegance.",
+        image: images.series2,
+      },
+      {
+        id: "japanese-minimalism",
+        seriesNumber: "03",
+        title: "Japanese Minimalism",
+        description:
+          "Silence translated into space. A study of Ma and the art of subtraction.",
+        image: images.series3,
+      },
+      {
+        id: "modernist-glass",
+        seriesNumber: "04",
+        title: "Modernist Glass",
+        description:
+          "Transparency, reflection, and the dissolution of boundaries between inside and out.",
+        image: images.series4,
+      },
+      {
+        id: "industrial-utility",
+        seriesNumber: "05",
+        title: "Industrial Utility",
+        description:
+          "Objects born from necessity, celebrated for their unapologetic functionality.",
+        image: images.series5,
       },
     ],
   };

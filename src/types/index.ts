@@ -43,3 +43,15 @@ export type TCollectionDetail = {
   intentDescription: string[];
   items: TCollectionItem[];
 };
+
+export type TCollectionCard = {
+  id: string;
+  seriesNumber: string;
+  title: string;
+  description: string;
+  image: ImageSourcePropType;
+};
+
+export type TCollection = {
+  collections: TCollectionCard[];
+};
