@@ -14,6 +14,9 @@ export const images = {
   clock: require("./clock.png"),
   curator1: require("./curator-1.png"),
   curator2: require("./curator-2.png"),
+  curator3: require("./curator-3.png"),
+  curator4: require("./curator-4.png"),
+  curator5: require("./curator-5.png"),
   flowerPot: require("./flower-pot.png"),
   homeHero: require("./home-hero.png"),
   stoneMonolith: require("./stone-monolith.png"),
@@ -32,4 +35,5 @@ export const images = {
   series3: require("./series-3.png"),
   series4: require("./series-4.png"),
   series5: require("./series-5.png"),
+  homeCollection: require("./home-collection.png"),
 };

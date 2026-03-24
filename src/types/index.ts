@@ -21,6 +21,8 @@ export type TFeaturedCollection = {
   title: string;
   description: string;
   image: ImageSourcePropType;
+  imageCaption: string;
+  volume: string;
 };
 
 export type TCollectionItem = {
