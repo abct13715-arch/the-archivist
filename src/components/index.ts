@@ -1,3 +1,4 @@
+export * from "./drawer";
 export * from "./external-link";
 export * from "./haptic-tab";
 export * from "./hello-wave";

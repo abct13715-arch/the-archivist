@@ -36,12 +36,13 @@ export default function RootLayout() {
   if (!loaded) return null;
   return (
     <ThemeProvider value={ArchivistTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
         <Stack.Screen
           name="collection/index"
           options={{
             headerShown: true,
+            animation: "slide_from_bottom",
             header: () => <Navbar routeName="collection" />,
           }}
         />
@@ -49,9 +50,11 @@ export default function RootLayout() {
           name="collection/[id]"
           options={{
             headerShown: true,
+            animation: "slide_from_bottom",
             header: () => <Navbar routeName="collection/detail" />,
           }}
         />
+        <Stack.Screen name="drawer/[path]" />
       </Stack>
       <StatusBar style="dark" />
     </ThemeProvider>
