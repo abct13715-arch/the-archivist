@@ -1,6 +1,6 @@
-import { Listing, Review } from "@/types";
+import { TListing, TReview } from "@/types";
 
-export const listings: Listing[] = [
+export const listings: TListing[] = [
   {
     id: "1",
     image: require("@/assets/images/chair-2.png"),
@@ -33,7 +33,7 @@ export const listings: Listing[] = [
   },
 ];
 
-export const reviews: Review[] = [
+export const reviews: TReview[] = [
   {
     id: "1",
     name: "Sophie M.",

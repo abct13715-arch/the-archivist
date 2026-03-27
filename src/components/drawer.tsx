@@ -57,7 +57,10 @@ export const Drawer = () => {
             THE ARCHIVIST
           </Text>
 
-          <TouchableOpacity onPress={() => router.back()}>
+          <TouchableOpacity
+            onPress={() => router.back()}
+            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          >
             <Ionicons name="close" size={30} color={Colors.light.text} />
           </TouchableOpacity>
         </View>

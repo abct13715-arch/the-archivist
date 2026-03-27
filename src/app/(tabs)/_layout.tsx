@@ -2,18 +2,23 @@ import { Navbar } from "@/components";
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
+import { isHorizontalScrollingRef } from "@/contexts/horizontal-scroll-context";
 import { router, Tabs } from "expo-router";
 import { useRef } from "react";
 import { PanResponder, View } from "react-native";
 
-export default function TabLayout() {
+function TabLayoutContent() {
   const swipeResponder = useRef(
     PanResponder.create({
+      onStartShouldSetPanResponder: () => false,
+      onStartShouldSetPanResponderCapture: () => false,
       onMoveShouldSetPanResponder: (_, g) =>
-        Math.abs(g.dx) > Math.abs(g.dy) && g.dx < -20,
+        !isHorizontalScrollingRef.current && Math.abs(g.dx) > Math.abs(g.dy) && g.dx < -20,
+      onMoveShouldSetPanResponderCapture: (_, g) =>
+        !isHorizontalScrollingRef.current && Math.abs(g.dx) > Math.abs(g.dy) && g.dx < -20,
 
       onPanResponderRelease: (_, g) => {
-        if (g.dx < -60) {
+        if (!isHorizontalScrollingRef.current && g.dx < -60) {
           router.push("/drawer");
         }
       },
@@ -83,3 +88,5 @@ export default function TabLayout() {
     </View>
   );
 }
+
+export default TabLayoutContent;

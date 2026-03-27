@@ -1,54 +1,74 @@
-import { ProductImage } from "@/components";
+import { ImageSourcePropType } from "react-native";
 
-export const products: ProductImage[] = [
+export type TBrowseCollection = {
+  id: string;
+  image: ImageSourcePropType;
+  series: string;
+  title: string;
+};
+
+export type TBrowseProduct = {
+  id: string;
+  image: ImageSourcePropType;
+  title: string;
+  price: string;
+  isAsymmetric?: boolean;
+};
+
+export const browseCollections: TBrowseCollection[] = [
   {
     id: "1",
-    image: require("@/assets/images/watch.png"),
-    condition: "MINT CONDITION",
-    title: "1964 Calatrava Ref. 3445 in 18K White Gold",
-    price: "$18,450.00",
-    curatedBy: "THE GENEVA ARCHIVE",
-    rating: 4.9,
-    totalRatings: 210,
+    image: require("@/assets/images/series-1.png"),
+    series: "SERIES 01",
+    title: "The Brutalist Series",
   },
   {
     id: "2",
-    image: require("@/assets/images/p-1.png"),
-    condition: "EXCELLENT CONDITION",
-    title: "Minimal White Mobile Object Study",
-    price: "$2,200.00",
-    curatedBy: "THE FORM ARCHIVE",
-    rating: 4.7,
-    totalRatings: 94,
+    image: require("@/assets/images/series-2.png"),
+    series: "SERIES 02",
+    title: "Nordic Woodcraft",
   },
   {
     id: "3",
-    image: require("@/assets/images/p-2.png"),
-    condition: "GOOD CONDITION",
-    title: "Fiddle Leaf Fig in Studio Ceramic Pot",
-    price: "$380.00",
-    curatedBy: "THE BOTANICAL ARCHIVE",
-    rating: 4.8,
-    totalRatings: 156,
+    image: require("@/assets/images/series-3.png"), series: "SERIES 03",
+    title: "Luminous Objects",
+  },
+];
+
+export const browseProducts: TBrowseProduct[] = [
+  {
+    id: "1",
+    image: require("@/assets/images/bottle-1.png"),
+    title: "Earthen Vessel No. 04",
+    price: "$420.00",
+    isAsymmetric: true,
+  },
+  {
+    id: "2",
+    image: require("@/assets/images/chair-2.png"),
+    title: "The Artek Lounge",
+    price: "$1,850.00",
+  },
+  {
+    id: "3",
+    image: require("@/assets/images/light.png"),
+    title: "Brushed Brass Task Lamp",
+    price: "$315.00",
   },
   {
     id: "4",
-    image: require("@/assets/images/p-3.png"),
-    condition: "PRISTINE CONDITION",
-    title: "Ruscus Branch — Dried Botanical Specimen",
-    price: "$120.00",
-    curatedBy: "THE BOTANICAL ARCHIVE",
-    rating: 4.6,
-    totalRatings: 73,
+    image: require("@/assets/images/folio.png"),
+    title: "Linear Study 09",
+    price: "$580.00",
+    isAsymmetric: true,
   },
-  {
-    id: "5",
-    image: require("@/assets/images/p-4.png"),
-    condition: "ARCHIVAL CONDITION",
-    title: "Handwritten Poetry Manuscript on Parchment",
-    price: "$5,800.00",
-    curatedBy: "THE LITERARY ARCHIVE",
-    rating: 5.0,
-    totalRatings: 41,
-  },
+];
+
+export const categories = [
+  "FURNITURE",
+  "LIGHTING",
+  "TEXTILES",
+  "CERAMICS",
+  "OBJECTS",
+  "ARCHIVE",
 ];

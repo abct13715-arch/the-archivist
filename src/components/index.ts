@@ -7,3 +7,4 @@ export * from "./navbar";
 export * from "./pagination";
 export * from "./themed-text";
 export * from "./themed-view";
+export * from "./ui/bottom-sheet";
