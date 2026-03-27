@@ -1,4 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetScrollView,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
+import React, { forwardRef, useEffect, useRef } from "react";
 import {
   Animated,
   Dimensions,
@@ -65,3 +71,50 @@ export const BottomSheet = ({
     </Modal>
   );
 };
+
+interface BottomSheetComponentProps {
+  children: React.ReactNode;
+  snapPoints?: (string | number)[];
+  useScroll?: boolean;
+}
+
+export const BottomSheetComponent = forwardRef<
+  BottomSheetModal,
+  BottomSheetComponentProps
+>(({ children, snapPoints = ["50%"], useScroll = false }, ref) => {
+  const renderBackdrop = React.useCallback(
+    (props: any) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        opacity={0.5}
+      />
+    ),
+    [],
+  );
+
+  return (
+    <BottomSheetModal
+      ref={ref}
+      index={0}
+      snapPoints={snapPoints}
+      backdropComponent={renderBackdrop}
+      enablePanDownToClose
+      backgroundStyle={{ backgroundColor: "white", borderRadius: 32 }}
+      handleIndicatorStyle={{ backgroundColor: "#D1D5DB", width: 48 }}
+    >
+      {useScroll ? (
+        <BottomSheetScrollView className="flex-1">
+          <View className="p-6">{children}</View>
+        </BottomSheetScrollView>
+      ) : (
+        <BottomSheetView className="flex-1 px-6 py-4">
+          {children}
+        </BottomSheetView>
+      )}
+    </BottomSheetModal>
+  );
+});
+
+BottomSheetComponent.displayName = "BottomSheetComponent";

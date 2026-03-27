@@ -1,11 +1,12 @@
 import { Feather } from "@expo/vector-icons";
-import React, { useState } from "react";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import React, { useRef, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { FilterBottomSheet } from "./filter-bottom-sheet";
 
 export const SearchBar = () => {
   const [search, setSearch] = useState("");
-  const [visible, setVisible] = useState(false);
+  const filterBottomSheetRef = useRef<BottomSheetModal>(null);
 
   return (
     <>
@@ -21,7 +22,7 @@ export const SearchBar = () => {
           />
           <View className="h-4 w-[1px] bg-neutral-300" />
           <TouchableOpacity
-            onPress={() => setVisible(true)}
+            onPress={() => filterBottomSheetRef.current?.present()}
             hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
             <Text className="text-[10px] font-bold tracking-widest text-primary-900">
@@ -31,7 +32,7 @@ export const SearchBar = () => {
         </View>
       </View>
 
-      <FilterBottomSheet visible={visible} onClose={() => setVisible(false)} />
+      <FilterBottomSheet ref={filterBottomSheetRef} />
     </>
   );
 };

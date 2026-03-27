@@ -4,11 +4,13 @@ import {
   PlayfairDisplay_700Bold,
   useFonts,
 } from "@expo-google-fonts/playfair-display";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 import "../global.css";
 
@@ -35,28 +37,32 @@ export default function RootLayout() {
   }, [loaded]);
   if (!loaded) return null;
   return (
-    <ThemeProvider value={ArchivistTheme}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen
-          name="collection/index"
-          options={{
-            headerShown: true,
-            animation: "slide_from_bottom",
-            header: () => <Navbar routeName="collection" />,
-          }}
-        />
-        <Stack.Screen
-          name="collection/[id]"
-          options={{
-            headerShown: true,
-            animation: "slide_from_bottom",
-            header: () => <Navbar routeName="collection/detail" />,
-          }}
-        />
-        <Stack.Screen name="drawer/[path]" />
-      </Stack>
-      <StatusBar style="dark" />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <ThemeProvider value={ArchivistTheme}>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen
+              name="collection/index"
+              options={{
+                headerShown: true,
+                animation: "slide_from_bottom",
+                header: () => <Navbar routeName="collection" />,
+              }}
+            />
+            <Stack.Screen
+              name="collection/[id]"
+              options={{
+                headerShown: true,
+                animation: "slide_from_bottom",
+                header: () => <Navbar routeName="collection/detail" />,
+              }}
+            />
+            <Stack.Screen name="drawer/[path]" />
+          </Stack>
+          <StatusBar style="dark" />
+        </ThemeProvider>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 }
