@@ -36,4 +36,5 @@ export const images = {
   series4: require("./series-4.png"),
   series5: require("./series-5.png"),
   homeCollection: require("./home-collection.png"),
+  onboardingBg: require("./onboarding-bg.png"),
 };
