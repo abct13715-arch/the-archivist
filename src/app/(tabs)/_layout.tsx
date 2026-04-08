@@ -3,19 +3,27 @@ import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { isHorizontalScrollingRef } from "@/contexts/horizontal-scroll-context";
+import { useAuth } from "@/hooks/use-auth";
 import { router, Tabs } from "expo-router";
 import { useRef } from "react";
 import { PanResponder, View } from "react-native";
 
 function TabLayoutContent() {
+  const { user, isGuest } = useAuth();
+  const isLoggedIn = user && !isGuest;
+
   const swipeResponder = useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: () => false,
       onStartShouldSetPanResponderCapture: () => false,
       onMoveShouldSetPanResponder: (_, g) =>
-        !isHorizontalScrollingRef.current && Math.abs(g.dx) > Math.abs(g.dy) && g.dx < -20,
+        !isHorizontalScrollingRef.current &&
+        Math.abs(g.dx) > Math.abs(g.dy) &&
+        g.dx < -20,
       onMoveShouldSetPanResponderCapture: (_, g) =>
-        !isHorizontalScrollingRef.current && Math.abs(g.dx) > Math.abs(g.dy) && g.dx < -20,
+        !isHorizontalScrollingRef.current &&
+        Math.abs(g.dx) > Math.abs(g.dy) &&
+        g.dx < -20,
 
       onPanResponderRelease: (_, g) => {
         if (!isHorizontalScrollingRef.current && g.dx < -60) {
@@ -67,20 +75,24 @@ function TabLayoutContent() {
           }}
         />
         <Tabs.Screen
-          name="profile"
-          options={{
-            title: "Profile",
-            tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="person.fill" color={color} />
-            ),
-          }}
-        />
-        <Tabs.Screen
           name="cart"
           options={{
             title: "Cart",
             tabBarIcon: ({ color }) => (
               <IconSymbol size={28} name="cart.fill" color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: isLoggedIn ? "Profile" : "Login",
+            tabBarIcon: ({ color }) => (
+              <IconSymbol
+                size={28}
+                name={isLoggedIn ? "person.fill" : "arrow.right.circle.fill"}
+                color={color}
+              />
             ),
           }}
         />

@@ -1,5 +1,6 @@
 import { images } from "@/assets";
 import { Colors } from "@/constants/theme";
+import { storage } from "@/lib/storage";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router } from "expo-router";
@@ -146,7 +147,10 @@ export const Drawer = () => {
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => console.log("logout")}
+              onPress={async () => {
+                await storage.deleteItem("guest");
+                router.replace("/(auth)/onboarding");
+              }}
               className="border border-tertiary-100 w-12 h-12 items-center justify-center"
             >
               <Ionicons
