@@ -14,8 +14,6 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 import "../global.css";
 
-import { useAuth } from "@/hooks/use-auth";
-
 const ArchivistTheme = {
   ...DefaultTheme,
   colors: {
@@ -30,48 +28,42 @@ const ArchivistTheme = {
 
 export default function RootLayout() {
   const [loaded] = useFonts({ PlayfairDisplay_700Bold });
-  const { user, isGuest, loading } = useAuth();
-  const isLoggedIn = user || isGuest;
 
   useEffect(() => {
     if (loaded) SplashScreen.hideAsync();
   }, [loaded]);
-
-  if (!loaded || loading) return null;
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <BottomSheetModalProvider>
         <ThemeProvider value={ArchivistTheme}>
           <Stack screenOptions={{ headerShown: false }}>
-            {!isLoggedIn ? (
-              <>
-                <Stack.Screen name="(auth)/onboarding" />
-                <Stack.Screen name="(auth)/login" />
-                <Stack.Screen name="(auth)/register" />
-              </>
-            ) : (
-              <>
-                <Stack.Screen name="(tabs)" />
-                <Stack.Screen
-                  name="collection/index"
-                  options={{
-                    headerShown: true,
-                    animation: "slide_from_bottom",
-                    header: () => <Navbar routeName="collection" />,
-                  }}
-                />
-                <Stack.Screen
-                  name="collection/[id]"
-                  options={{
-                    headerShown: true,
-                    animation: "slide_from_bottom",
-                    header: () => <Navbar routeName="collection/detail" />,
-                  }}
-                />
-                <Stack.Screen name="drawer/[path]" />
-              </>
-            )}
+            <Stack.Screen name="(auth)/onboarding" />
+            <Stack.Screen name="(auth)/login" />
+            <Stack.Screen name="(auth)/register" />
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen
+              name="collection/index"
+              options={{
+                headerShown: true,
+                header: () => <Navbar routeName="collection" />,
+              }}
+            />
+            <Stack.Screen
+              name="collection/[id]"
+              options={{
+                headerShown: true,
+                header: () => <Navbar routeName="collection/detail" />,
+              }}
+            />
+            <Stack.Screen name="drawer/[path]" />
+            <Stack.Screen
+              name="product-detail/[id]"
+              options={{
+                headerShown: true,
+                header: () => <Navbar routeName="product-detail" />,
+              }}
+            />
           </Stack>
           <StatusBar style="dark" />
         </ThemeProvider>
