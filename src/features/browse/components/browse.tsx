@@ -35,7 +35,13 @@ export const Browse = () => {
 
       <View className="px-6 py-10 flex-row flex-wrap justify-between gap-y-2">
         {browseProducts.map((product) => (
-          <BrowseProductCard key={product.id} product={product} />
+          <BrowseProductCard 
+            key={product.id} 
+            product={product}
+            onToggleBookmark={(id, bookmarked) => {
+              console.log("Bookmark toggled:", id, bookmarked);
+            }}
+          />
         ))}
       </View>
 
