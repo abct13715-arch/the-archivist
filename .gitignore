@@ -44,3 +44,5 @@ app-example
 
 design/
 .ai/
+graphify-out/
+tmp_design_images/
