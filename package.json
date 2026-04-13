@@ -53,6 +53,8 @@
     "babel-plugin-module-resolver": "^5.0.3",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-unicorn": "^64.0.0",
     "skills": "^1.4.6",
     "typescript": "~5.9.2"
   },
