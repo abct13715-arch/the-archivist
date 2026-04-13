@@ -6,6 +6,11 @@ import { useAcquisitions } from "../data";
 export const HomeAcquisitions = () => {
   const { acquisitions } = useAcquisitions();
 
+  const handleProductPress = (index: number) => {
+    const productId = (index + 1).toString();
+    router.push(`/product-detail/${productId}`);
+  };
+
   return (
     <View className="py-8">
       <View className="h-px bg-tertiary-100 w-2/3 mb-4 mx-auto" />
@@ -28,7 +33,7 @@ export const HomeAcquisitions = () => {
         <View className="mx-4 border border-tertiary-100">
           <View className="flex-row">
             <TouchableOpacity
-              onPress={() => console.log(acquisitions[0].id)}
+              onPress={() => handleProductPress(0)}
               className="w-1/2 p-4 border-r border-b border-tertiary-100"
             >
               <Image
@@ -50,7 +55,7 @@ export const HomeAcquisitions = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => console.log(acquisitions[1].id)}
+              onPress={() => handleProductPress(1)}
               className="w-1/2 p-4 border-b border-tertiary-100"
             >
               <Image
@@ -74,7 +79,7 @@ export const HomeAcquisitions = () => {
 
           <View className="flex-row">
             <TouchableOpacity
-              onPress={() => console.log(acquisitions[2].id)}
+              onPress={() => handleProductPress(2)}
               className="w-1/2 p-4 border-r border-tertiary-100"
             >
               <Image
@@ -96,7 +101,7 @@ export const HomeAcquisitions = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => console.log(acquisitions[3].id)}
+              onPress={() => handleProductPress(3)}
               className="w-1/2 p-4"
             >
               <Image
