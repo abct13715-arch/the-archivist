@@ -1,21 +1,16 @@
 import { Colors } from "@/constants/theme";
-import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 type TabType = "objects" | "collections";
 
 type Props = {
-  onTabChange?: (tab: TabType) => void;
+  activeTab: TabType;
+  onTabChange: (tab: TabType) => void;
 };
 
-export const SavedTabToggle = ({ onTabChange }: Props) => {
-  const [activeTab, setActiveTab] = useState<TabType>("objects");
-
+export const SavedTabToggle = ({ activeTab, onTabChange }: Props) => {
   const handleTabPress = (tab: TabType) => {
-    setActiveTab(tab);
-    if (onTabChange) {
-      onTabChange(tab);
-    }
+    onTabChange(tab);
   };
 
   return (

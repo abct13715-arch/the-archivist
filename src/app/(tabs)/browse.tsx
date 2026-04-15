@@ -1,2 +1,5 @@
 import { Browse } from "@/features";
-export default Browse;
+
+export default function BrowseTab() {
+  return <Browse />;
+}

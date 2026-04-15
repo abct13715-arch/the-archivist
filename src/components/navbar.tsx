@@ -24,7 +24,7 @@ export const Navbar = ({ routeName }: NavbarProps) => {
         THE ARCHIVIST
       </Text>
 
-      {["index", "browse", "profile", "cart"].includes(routeName) ? (
+      {["index", "browse", "profile", "saved"].includes(routeName) ? (
         <TouchableOpacity onPress={() => router.push("/drawer")}>
           <Ionicons name="menu-outline" size={30} color={Colors.light.icon} />
         </TouchableOpacity>

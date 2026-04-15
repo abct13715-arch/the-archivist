@@ -1,2 +1,5 @@
 import { Home } from "@/features";
-export default Home;
+
+export default function HomeTab() {
+  return <Home />;
+}
