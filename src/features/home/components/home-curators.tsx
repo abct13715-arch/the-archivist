@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import { router } from "expo-router";
 import { useCurators } from "../data";
 import { CuratorArrowNav } from "./curator-arrow-nav";
 import { CuratorCard } from "./curator-card";
@@ -46,7 +47,12 @@ export const HomeCurators = () => {
             name={curator.name}
             quote={curator.quote}
             selections={curator.selections}
-            onPress={() => console.log(curator.id)}
+            onPress={() =>
+              router.push({
+                pathname: "/curator/[id]",
+                params: { id: curator.id },
+              } as any)
+            }
           />
         ))}
       </View>

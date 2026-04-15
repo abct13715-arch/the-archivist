@@ -64,6 +64,13 @@ export default function RootLayout() {
                 header: () => <Navbar routeName="product-detail" />,
               }}
             />
+            <Stack.Screen
+              name="curator/[id]"
+              options={{
+                headerShown: true,
+                header: () => <Navbar routeName="curator" />,
+              }}
+            />
           </Stack>
           <StatusBar style="dark" />
         </ThemeProvider>

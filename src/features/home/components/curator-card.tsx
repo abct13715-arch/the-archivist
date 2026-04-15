@@ -43,7 +43,7 @@ export const CuratorCard = ({
       </Text>
 
       <Text className="text-base text-tertiary-500 italic leading-6">
-        "{quote}"
+        &quot;{quote}&quot;
       </Text>
 
       <View className="border-t border-tertiary-100 pt-4 flex-row justify-between items-center">
