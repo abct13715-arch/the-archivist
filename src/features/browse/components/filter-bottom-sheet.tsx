@@ -1,10 +1,10 @@
-import { FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/theme";
+import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import React, { forwardRef, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { BottomSheetComponent } from "../../../components/ui/bottom-sheet";
 import { categories } from "../data";
-import { Colors } from "@/constants/theme";
 
 interface FilterBottomSheetProps {
   onApply?: (filters: any) => void;
@@ -49,7 +49,11 @@ export const FilterBottomSheet = forwardRef<
           <Text className="text-2xl font-playfair text-primary-900 tracking-tighter uppercase">
             Filters
           </Text>
-          <TouchableOpacity onPress={handleClear} activeOpacity={0.7} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+          <TouchableOpacity
+            onPress={handleClear}
+            activeOpacity={0.7}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
             <Text className="text-[11px] font-bold text-tertiary-500 uppercase tracking-label-lg">
               Clear All
             </Text>
@@ -74,9 +78,7 @@ export const FilterBottomSheet = forwardRef<
               >
                 <Text
                   className={`text-[10px] font-bold tracking-label-lg uppercase ${
-                    selectedCategory === cat
-                      ? "text-white"
-                      : "text-primary-900"
+                    selectedCategory === cat ? "text-white" : "text-primary-900"
                   }`}
                 >
                   {cat}
@@ -170,7 +172,11 @@ export const FilterBottomSheet = forwardRef<
                 <Ionicons
                   name={rating >= s ? "star" : "star-outline"}
                   size={20}
-                  color={rating >= s ? Colors.brand.secondary : Colors.palette.tertiary100}
+                  color={
+                    rating >= s
+                      ? Colors.brand.secondary
+                      : Colors.palette.tertiary100
+                  }
                 />
               </TouchableOpacity>
             ))}

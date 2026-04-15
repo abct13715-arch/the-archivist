@@ -1,8 +1,8 @@
+import { setIsHorizontalScrolling } from "@/contexts/horizontal-scroll-context";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { browseCollections } from "../data";
-import { setIsHorizontalScrolling } from "@/contexts/horizontal-scroll-context";
-import { useRouter } from "expo-router";
 
 export const FeaturedCollections = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ export const FeaturedCollections = () => {
         <Text className="font-playfair text-3xl tracking-tighter text-primary-900">
           Featured Collections
         </Text>
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => router.push("/collection")}
           className="border-b border-primary-900 pb-0.5"
         >

@@ -22,7 +22,7 @@ const trustBadges: TrustBadge[] = [
   },
 ];
 
-export const ProductTrustBadges = () => {
+export const ListingTrustBadges = () => {
   return (
     <View className="gap-6 mt-10 pb-10">
       {trustBadges.map((badge) => (

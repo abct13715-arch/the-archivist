@@ -1,11 +1,11 @@
 import { Text, View } from "react-native";
-import type { TProductSpecs } from "../data";
+import type { TListingSpecs } from "../data";
 
 type SpecsProps = {
-  specs: TProductSpecs;
+  specs: TListingSpecs;
 };
 
-export const ProductSpecs = ({ specs }: SpecsProps) => {
+export const ListingSpecs = ({ specs }: SpecsProps) => {
   const specItems = [
     { label: "Year", value: specs.year },
     { label: "Movement", value: specs.movement },

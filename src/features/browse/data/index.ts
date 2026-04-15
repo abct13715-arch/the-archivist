@@ -7,7 +7,7 @@ export type TBrowseCollection = {
   title: string;
 };
 
-export type TBrowseProduct = {
+export type TBrowseListing = {
   id: string;
   image: ImageSourcePropType;
   title: string;
@@ -30,12 +30,13 @@ export const browseCollections: TBrowseCollection[] = [
   },
   {
     id: "3",
-    image: require("@/assets/images/series-3.png"), series: "SERIES 03",
+    image: require("@/assets/images/series-3.png"),
+    series: "SERIES 03",
     title: "Luminous Objects",
   },
 ];
 
-export const browseProducts: TBrowseProduct[] = [
+export const browseListings: TBrowseListing[] = [
   {
     id: "1",
     image: require("@/assets/images/bottle-1.png"),

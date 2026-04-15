@@ -8,48 +8,48 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import type { TProductDetail } from "../data";
-import { ProductProvenance } from "./product-provenance";
-import { ProductSpecs } from "./product-specs";
-import { ProductTrustBadges } from "./product-trust-badges";
+import type { TListingDetail } from "../data";
+import { ListingProvenance } from "./listing-provenance";
+import { ListingSpecs } from "./listing-specs";
+import { ListingTrustBadges } from "./listing-trust-badges";
 
 const { width } = Dimensions.get("window");
 
-type ProductDetailProps = {
-  product: TProductDetail;
+type ListingDetailProps = {
+  listing: TListingDetail;
   onAddToCart?: () => void;
   onSaveLater?: () => void;
   showFullDetails?: boolean;
-  onRelatedProductPress?: (productId: string) => void;
+  onRelatedListingPress?: (listingId: string) => void;
 };
 
-export const ProductDetail = ({
-  product,
+export const ListingDetail = ({
+  listing,
   onAddToCart,
   onSaveLater,
   showFullDetails = false,
-  onRelatedProductPress,
-}: ProductDetailProps) => {
+  onRelatedListingPress,
+}: ListingDetailProps) => {
   const allImages = useMemo(() => {
-    const images: (typeof product.image)[] = [];
+    const images: (typeof listing.image)[] = [];
 
-    if (product.images && product.images.length > 0) {
-      images.push(...product.images);
+    if (listing.images && listing.images.length > 0) {
+      images.push(...listing.images);
     } else {
-      images.push(product.image);
-      if (product.relatedProducts) {
-        product.relatedProducts.forEach((rp) => {
+      images.push(listing.image);
+      if (listing.relatedListings) {
+        for (const rp of listing.relatedListings) {
           if (rp.image) images.push(rp.image);
-        });
+        }
       }
     }
 
     return images;
-  }, [product]);
+  }, [listing]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const selectedImage = allImages[selectedIndex] || product.image;
+  const selectedImage = allImages[selectedIndex] || listing.image;
 
   return (
     <ScrollView
@@ -92,24 +92,24 @@ export const ProductDetail = ({
       <View className="px-5 pt-5 pb-10 gap-4">
         <View className="self-start px-2 py-1 border border-secondary-500">
           <Text className="text-[10px] font-bold uppercase tracking-label-lg text-secondary-500">
-            {product.condition}
+            {listing.condition}
           </Text>
         </View>
 
         <Text className="text-3xl lg:text-4xl font-playfair text-brand-primary leading-tight">
-          {product.title}
+          {listing.title}
         </Text>
 
-        {product.subtitle && (
-          <Text className="text-xl text-tertiary-500">{product.subtitle}</Text>
+        {listing.subtitle && (
+          <Text className="text-xl text-tertiary-500">{listing.subtitle}</Text>
         )}
 
         <View className="border-b border-border pb-10 mb-10">
           <Text className="text-3xl font-playfair text-brand-primary mb-2">
-            {product.price}
+            {listing.price}
           </Text>
           <Text className="text-sm uppercase tracking-label-lg text-tertiary-500">
-            {product.priceLabel || "Available for immediate acquisition"}
+            {listing.priceLabel || "Available for immediate acquisition"}
           </Text>
         </View>
 
@@ -132,27 +132,27 @@ export const ProductDetail = ({
           </Text>
         </TouchableOpacity>
 
-        <ProductTrustBadges />
+        <ListingTrustBadges />
       </View>
 
-      {showFullDetails && product.quote && product.description && (
+      {showFullDetails && listing.quote && listing.description && (
         <View className="px-5 pb-10">
-          <ProductProvenance
-            quote={product.quote}
-            description={product.description}
+          <ListingProvenance
+            quote={listing.quote}
+            description={listing.description}
           />
-          {product.specs && <ProductSpecs specs={product.specs} />}
+          {listing.specs && <ListingSpecs specs={listing.specs} />}
         </View>
       )}
 
-      {product.relatedProducts && product.relatedProducts.length > 0 && (
+      {listing.relatedListings && listing.relatedListings.length > 0 && (
         <View className="px-5 pb-10">
           <View className="mb-10">
             <Text className="text-[10px] uppercase tracking-label-lg text-tertiary-500 mb-2">
               Curation
             </Text>
             <Text className="text-3xl font-playfair text-brand-primary">
-              More from {product.curatedBy}
+              More from {listing.curatedBy}
             </Text>
           </View>
 
@@ -161,10 +161,10 @@ export const ProductDetail = ({
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ gap: 8 }}
           >
-            {product.relatedProducts.map((related) => (
+            {listing.relatedListings.map((related) => (
               <TouchableOpacity
                 key={related.id}
-                onPress={() => onRelatedProductPress?.(related.id)}
+                onPress={() => onRelatedListingPress?.(related.id)}
                 className="w-[280px] mr-8"
               >
                 <View className="aspect-[3/4] border border-border mb-4">

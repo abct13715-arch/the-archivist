@@ -1,6 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 
-export type TProductSpecs = {
+export type TListingSpecs = {
   year?: string;
   movement?: string;
   diameter?: string;
@@ -9,7 +9,7 @@ export type TProductSpecs = {
   accessories?: string;
 };
 
-export type TRelatedProduct = {
+export type TRelatedListing = {
   id: string;
   brand: string;
   title: string;
@@ -17,7 +17,7 @@ export type TRelatedProduct = {
   image: ImageSourcePropType;
 };
 
-export type TProductDetail = {
+export type TListingDetail = {
   id: string;
   image: ImageSourcePropType;
   images?: ImageSourcePropType[];
@@ -31,11 +31,11 @@ export type TProductDetail = {
   totalRatings: number;
   quote?: string;
   description?: string[];
-  specs?: TProductSpecs;
-  relatedProducts?: TRelatedProduct[];
+  specs?: TListingSpecs;
+  relatedListings?: TRelatedListing[];
 };
 
-export const productList: TProductDetail[] = [
+export const ListingList: TListingDetail[] = [
   {
     id: "1",
     image: require("@/assets/images/bottle-1.png"),
@@ -47,7 +47,8 @@ export const productList: TProductDetail[] = [
     curatedBy: "The Heritage Loft",
     rating: 4.8,
     totalRatings: 24,
-    quote: "A definitive expression of minimal form, this vessel embodies the essence of wabi-sabi aesthetics.",
+    quote:
+      "A definitive expression of minimal form, this vessel embodies the essence of wabi-sabi aesthetics.",
     description: [
       "Hand-thrown by master ceramicist in rural Japan, each vessel carries the unique imprint of its maker's hands. The irregular glaze pattern emerges from a 72-hour firing process in a wood-fired kiln.",
       "This particular piece demonstrates exceptional balance between function and form, suitable for both dried floral arrangements and as a standalone sculptural presence.",
@@ -60,7 +61,7 @@ export const productList: TProductDetail[] = [
       condition: "Excellent",
       accessories: "Certificate of Authenticity",
     },
-    relatedProducts: [
+    relatedListings: [
       {
         id: "2",
         brand: "CERAMICS",
@@ -88,7 +89,8 @@ export const productList: TProductDetail[] = [
     curatedBy: "Nordic Archive",
     rating: 4.9,
     totalRatings: 42,
-    quote: "A masterclass in organic modernism, where every curve serves purpose.",
+    quote:
+      "A masterclass in organic modernism, where every curve serves purpose.",
     description: [
       "Designed in the 1960s by Finnish master craftsman, this lounge chair represents the pinnacle of Scandinavian design philosophy.",
       "Crafted from sustainably sourced Finnish teak with hand-stitched leather upholstery.",
@@ -101,7 +103,7 @@ export const productList: TProductDetail[] = [
       condition: "Very Good",
       accessories: "Original Certificate",
     },
-    relatedProducts: [],
+    relatedListings: [],
   },
   {
     id: "3",
@@ -122,7 +124,7 @@ export const productList: TProductDetail[] = [
       condition: "New",
       accessories: "Bulb included",
     },
-    relatedProducts: [],
+    relatedListings: [],
   },
   {
     id: "4",
@@ -134,7 +136,7 @@ export const productList: TProductDetail[] = [
     curatedBy: "Atelier Form",
     rating: 4.7,
     totalRatings: 12,
-    relatedProducts: [],
+    relatedListings: [],
   },
   {
     id: "5",
@@ -146,7 +148,7 @@ export const productList: TProductDetail[] = [
     curatedBy: "Woodcraft Collective",
     rating: 4.5,
     totalRatings: 8,
-    relatedProducts: [],
+    relatedListings: [],
   },
   {
     id: "6",
@@ -158,10 +160,10 @@ export const productList: TProductDetail[] = [
     curatedBy: "Time Gallery",
     rating: 4.8,
     totalRatings: 31,
-    relatedProducts: [],
+    relatedListings: [],
   },
 ];
 
-export const getProductById = (id: string): TProductDetail | undefined => {
-  return productList.find((p) => p.id === id);
+export const getListingById = (id: string): TListingDetail | undefined => {
+  return ListingList.find((p) => p.id === id);
 };

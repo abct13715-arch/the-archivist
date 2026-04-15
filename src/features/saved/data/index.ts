@@ -1,6 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 
-export type TSavedProduct = {
+export type TSavedListing = {
   id: string;
   image: ImageSourcePropType;
   title: string;
@@ -17,7 +17,7 @@ export type TSavedCollection = {
   itemCount: number;
 };
 
-export const savedProducts: TSavedProduct[] = [
+export const savedListings: TSavedListing[] = [
   {
     id: "1",
     image: require("@/assets/images/bottle-1.png"),

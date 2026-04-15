@@ -1,10 +1,10 @@
 import { Colors } from "@/constants/theme";
 import { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
-import { savedCollections, savedProducts } from "../data";
+import { savedCollections, savedListings } from "../data";
 import { SavedCollections } from "./saved-collections";
+import { SavedListingCard } from "./saved-listing-card";
 import { SavedLoadMore } from "./saved-load-more";
-import { SavedProductCard } from "./saved-product-card";
 import { SavedTabToggle } from "./saved-tab-toggle";
 
 export const Saved = () => {
@@ -37,20 +37,20 @@ export const Saved = () => {
         {activeTab === "objects" ? (
           <>
             <View className="flex-row flex-wrap justify-between gap-y-6">
-              {savedProducts.map((product) => (
+              {savedListings.map((listing) => (
                 <View
-                  key={product.id}
+                  key={listing.id}
                   className="w-[48%]"
                   style={{
                     marginBottom: 32,
                   }}
                 >
-                  <SavedProductCard product={product} />
+                  <SavedListingCard listing={listing} />
                 </View>
               ))}
             </View>
 
-            <SavedLoadMore shownCount={savedProducts.length} totalCount={28} />
+            <SavedLoadMore shownCount={savedListings.length} totalCount={28} />
           </>
         ) : (
           <SavedCollections collections={savedCollections} />

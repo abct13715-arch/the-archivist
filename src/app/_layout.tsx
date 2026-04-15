@@ -58,10 +58,17 @@ export default function RootLayout() {
             />
             <Stack.Screen name="drawer/[path]" />
             <Stack.Screen
-              name="product-detail/[id]"
+              name="listing/[id]"
               options={{
                 headerShown: true,
-                header: () => <Navbar routeName="product-detail" />,
+                header: () => <Navbar routeName="listing-detail" />,
+              }}
+            />
+            <Stack.Screen
+              name="listing/create"
+              options={{
+                headerShown: true,
+                header: () => <Navbar routeName="Create listing" />,
               }}
             />
             <Stack.Screen

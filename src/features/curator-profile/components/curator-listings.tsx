@@ -14,7 +14,7 @@ export const CuratorListings = ({ listings }: CuratorListingsProps) => {
         <CuratorListingCard
           key={listing.id}
           {...listing}
-          onPress={() => router.push(`/product-detail/${listing.id}`)}
+          onPress={() => router.push(`/listing/${listing.id}`)}
         />
       ))}
     </View>

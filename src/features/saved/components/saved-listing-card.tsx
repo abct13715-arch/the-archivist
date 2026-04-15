@@ -3,22 +3,22 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
-import { TSavedProduct } from "../data";
+import { TSavedListing } from "../data";
 
 type Props = {
-  product: TSavedProduct;
+  listing: TSavedListing;
 };
 
-export const SavedProductCard = ({ product }: Props) => {
+export const SavedListingCard = ({ listing }: Props) => {
   const handlePress = () => {
-    router.push(`/product-detail/${product.id}`);
+    router.push(`/listing/${listing.id}`);
   };
 
   return (
     <View className="border border-neutral-300 bg-surface overflow-hidden">
       <View className="overflow-hidden">
         <Image
-          source={product.image}
+          source={listing.image}
           style={{ width: "100%", aspectRatio: 1 }}
           contentFit="cover"
         />
@@ -30,7 +30,7 @@ export const SavedProductCard = ({ product }: Props) => {
             className="font-playfair text-2xl text-primary-900 leading-tight flex-1 mr-2"
             numberOfLines={2}
           >
-            {product.title}
+            {listing.title}
           </Text>
           <MaterialIcons
             name="bookmark"
@@ -40,10 +40,10 @@ export const SavedProductCard = ({ product }: Props) => {
         </View>
 
         <Text className="text-[10px] font-bold tracking-widest text-tertiary-500 uppercase mb-2">
-          {product.studio}
+          {listing.studio}
         </Text>
 
-        <Text className="text-lg text-primary-900">{product.price}</Text>
+        <Text className="text-lg text-primary-900">{listing.price}</Text>
       </View>
       <View className="py-2 px-2">
         <TouchableOpacity

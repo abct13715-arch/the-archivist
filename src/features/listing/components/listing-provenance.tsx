@@ -1,14 +1,14 @@
 import { Text, View } from "react-native";
 
-type ProductProvenanceProps = {
+type ListingProvenanceProps = {
   quote: string;
   description: string[];
 };
 
-export const ProductProvenance = ({
+export const ListingProvenance = ({
   quote,
   description,
-}: ProductProvenanceProps) => {
+}: ListingProvenanceProps) => {
   return (
     <View className="pt-16">
       <Text className="text-[10px] uppercase tracking-label-md text-tertiary-500 mb-8">

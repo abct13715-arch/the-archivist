@@ -6,9 +6,9 @@ import { useAcquisitions } from "../data";
 export const HomeAcquisitions = () => {
   const { acquisitions } = useAcquisitions();
 
-  const handleProductPress = (index: number) => {
-    const productId = (index + 1).toString();
-    router.push(`/product-detail/${productId}`);
+  const handleListingPress = (index: number) => {
+    const listingId = (index + 1).toString();
+    router.push(`/listing/${listingId}`);
   };
 
   return (
@@ -33,7 +33,7 @@ export const HomeAcquisitions = () => {
         <View className="mx-4 border border-tertiary-100">
           <View className="flex-row">
             <TouchableOpacity
-              onPress={() => handleProductPress(0)}
+              onPress={() => handleListingPress(0)}
               className="w-1/2 p-4 border-r border-b border-tertiary-100"
             >
               <Image
@@ -55,7 +55,7 @@ export const HomeAcquisitions = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => handleProductPress(1)}
+              onPress={() => handleListingPress(1)}
               className="w-1/2 p-4 border-b border-tertiary-100"
             >
               <Image
@@ -79,7 +79,7 @@ export const HomeAcquisitions = () => {
 
           <View className="flex-row">
             <TouchableOpacity
-              onPress={() => handleProductPress(2)}
+              onPress={() => handleListingPress(2)}
               className="w-1/2 p-4 border-r border-tertiary-100"
             >
               <Image
@@ -101,7 +101,7 @@ export const HomeAcquisitions = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => handleProductPress(3)}
+              onPress={() => handleListingPress(3)}
               className="w-1/2 p-4"
             >
               <Image
