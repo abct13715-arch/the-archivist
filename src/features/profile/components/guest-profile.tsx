@@ -1,23 +1,23 @@
-import { images } from "@/assets/images";
-import { Image } from "expo-image";
-import { useRouter } from "expo-router";
-import React from "react";
+import React from 'react';
+import {images} from '@/assets/images';
+import {Image} from 'expo-image';
+import {useRouter} from 'expo-router';
 import {
   Dimensions,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const {width: SCREEN_WIDTH} = Dimensions.get('window');
 const HERO_HEIGHT = SCREEN_WIDTH < 375 ? 380 : 442;
 
 const STATS = [
-  { value: "12k+", label: "Active Curators" },
-  { value: "50k+", label: "Archived Objects" },
-  { value: "145", label: "Global Cities" },
-  { value: "24/7", label: "Expert Support" },
+  {value: '12k+', label: 'Active Curators'},
+  {value: '50k+', label: 'Archived Objects'},
+  {value: '145', label: 'Global Cities'},
+  {value: '24/7', label: 'Expert Support'},
 ];
 
 export const GuestProfile = () => {
@@ -27,25 +27,25 @@ export const GuestProfile = () => {
     <View className="flex-1 bg-neutral-100">
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Hero Section */}
-        <View className="relative" style={{ height: HERO_HEIGHT }}>
+        <View className="relative" style={{height: HERO_HEIGHT}}>
           <Image
             source={images.onboardingBg}
             className="absolute inset-0"
-            style={{ width: "100%", height: "100%" }}
+            style={{width: '100%', height: '100%'}}
             contentFit="cover"
           />
           <View className="absolute inset-0 bg-black/10" />
           <View className="absolute inset-0 justify-end">
             <View className="p-8">
               <Text
-                className="font-playfair text-white italic"
+                className="font-playfair italic text-white"
                 style={{
                   fontSize: 40,
                   letterSpacing: -2,
                   lineHeight: 44,
                 }}
               >
-                Join the {"\n"}Modern Archive
+                Join the {'\n'}Modern Archive
               </Text>
             </View>
           </View>
@@ -53,24 +53,24 @@ export const GuestProfile = () => {
 
         {/* Two-Column Membership Invitation */}
         <View
-          className={`flex-${SCREEN_WIDTH >= 768 ? "row" : "col"} border-b border-neutral-300`}
+          className={`flex-${SCREEN_WIDTH >= 768 ? 'row' : 'col'} border-b border-neutral-300`}
         >
           {/* Left Panel */}
           <View
-            className={`${SCREEN_WIDTH >= 768 ? "w-1/2" : "w-full"} p-8 justify-center ${SCREEN_WIDTH >= 768 ? "border-r border-neutral-300" : ""}`}
+            className={`${SCREEN_WIDTH >= 768 ? 'w-1/2' : 'w-full'} justify-center p-8 ${SCREEN_WIDTH >= 768 ? 'border-r border-neutral-300' : ''}`}
           >
             <View className="max-w-[400px]">
-              <Text className="text-[10px] font-bold tracking-[4px] text-secondary-500 mb-4">
+              <Text className="mb-4 text-[10px] font-bold tracking-[4px] text-secondary-500">
                 MEMBERSHIP INVITATION
               </Text>
-              <Text className="font-playfair text-primary-900 text-[28px] tracking-[-1px] leading-9 mb-8">
+              <Text className="mb-8 font-playfair text-[28px] leading-9 tracking-[-1px] text-primary-900">
                 A dedicated space for the discerning collector.
               </Text>
-              <Text className="text-base text-tertiary-500 leading-7 mb-4">
+              <Text className="mb-4 text-base leading-7 text-tertiary-500">
                 Save your favorite objects, track your listings, and connect
                 with other archivists across the globe.
               </Text>
-              <Text className="text-base text-tertiary-500 leading-7">
+              <Text className="text-base leading-7 text-tertiary-500">
                 As a member, you gain access to our curated provenance reports
                 and early access to archival releases.
               </Text>
@@ -79,28 +79,28 @@ export const GuestProfile = () => {
 
           {/* Right Panel */}
           <View
-            className={`${SCREEN_WIDTH >= 768 ? "w-1/2" : "w-full"} p-8 bg-white/50 items-center justify-center`}
+            className={`${SCREEN_WIDTH >= 768 ? 'w-1/2' : 'w-full'} items-center justify-center bg-white/50 p-8`}
           >
             <View className="w-full max-w-[320px] gap-4">
               <TouchableOpacity
-                className="bg-secondary-500 py-5 px-8 items-center"
-                onPress={() => router.push("/(auth)/register")}
+                className="items-center bg-secondary-500 px-8 py-5"
+                onPress={() => router.push('/(auth)/register')}
               >
-                <Text className="text-white text-[11px] font-bold tracking-[4px]">
+                <Text className="text-[11px] font-bold tracking-[4px] text-white">
                   CREATE ACCOUNT
                 </Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                className="border border-primary-900 bg-transparent py-5 px-8 items-center"
-                onPress={() => router.push("/(auth)/login")}
+                className="items-center border border-primary-900 bg-transparent px-8 py-5"
+                onPress={() => router.push('/(auth)/login')}
               >
-                <Text className="text-primary-900 text-[11px] font-bold tracking-[4px]">
+                <Text className="text-[11px] font-bold tracking-[4px] text-primary-900">
                   LOGIN
                 </Text>
               </TouchableOpacity>
 
-              <Text className="text-[9px] font-medium tracking-[3px] text-tertiary-500 text-center mt-6">
+              <Text className="mt-6 text-center text-[9px] font-medium tracking-[3px] text-tertiary-500">
                 BY CONTINUING, YOU AGREE TO OUR TERMS OF SERVICE.
               </Text>
             </View>
@@ -117,12 +117,12 @@ export const GuestProfile = () => {
             return (
               <View
                 key={stat.label}
-                className={`w-1/2 p-8 items-center justify-center ${!isLastInRow ? "border-r border-neutral-300" : ""} ${!isLastRow ? "border-b border-neutral-300" : ""}`}
+                className={`w-1/2 items-center justify-center p-8 ${!isLastInRow ? 'border-r border-neutral-300' : ''} ${!isLastRow ? 'border-b border-neutral-300' : ''}`}
               >
-                <Text className="font-playfair text-primary-900 text-2xl">
+                <Text className="font-playfair text-2xl text-primary-900">
                   {stat.value}
                 </Text>
-                <Text className="text-[9px] font-bold tracking-[3.2px] text-tertiary-500 mt-2">
+                <Text className="mt-2 text-[9px] font-bold tracking-[3.2px] text-tertiary-500">
                   {stat.label}
                 </Text>
               </View>
@@ -131,14 +131,14 @@ export const GuestProfile = () => {
         </View>
 
         {/* Pull Quote Section */}
-        <View className="bg-white p-16 items-center justify-center">
+        <View className="items-center justify-center bg-white p-16">
           <View className="max-w-[500px] border-l-2 border-secondary-500 pl-8">
-            <Text className="font-playfair text-primary-900 text-2xl italic leading-9">
+            <Text className="font-playfair text-2xl italic leading-9 text-primary-900">
               &quot;Objects are not just things; they are the physical vessels
               of our history, waiting to be rediscovered and
               recontextualized.&quot;
             </Text>
-            <Text className="text-[10px] font-bold tracking-[4px] text-tertiary-500 mt-6">
+            <Text className="mt-6 text-[10px] font-bold tracking-[4px] text-tertiary-500">
               — THE ARCHIVIST MANIFESTO
             </Text>
           </View>

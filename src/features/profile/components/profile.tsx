@@ -1,24 +1,25 @@
-import { images } from "@/assets/images";
-import { Colors } from "@/constants/theme";
-import { Image } from "expo-image";
-import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { filters, listings, reviews, tabs } from "../data";
-import { ProfileCard } from "./profile-card";
+import {useState} from 'react';
+import {images} from '@/assets/images';
+import {Colors} from '@/constants/theme';
+import {Image} from 'expo-image';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+
+import {filters, listings, reviews, tabs} from '../data';
+import {ProfileCard} from './profile-card';
 
 export const Profile = () => {
-  const [activeTab, setActiveTab] = useState("LISTINGS");
-  const [selectedFilter, setSelectedFilter] = useState("ALL ITEMS");
+  const [activeTab, setActiveTab] = useState('LISTINGS');
+  const [selectedFilter, setSelectedFilter] = useState('ALL ITEMS');
 
   const filtered =
-    selectedFilter === "ALL ITEMS"
+    selectedFilter === 'ALL ITEMS'
       ? listings
-      : listings.filter((l) =>
+      : listings.filter(l =>
           l.category.toLowerCase().includes(selectedFilter.toLowerCase()),
         );
 
   return (
-    <ScrollView style={{ backgroundColor: Colors.light.surface }}>
+    <ScrollView style={{backgroundColor: Colors.light.surface}}>
       <ProfileCard
         backgroundImage={images.profileBackground}
         profileImage={images.profileFace}
@@ -27,15 +28,15 @@ export const Profile = () => {
         memberSince="2019"
         responseRate="98%"
         badge="MASTER CURATOR"
-        onShare={() => console.log("shared")}
+        onShare={() => console.log('shared')}
       />
 
       <View>
         <View
-          style={{ borderBottomColor: Colors.light.border }}
+          style={{borderBottomColor: Colors.light.border}}
           className="flex-row border-b"
         >
-          {tabs.map((tab) => (
+          {tabs.map(tab => (
             <TouchableOpacity
               key={tab}
               onPress={() => setActiveTab(tab)}
@@ -61,19 +62,19 @@ export const Profile = () => {
           ))}
         </View>
 
-        {activeTab === "LISTINGS" && (
+        {activeTab === 'LISTINGS' && (
           <View>
             <View
-              style={{ borderBottomColor: Colors.light.border }}
-              className="border-b px-4 pb-3 gap-2"
+              style={{borderBottomColor: Colors.light.border}}
+              className="gap-2 border-b px-4 pb-3"
             >
               <Text
-                style={{ color: Colors.light.textSecondary, letterSpacing: 2 }}
-                className="text-xs mt-3"
+                style={{color: Colors.light.textSecondary, letterSpacing: 2}}
+                className="mt-3 text-xs"
               >
                 FILTERS
               </Text>
-              {filters.map((f) => (
+              {filters.map(f => (
                 <TouchableOpacity
                   key={f}
                   onPress={() => setSelectedFilter(f)}
@@ -107,28 +108,28 @@ export const Profile = () => {
             </View>
 
             <View
-              style={{ backgroundColor: Colors.palette.neutral100 }}
+              style={{backgroundColor: Colors.palette.neutral100}}
               className="mx-4 my-4 p-4"
             >
               <Text
                 style={{
                   color: Colors.light.text,
-                  fontFamily: "PlayfairDisplay_700Bold",
+                  fontFamily: 'PlayfairDisplay_700Bold',
                   lineHeight: 24,
                 }}
-                className="text-base italic mb-1"
+                className="mb-1 text-base italic"
               >
                 "Curating the forgotten and the permanent."
               </Text>
               <Text
-                style={{ color: Colors.light.textSecondary, letterSpacing: 1 }}
+                style={{color: Colors.light.textSecondary, letterSpacing: 1}}
                 className="text-xs"
               >
                 ARCHIVIST'S NOTE
               </Text>
             </View>
 
-            {filtered.map((item) => (
+            {filtered.map(item => (
               <View
                 key={item.id}
                 style={{
@@ -136,22 +137,22 @@ export const Profile = () => {
                   borderBottomWidth: 1,
                   borderBottomColor: Colors.light.border,
                 }}
-                className="border-t mx-4 my-4"
+                className="mx-4 my-4 border-t"
               >
-                <View style={{ position: "relative" }}>
+                <View style={{position: 'relative'}}>
                   <Image
                     source={item.image}
                     contentFit="cover"
-                    style={{ width: "100%", aspectRatio: 4 / 3 }}
+                    style={{width: '100%', aspectRatio: 4 / 3}}
                   />
                   {item.badge && (
                     <View
                       style={{
-                        position: "absolute",
+                        position: 'absolute',
                         top: 12,
                         right: 12,
                         backgroundColor:
-                          item.badge === "AVAILABLE"
+                          item.badge === 'AVAILABLE'
                             ? Colors.brand.secondary
                             : Colors.palette.primary500,
                       }}
@@ -169,17 +170,17 @@ export const Profile = () => {
                     </View>
                   )}
                 </View>
-                <View className="py-3 gap-1">
+                <View className="gap-1 py-3">
                   <Text
                     style={{
                       color: Colors.light.text,
-                      fontFamily: "PlayfairDisplay_700Bold",
+                      fontFamily: 'PlayfairDisplay_700Bold',
                     }}
                     className="text-lg"
                   >
                     {item.title}
                   </Text>
-                  <View className="flex-row justify-between items-center">
+                  <View className="flex-row items-center justify-between">
                     <Text
                       style={{
                         color: Colors.light.textSecondary,
@@ -192,7 +193,7 @@ export const Profile = () => {
                     <Text
                       style={{
                         color: Colors.light.text,
-                        fontFamily: "PlayfairDisplay_700Bold",
+                        fontFamily: 'PlayfairDisplay_700Bold',
                       }}
                       className="text-base"
                     >
@@ -205,26 +206,26 @@ export const Profile = () => {
           </View>
         )}
 
-        {activeTab === "REVIEWS" && (
-          <View className="px-4 gap-4 mt-4">
-            {reviews.map((review) => (
+        {activeTab === 'REVIEWS' && (
+          <View className="mt-4 gap-4 px-4">
+            {reviews.map(review => (
               <View
                 key={review.id}
-                style={{ borderBottomColor: Colors.light.border }}
-                className="border-b pb-4 gap-2"
+                style={{borderBottomColor: Colors.light.border}}
+                className="gap-2 border-b pb-4"
               >
-                <View className="flex-row justify-between items-center">
+                <View className="flex-row items-center justify-between">
                   <Text
                     style={{
                       color: Colors.light.text,
-                      fontFamily: "PlayfairDisplay_700Bold",
+                      fontFamily: 'PlayfairDisplay_700Bold',
                     }}
                     className="text-base"
                   >
                     {review.name}
                   </Text>
                   <View className="flex-row gap-1">
-                    {Array.from({ length: 5 }).map((_, i) => (
+                    {Array.from({length: 5}).map((_, i) => (
                       <Text
                         key={i}
                         style={{
@@ -240,7 +241,7 @@ export const Profile = () => {
                   </View>
                 </View>
                 <Text
-                  style={{ color: Colors.light.textSecondary }}
+                  style={{color: Colors.light.textSecondary}}
                   className="text-sm leading-6"
                 >
                   {review.text}
@@ -250,16 +251,16 @@ export const Profile = () => {
           </View>
         )}
 
-        {activeTab === "ABOUT" && (
+        {activeTab === 'ABOUT' && (
           <View
             style={{
               borderLeftColor: Colors.brand.secondary,
               borderLeftWidth: 2,
             }}
-            className="mx-4 mt-4 pl-4 py-2"
+            className="mx-4 mt-4 py-2 pl-4"
           >
             <Text
-              style={{ color: Colors.light.text }}
+              style={{color: Colors.light.text}}
               className="text-base leading-7"
             >
               Julian has been curating rare objects from European estates since

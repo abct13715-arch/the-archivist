@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { STORAGE_KEYS } from '@/constants/storage-keys';
-import { User } from '@/models/user';
-import { storage } from '@/lib/storage';
+import {useEffect, useState} from 'react';
+import {STORAGE_KEYS} from '@/constants/storage-keys';
+import {User} from '@/models/user';
+
+import {storage} from '@/lib/storage';
 
 export const useGetUser = () => {
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -21,5 +22,5 @@ export const useGetUser = () => {
     loadUser();
   }, []);
 
-  return { user, isLoading };
+  return {user, isLoading};
 };

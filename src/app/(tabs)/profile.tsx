@@ -1,9 +1,10 @@
-import { GuestProfile, Profile } from "@/features";
-import { useAuth } from "@/hooks/use-auth";
-import { View } from "react-native";
+import {GuestProfile, Profile} from '@/features';
+import {View} from 'react-native';
+
+import {useAuth} from '@/hooks/use-auth';
 
 export default function ProfileScreen() {
-  const { user, isGuest, loading } = useAuth();
+  const {user, isGuest, loading} = useAuth();
 
   if (loading) return <View></View>;
 

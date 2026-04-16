@@ -1,10 +1,11 @@
-import { Colors } from "@/constants/theme";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Image } from "expo-image";
-import { router } from "expo-router";
-import { useCallback, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { TBrowseListing } from "../data";
+import {useCallback, useState} from 'react';
+import {Colors} from '@/constants/theme';
+import {MaterialIcons} from '@expo/vector-icons';
+import {Image} from 'expo-image';
+import {router} from 'expo-router';
+import {Text, TouchableOpacity, View} from 'react-native';
+
+import {TBrowseListing} from '../data';
 
 type Props = {
   listing: TBrowseListing;
@@ -32,32 +33,32 @@ export const BrowseListingCard = ({
   }, [listing.id]);
 
   return (
-    <TouchableOpacity onPress={handlePress} className="w-[46%] mb-10">
-      <View className="border border-neutral-300 relative mb-4">
+    <TouchableOpacity onPress={handlePress} className="mb-10 w-[46%]">
+      <View className="relative mb-4 border border-neutral-300">
         <Image
           source={listing.image}
-          style={{ width: "100%", aspectRatio: 3 / 4 }}
+          style={{width: '100%', aspectRatio: 3 / 4}}
           contentFit="cover"
         />
         <TouchableOpacity
-          className="absolute top-3 right-3"
+          className="absolute right-3 top-3"
           onPress={handleToggle}
         >
           <MaterialIcons
-            name={bookmarked ? "bookmark" : "bookmark-outline"}
+            name={bookmarked ? 'bookmark' : 'bookmark-outline'}
             size={24}
             color={Colors.brand.secondary}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
           />
         </TouchableOpacity>
       </View>
       <Text
-        className="font-playfair text-lg text-primary-900 leading-tight mb-1"
+        className="mb-1 font-playfair text-lg leading-tight text-primary-900"
         numberOfLines={2}
       >
         {listing.title}
       </Text>
-      <Text className="text-[11px] font-bold tracking-widest text-secondary-500 uppercase">
+      <Text className="text-[11px] font-bold uppercase tracking-widest text-secondary-500">
         {listing.price}
       </Text>
     </TouchableOpacity>

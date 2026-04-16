@@ -1,5 +1,5 @@
-import { Colors } from "@/constants/theme";
-import { Text, View } from "react-native";
+import {Colors} from '@/constants/theme';
+import {Text, View} from 'react-native';
 
 export type Review = {
   id: string;
@@ -8,26 +8,26 @@ export type Review = {
   rating: number;
 };
 
-export const ProfileReviewsTab = ({ reviews }: { reviews: Review[] }) => (
-  <View className="px-4 gap-4 mt-4">
-    {reviews.map((review) => (
+export const ProfileReviewsTab = ({reviews}: {reviews: Review[]}) => (
+  <View className="mt-4 gap-4 px-4">
+    {reviews.map(review => (
       <View
         key={review.id}
-        style={{ borderBottomColor: Colors.light.border }}
-        className="border-b pb-4 gap-2"
+        style={{borderBottomColor: Colors.light.border}}
+        className="gap-2 border-b pb-4"
       >
-        <View className="flex-row justify-between items-center">
+        <View className="flex-row items-center justify-between">
           <Text
             style={{
               color: Colors.light.text,
-              fontFamily: "PlayfairDisplay_700Bold",
+              fontFamily: 'PlayfairDisplay_700Bold',
             }}
             className="text-base"
           >
             {review.name}
           </Text>
           <View className="flex-row gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
+            {Array.from({length: 5}).map((_, i) => (
               <Text
                 key={i}
                 style={{
@@ -43,7 +43,7 @@ export const ProfileReviewsTab = ({ reviews }: { reviews: Review[] }) => (
           </View>
         </View>
         <Text
-          style={{ color: Colors.light.textSecondary }}
+          style={{color: Colors.light.textSecondary}}
           className="text-sm leading-6"
         >
           {review.text}

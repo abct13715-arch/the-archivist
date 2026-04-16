@@ -1,13 +1,13 @@
-import { Image } from "expo-image";
-import { Dimensions, ImageSourcePropType } from "react-native";
+import {Image} from 'expo-image';
+import {Dimensions, ImageSourcePropType} from 'react-native';
 
-const { width } = Dimensions.get("window");
+const {width} = Dimensions.get('window');
 
 type CuratorHeroProps = {
   portrait: ImageSourcePropType;
 };
 
-export const CuratorHero = ({ portrait }: CuratorHeroProps) => {
+export const CuratorHero = ({portrait}: CuratorHeroProps) => {
   return (
     <Image
       source={portrait}
@@ -16,7 +16,7 @@ export const CuratorHero = ({ portrait }: CuratorHeroProps) => {
         width: width,
         height: 530,
       }}
-      className="grayscale contrast-125"
+      className="contrast-125 grayscale"
     />
   );
 };

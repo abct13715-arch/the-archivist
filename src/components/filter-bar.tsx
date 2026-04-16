@@ -1,18 +1,18 @@
-import { Colors } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {useState} from 'react';
+import {Colors} from '@/constants/theme';
+import {Ionicons} from '@expo/vector-icons';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 
 const categories = [
-  "EVERYTHING",
-  "CERAMICS",
-  "FURNITURE",
-  "SCULPTURE",
-  "VINTAGE",
+  'EVERYTHING',
+  'CERAMICS',
+  'FURNITURE',
+  'SCULPTURE',
+  'VINTAGE',
 ];
 
 export const FilterBar = () => {
-  const [selected, setSelected] = useState("EVERYTHING");
+  const [selected, setSelected] = useState('EVERYTHING');
 
   return (
     <View
@@ -20,22 +20,22 @@ export const FilterBar = () => {
         borderTopColor: Colors.light.border,
         borderBottomColor: Colors.light.border,
       }}
-      className="border-t border-b flex-row items-center"
+      className="flex-row items-center border-b border-t"
     >
       <TouchableOpacity
-        style={{ borderRightColor: Colors.light.border }}
-        className="border-r px-4 py-4 flex-row items-center gap-2"
+        style={{borderRightColor: Colors.light.border}}
+        className="flex-row items-center gap-2 border-r px-4 py-4"
       >
         <Ionicons name="options-outline" size={18} color={Colors.light.text} />
         <View>
           <Text
-            style={{ color: Colors.light.text, letterSpacing: 2 }}
+            style={{color: Colors.light.text, letterSpacing: 2}}
             className="text-xs font-bold"
           >
             FILTER
           </Text>
           <Text
-            style={{ color: Colors.light.text, letterSpacing: 2 }}
+            style={{color: Colors.light.text, letterSpacing: 2}}
             className="text-xs font-bold"
           >
             ARCHIVE
@@ -49,10 +49,10 @@ export const FilterBar = () => {
         contentContainerStyle={{
           paddingHorizontal: 16,
           gap: 24,
-          alignItems: "center",
+          alignItems: 'center',
         }}
       >
-        {categories.map((cat) => (
+        {categories.map(cat => (
           <TouchableOpacity
             key={cat}
             onPress={() => setSelected(cat)}
@@ -72,8 +72,8 @@ export const FilterBar = () => {
             </Text>
             {selected === cat && (
               <View
-                style={{ backgroundColor: Colors.light.text }}
-                className="h-px mt-1"
+                style={{backgroundColor: Colors.light.text}}
+                className="mt-1 h-px"
               />
             )}
           </TouchableOpacity>

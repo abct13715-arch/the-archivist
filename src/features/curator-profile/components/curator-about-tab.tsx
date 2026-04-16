@@ -1,5 +1,5 @@
-import { Colors } from "@/constants/theme";
-import { Text, View } from "react-native";
+import {Colors} from '@/constants/theme';
+import {Text, View} from 'react-native';
 
 type CuratorAboutTabProps = {
   bio: string;
@@ -13,14 +13,14 @@ export const CuratorAboutTab = ({
   expertise,
 }: CuratorAboutTabProps) => {
   return (
-    <View className="px-6 pt-6 gap-8">
+    <View className="gap-8 px-6 pt-6">
       <View>
         <Text
           style={{
             color: Colors.light.textSecondary,
             letterSpacing: 2,
           }}
-          className="text-xs mb-4"
+          className="mb-4 text-xs"
         >
           BIOGRAPHY
         </Text>
@@ -45,8 +45,8 @@ export const CuratorAboutTab = ({
         <Text
           style={{
             color: Colors.light.text,
-            fontFamily: "PlayfairDisplay_700Bold",
-            fontStyle: "italic",
+            fontFamily: 'PlayfairDisplay_700Bold',
+            fontStyle: 'italic',
             lineHeight: 28,
           }}
           className="text-base"
@@ -61,7 +61,7 @@ export const CuratorAboutTab = ({
             color: Colors.light.textSecondary,
             letterSpacing: 2,
           }}
-          className="text-xs mb-4"
+          className="mb-4 text-xs"
         >
           EXPERTISE
         </Text>
@@ -69,7 +69,7 @@ export const CuratorAboutTab = ({
           {expertise.map((item, index) => (
             <View
               key={index}
-              style={{ borderBottomColor: Colors.light.border }}
+              style={{borderBottomColor: Colors.light.border}}
               className="border-b pb-3"
             >
               <Text

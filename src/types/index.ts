@@ -1,4 +1,4 @@
-import { ImageSourcePropType } from "react-native";
+import {ImageSourcePropType} from 'react-native';
 
 export type TListing = {
   id: string;
@@ -6,7 +6,7 @@ export type TListing = {
   title: string;
   category: string;
   price: string;
-  badge?: "AVAILABLE" | "RESERVED";
+  badge?: 'AVAILABLE' | 'RESERVED';
 };
 
 export type TReview = {

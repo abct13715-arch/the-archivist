@@ -1,10 +1,11 @@
-import { Image } from "expo-image";
-import { router } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
-import { useAcquisitions } from "../data";
+import {Image} from 'expo-image';
+import {router} from 'expo-router';
+import {Text, TouchableOpacity, View} from 'react-native';
+
+import {useAcquisitions} from '../data';
 
 export const HomeAcquisitions = () => {
-  const { acquisitions } = useAcquisitions();
+  const {acquisitions} = useAcquisitions();
 
   const handleListingPress = (index: number) => {
     const listingId = (index + 1).toString();
@@ -13,18 +14,18 @@ export const HomeAcquisitions = () => {
 
   return (
     <View className="py-8">
-      <View className="h-px bg-tertiary-100 w-2/3 mb-4 mx-auto" />
+      <View className="mx-auto mb-4 h-px w-2/3 bg-tertiary-100" />
 
       <View className="py-14">
-        <View className="px-6 pb-4 flex-row justify-between items-start mx-4 mb-0">
-          <Text className="text-xs tracking-label-lg text-primary-900 font-bold w-1/2">
+        <View className="mx-4 mb-0 flex-row items-start justify-between px-6 pb-4">
+          <Text className="w-1/2 text-xs font-bold tracking-label-lg text-primary-900">
             SHOP THE CONVERSATION
           </Text>
           <TouchableOpacity
-            onPress={() => router.push("/browse")}
+            onPress={() => router.push('/browse')}
             className="w-1/2 items-end"
           >
-            <Text className="text-xs tracking-label-md text-brand-secondary font-bold text-right">
+            <Text className="text-right text-xs font-bold tracking-label-md text-brand-secondary">
               VIEW FULL DIALOGUE GALLERY
             </Text>
           </TouchableOpacity>
@@ -34,18 +35,18 @@ export const HomeAcquisitions = () => {
           <View className="flex-row">
             <TouchableOpacity
               onPress={() => handleListingPress(0)}
-              className="w-1/2 p-4 border-r border-b border-tertiary-100"
+              className="w-1/2 border-b border-r border-tertiary-100 p-4"
             >
               <Image
                 source={acquisitions[0].image}
-                style={{ width: "100%", aspectRatio: 1 }}
+                style={{width: '100%', aspectRatio: 1}}
                 contentFit="cover"
               />
-              <View className="pt-3 gap-1">
-                <Text className="text-xs tracking-label-lg text-brand-secondary font-bold">
+              <View className="gap-1 pt-3">
+                <Text className="text-xs font-bold tracking-label-lg text-brand-secondary">
                   {acquisitions[0].category}
                 </Text>
-                <Text className="font-playfair text-lg text-primary-900 leading-tight">
+                <Text className="font-playfair text-lg leading-tight text-primary-900">
                   {acquisitions[0].name}
                 </Text>
                 <Text className="text-sm text-primary-900">
@@ -56,18 +57,18 @@ export const HomeAcquisitions = () => {
 
             <TouchableOpacity
               onPress={() => handleListingPress(1)}
-              className="w-1/2 p-4 border-b border-tertiary-100"
+              className="w-1/2 border-b border-tertiary-100 p-4"
             >
               <Image
                 source={acquisitions[1].image}
-                style={{ width: "100%", aspectRatio: 1 }}
+                style={{width: '100%', aspectRatio: 1}}
                 contentFit="cover"
               />
-              <View className="pt-3 gap-1">
-                <Text className="text-xs tracking-label-lg text-brand-secondary font-bold">
+              <View className="gap-1 pt-3">
+                <Text className="text-xs font-bold tracking-label-lg text-brand-secondary">
                   {acquisitions[1].category}
                 </Text>
-                <Text className="font-playfair text-lg text-primary-900 leading-tight">
+                <Text className="font-playfair text-lg leading-tight text-primary-900">
                   {acquisitions[1].name}
                 </Text>
                 <Text className="text-sm text-primary-900">
@@ -80,18 +81,18 @@ export const HomeAcquisitions = () => {
           <View className="flex-row">
             <TouchableOpacity
               onPress={() => handleListingPress(2)}
-              className="w-1/2 p-4 border-r border-tertiary-100"
+              className="w-1/2 border-r border-tertiary-100 p-4"
             >
               <Image
                 source={acquisitions[2].image}
-                style={{ width: "100%", aspectRatio: 1 }}
+                style={{width: '100%', aspectRatio: 1}}
                 contentFit="cover"
               />
-              <View className="pt-3 gap-1">
-                <Text className="text-xs tracking-label-lg text-brand-secondary font-bold">
+              <View className="gap-1 pt-3">
+                <Text className="text-xs font-bold tracking-label-lg text-brand-secondary">
                   {acquisitions[2].category}
                 </Text>
-                <Text className="font-playfair text-lg text-primary-900 leading-tight">
+                <Text className="font-playfair text-lg leading-tight text-primary-900">
                   {acquisitions[2].name}
                 </Text>
                 <Text className="text-sm text-primary-900">
@@ -106,14 +107,14 @@ export const HomeAcquisitions = () => {
             >
               <Image
                 source={acquisitions[3].image}
-                style={{ width: "100%", aspectRatio: 1 }}
+                style={{width: '100%', aspectRatio: 1}}
                 contentFit="cover"
               />
-              <View className="pt-3 gap-1">
-                <Text className="text-xs tracking-label-lg text-brand-secondary font-bold">
+              <View className="gap-1 pt-3">
+                <Text className="text-xs font-bold tracking-label-lg text-brand-secondary">
                   {acquisitions[3].category}
                 </Text>
-                <Text className="font-playfair text-lg text-primary-900 leading-tight">
+                <Text className="font-playfair text-lg leading-tight text-primary-900">
                   {acquisitions[3].name}
                 </Text>
                 <Text className="text-sm text-primary-900">
@@ -124,7 +125,7 @@ export const HomeAcquisitions = () => {
           </View>
         </View>
       </View>
-      <View className="h-px bg-tertiary-100 w-2/3 mb-4 mx-auto" />
+      <View className="mx-auto mb-4 h-px w-2/3 bg-tertiary-100" />
     </View>
   );
 };

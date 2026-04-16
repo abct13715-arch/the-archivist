@@ -1,2 +1,3 @@
-import { Drawer } from "@/components";
+import {Drawer} from '@/components';
+
 export default Drawer;

@@ -1,16 +1,16 @@
-import { Colors } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
-import { Image } from "expo-image";
-import { useState } from "react";
+import {useState} from 'react';
+import {Colors} from '@/constants/theme';
+import {Ionicons} from '@expo/vector-icons';
+import {Image} from 'expo-image';
 import {
   Dimensions,
   ImageSourcePropType,
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 
-const { width } = Dimensions.get("window");
+const {width} = Dimensions.get('window');
 const CARD_WIDTH = (width - 48) / 2;
 
 type ItemCardProps = {
@@ -43,27 +43,27 @@ export const ItemCard = ({
       <Image
         source={image}
         contentFit="cover"
-        style={{ width: CARD_WIDTH, aspectRatio: 3 / 4 }}
+        style={{width: CARD_WIDTH, aspectRatio: 3 / 4}}
       />
 
       <View
-        style={{ borderTopColor: Colors.light.border }}
-        className="border-t px-3 pt-3 pb-4"
+        style={{borderTopColor: Colors.light.border}}
+        className="border-t px-3 pb-4 pt-3"
       >
         <Text
-          style={{ color: Colors.light.textSecondary, letterSpacing: 1.5 }}
-          className="text-xs mb-1"
+          style={{color: Colors.light.textSecondary, letterSpacing: 1.5}}
+          className="mb-1 text-xs"
         >
           {category}
         </Text>
 
-        <View className="flex-row justify-between items-center">
+        <View className="flex-row items-center justify-between">
           <Text
             style={{
               color: Colors.light.text,
-              fontFamily: "PlayfairDisplay_700Bold",
+              fontFamily: 'PlayfairDisplay_700Bold',
             }}
-            className="text-lg flex-1"
+            className="flex-1 text-lg"
           >
             {title}
           </Text>
@@ -73,11 +73,11 @@ export const ItemCard = ({
               setWishlisted(!wishlisted);
               onWishlist?.();
             }}
-            style={{ borderColor: Colors.light.border }}
+            style={{borderColor: Colors.light.border}}
             className="border p-2"
           >
             <Ionicons
-              name={wishlisted ? "heart" : "heart-outline"}
+              name={wishlisted ? 'heart' : 'heart-outline'}
               size={16}
               color={wishlisted ? Colors.brand.secondary : Colors.light.icon}
             />

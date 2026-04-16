@@ -1,15 +1,16 @@
-import { Navbar } from "@/components";
-import { HapticTab } from "@/components/haptic-tab";
-import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Colors } from "@/constants/theme";
-import { isHorizontalScrollingRef } from "@/contexts/horizontal-scroll-context";
-import { useAuth } from "@/hooks/use-auth";
-import { router, Tabs } from "expo-router";
-import { useRef } from "react";
-import { PanResponder, View } from "react-native";
+import {useRef} from 'react';
+import {Navbar} from '@/components';
+import {Colors} from '@/constants/theme';
+import {isHorizontalScrollingRef} from '@/contexts/horizontal-scroll-context';
+import {router, Tabs} from 'expo-router';
+import {PanResponder, View} from 'react-native';
+
+import {useAuth} from '@/hooks/use-auth';
+import {IconSymbol} from '@/components/ui/icon-symbol';
+import {HapticTab} from '@/components/haptic-tab';
 
 function TabLayoutContent() {
-  const { user, isGuest } = useAuth();
+  const {user, isGuest} = useAuth();
   const isLoggedIn = user && !isGuest;
 
   const swipeResponder = useRef(
@@ -27,7 +28,7 @@ function TabLayoutContent() {
 
       onPanResponderRelease: (_, g) => {
         if (!isHorizontalScrollingRef.current && g.dx < -60) {
-          router.push("/drawer");
+          router.push('/drawer');
         }
       },
     }),
@@ -40,7 +41,7 @@ function TabLayoutContent() {
           tabBarInactiveTintColor: Colors.light.textSecondary,
           headerShown: true,
           tabBarButton: HapticTab,
-          header: ({ route }) => <Navbar routeName={route?.name} />,
+          header: ({route}) => <Navbar routeName={route?.name} />,
           tabBarStyle: {
             backgroundColor: Colors.brand.neutral,
             borderTopColor: Colors.light.border,
@@ -52,15 +53,15 @@ function TabLayoutContent() {
           tabBarLabelStyle: {
             letterSpacing: 2,
             fontSize: 10,
-            fontWeight: "600",
+            fontWeight: '600',
           },
         }}
       >
         <Tabs.Screen
           name="index"
           options={{
-            title: "Home",
-            tabBarIcon: ({ color }) => (
+            title: 'Home',
+            tabBarIcon: ({color}) => (
               <IconSymbol size={28} name="house.fill" color={color} />
             ),
           }}
@@ -68,8 +69,8 @@ function TabLayoutContent() {
         <Tabs.Screen
           name="browse"
           options={{
-            title: "Browse",
-            tabBarIcon: ({ color }) => (
+            title: 'Browse',
+            tabBarIcon: ({color}) => (
               <IconSymbol size={28} name="square.grid.2x2.fill" color={color} />
             ),
           }}
@@ -77,8 +78,8 @@ function TabLayoutContent() {
         <Tabs.Screen
           name="saved"
           options={{
-            title: "Saved",
-            tabBarIcon: ({ color }) => (
+            title: 'Saved',
+            tabBarIcon: ({color}) => (
               <IconSymbol size={28} name="bookmark.fill" color={color} />
             ),
           }}
@@ -86,11 +87,11 @@ function TabLayoutContent() {
         <Tabs.Screen
           name="profile"
           options={{
-            title: isLoggedIn ? "Profile" : "Login",
-            tabBarIcon: ({ color }) => (
+            title: isLoggedIn ? 'Profile' : 'Login',
+            tabBarIcon: ({color}) => (
               <IconSymbol
                 size={28}
-                name={isLoggedIn ? "person.fill" : "arrow.right.circle.fill"}
+                name={isLoggedIn ? 'person.fill' : 'arrow.right.circle.fill'}
                 color={color}
               />
             ),

@@ -1,12 +1,7 @@
-import { Colors } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
-import { Image } from "expo-image";
-import {
-  ImageSourcePropType,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import {Colors} from '@/constants/theme';
+import {Ionicons} from '@expo/vector-icons';
+import {Image} from 'expo-image';
+import {ImageSourcePropType, Text, TouchableOpacity, View} from 'react-native';
 
 type ProfileCardProps = {
   backgroundImage: ImageSourcePropType;
@@ -30,16 +25,16 @@ export const ProfileCard = ({
   onShare,
 }: ProfileCardProps) => {
   return (
-    <View style={{ backgroundColor: Colors.brand.neutral }}>
-      <View style={{ height: 180 }}>
+    <View style={{backgroundColor: Colors.brand.neutral}}>
+      <View style={{height: 180}}>
         <Image
           source={backgroundImage}
           contentFit="cover"
-          style={{ width: "100%", height: "100%" }}
+          style={{width: '100%', height: '100%'}}
         />
         <View
           style={{
-            position: "absolute",
+            position: 'absolute',
             bottom: -60,
             right: 24,
             borderWidth: 3,
@@ -49,16 +44,16 @@ export const ProfileCard = ({
           <Image
             source={profileImage}
             contentFit="cover"
-            style={{ width: 120, height: 120 }}
+            style={{width: 120, height: 120}}
           />
         </View>
       </View>
 
-      <View className="px-6 pt-16 pb-8 gap-3">
+      <View className="gap-3 px-6 pb-8 pt-16">
         <Text
           style={{
             color: Colors.light.text,
-            fontFamily: "PlayfairDisplay_700Bold",
+            fontFamily: 'PlayfairDisplay_700Bold',
             lineHeight: 48,
           }}
           className="text-4xl"
@@ -66,7 +61,7 @@ export const ProfileCard = ({
           {name}
         </Text>
 
-        <View className="flex-row gap-6 items-center">
+        <View className="flex-row items-center gap-6">
           <View className="flex-row items-center gap-1">
             <Ionicons
               name="location-outline"
@@ -74,14 +69,14 @@ export const ProfileCard = ({
               color={Colors.light.textSecondary}
             />
             <Text
-              style={{ color: Colors.light.textSecondary, letterSpacing: 1 }}
+              style={{color: Colors.light.textSecondary, letterSpacing: 1}}
               className="text-xs"
             >
               {location}
             </Text>
           </View>
           <Text
-            style={{ color: Colors.light.textSecondary, letterSpacing: 1 }}
+            style={{color: Colors.light.textSecondary, letterSpacing: 1}}
             className="text-xs"
           >
             MEMBER SINCE {memberSince}
@@ -89,20 +84,20 @@ export const ProfileCard = ({
         </View>
 
         <Text
-          style={{ color: Colors.light.textSecondary, letterSpacing: 1 }}
+          style={{color: Colors.light.textSecondary, letterSpacing: 1}}
           className="text-xs"
         >
           RESPONSE RATE: {responseRate}
         </Text>
 
-        <View className="flex-row gap-3 mt-2">
+        <View className="mt-2 flex-row gap-3">
           <TouchableOpacity
-            style={{ backgroundColor: Colors.light.text }}
+            style={{backgroundColor: Colors.light.text}}
             className="flex-row items-center gap-2 px-5 py-3"
           >
             <Ionicons name="star" size={14} color={Colors.brand.neutral} />
             <Text
-              style={{ color: Colors.brand.neutral, letterSpacing: 2 }}
+              style={{color: Colors.brand.neutral, letterSpacing: 2}}
               className="text-xs font-bold"
             >
               {badge}
@@ -111,8 +106,8 @@ export const ProfileCard = ({
 
           <TouchableOpacity
             onPress={onShare}
-            style={{ borderColor: Colors.light.border }}
-            className="border p-3 items-center justify-center"
+            style={{borderColor: Colors.light.border}}
+            className="items-center justify-center border p-3"
           >
             <Ionicons
               name="share-outline"

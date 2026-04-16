@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import {Text, View} from 'react-native';
 
 type ListingProvenanceProps = {
   quote: string;
@@ -11,12 +11,12 @@ export const ListingProvenance = ({
 }: ListingProvenanceProps) => {
   return (
     <View className="pt-16">
-      <Text className="text-[10px] uppercase tracking-label-md text-tertiary-500 mb-8">
+      <Text className="mb-8 text-[10px] uppercase tracking-label-md text-tertiary-500">
         Provenance &amp; Description
       </Text>
 
-      <View className="pl-4 border-l-2 border-secondary-500 mb-8">
-        <Text className="text-2xl font-playfair text-brand-primary italic leading-snug">
+      <View className="mb-8 border-l-2 border-secondary-500 pl-4">
+        <Text className="font-playfair text-2xl italic leading-snug text-brand-primary">
           &quot;{quote}&quot;
         </Text>
       </View>
@@ -24,7 +24,7 @@ export const ListingProvenance = ({
       {description.map((paragraph, index) => (
         <Text
           key={index}
-          className="text-lg leading-relaxed text-tertiary-500 mb-6"
+          className="mb-6 text-lg leading-relaxed text-tertiary-500"
         >
           {paragraph}
         </Text>

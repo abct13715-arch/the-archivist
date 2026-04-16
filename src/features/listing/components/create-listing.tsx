@@ -1,39 +1,39 @@
-import { Colors } from "@/constants/theme";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useState } from "react";
+import {useState} from 'react';
+import {Colors} from '@/constants/theme';
+import {MaterialIcons} from '@expo/vector-icons';
 import {
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 
 const categories = [
-  "FURNITURE",
-  "TEXTILES",
-  "LIGHTING",
-  "ART",
-  "CERAMICS",
-  "OBJECTS",
+  'FURNITURE',
+  'TEXTILES',
+  'LIGHTING',
+  'ART',
+  'CERAMICS',
+  'OBJECTS',
 ];
 
 const conditions = [
-  "Museum Grade (Mint)",
-  "Excellent (Minor Patina)",
-  "Good (Visible Wear)",
-  "Fair (Requires Restoration)",
+  'Museum Grade (Mint)',
+  'Excellent (Minor Patina)',
+  'Good (Visible Wear)',
+  'Fair (Requires Restoration)',
 ];
 
 export const CreateListing = () => {
-  const [title, setTitle] = useState("");
-  const [year, setYear] = useState("");
-  const [description, setDescription] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("FURNITURE");
-  const [selectedCondition, setSelectedCondition] = useState("");
+  const [title, setTitle] = useState('');
+  const [year, setYear] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('FURNITURE');
+  const [selectedCondition, setSelectedCondition] = useState('');
 
   return (
-    <View className="flex-1" style={{ backgroundColor: Colors.brand.neutral }}>
+    <View className="flex-1" style={{backgroundColor: Colors.brand.neutral}}>
       <ScrollView
         className="flex-1"
         showsVerticalScrollIndicator={false}
@@ -42,15 +42,15 @@ export const CreateListing = () => {
         {/* Main Content Grid */}
         <View className="px-6 py-10 lg:grid lg:grid-cols-12 lg:gap-16">
           {/* Left Column: Headline & Visual Documentation */}
-          <View className="lg:col-span-5 mb-12 lg:mb-0">
+          <View className="mb-12 lg:col-span-5 lg:mb-0">
             <View className="mb-12">
               <Text
-                className="text-5xl lg:text-6xl font-playfair text-primary-900 leading-none mb-4"
-                style={{ letterSpacing: -1 }}
+                className="mb-4 font-playfair text-5xl leading-none text-primary-900 lg:text-6xl"
+                style={{letterSpacing: -1}}
               >
                 Catalog New Object
               </Text>
-              <Text className="text-base text-brand-tertiary leading-relaxed max-w-xs">
+              <Text className="max-w-xs text-base leading-relaxed text-brand-tertiary">
                 Each entry in the archive is meticulously documented. Please
                 provide high-resolution visual evidence and provenance details.
               </Text>
@@ -58,18 +58,18 @@ export const CreateListing = () => {
 
             {/* Visual Documentation Section */}
             <View>
-              <View className="flex-row items-center justify-between border-b border-border pb-2 mb-6">
+              <View className="mb-6 flex-row items-center justify-between border-b border-border pb-2">
                 <Text className="text-[10px] font-bold uppercase tracking-widest">
                   Visual Documentation
                 </Text>
-                <Text className="text-[9px] text-brand-tertiary uppercase tracking-widest">
+                <Text className="text-[9px] uppercase tracking-widest text-brand-tertiary">
                   0 / 5 Images
                 </Text>
               </View>
 
               {/* Primary Image Upload */}
               <TouchableOpacity
-                className="aspect-[4/5] w-full border border-dashed border-border flex flex-col items-center justify-center mb-4"
+                className="mb-4 flex aspect-[4/5] w-full flex-col items-center justify-center border border-dashed border-border"
                 style={{
                   borderColor: Colors.light.border,
                   backgroundColor: Colors.light.surface,
@@ -81,20 +81,20 @@ export const CreateListing = () => {
                   size={40}
                   color={Colors.brand.tertiary}
                 />
-                <Text className="text-[10px] font-bold uppercase tracking-widest mt-4">
+                <Text className="mt-4 text-[10px] font-bold uppercase tracking-widest">
                   Upload Primary Plate
                 </Text>
-                <Text className="text-[9px] text-brand-tertiary mt-2">
+                <Text className="mt-2 text-[9px] text-brand-tertiary">
                   Front Profile View
                 </Text>
               </TouchableOpacity>
 
               {/* Secondary Thumbnails */}
               <View className="flex-row flex-wrap gap-3">
-                {[1, 2, 3, 4].map((item) => (
+                {[1, 2, 3, 4].map(item => (
                   <TouchableOpacity
                     key={item}
-                    className="w-[48%] h-[20%] aspect-square border border-dashed border-border flex items-center justify-center"
+                    className="flex aspect-square h-[20%] w-[48%] items-center justify-center border border-dashed border-border"
                     style={{
                       borderColor: Colors.light.border,
                       backgroundColor: Colors.light.surface,
@@ -110,9 +110,9 @@ export const CreateListing = () => {
                 ))}
               </View>
 
-              <Text className="text-[11px] text-brand-tertiary italic mt-4">
+              <Text className="mt-4 text-[11px] italic text-brand-tertiary">
                 * Note: At least three distinct angles are required for initial
-                {"\n"}authentication triage.
+                {'\n'}authentication triage.
               </Text>
             </View>
           </View>
@@ -121,22 +121,22 @@ export const CreateListing = () => {
           <View className="lg:col-span-7 lg:border-l lg:border-border lg:pl-0">
             {/* 01 Object Identity */}
             <View className="mb-10 pt-10 lg:pt-0">
-              <View className="flex-row items-center gap-4 mb-4">
-                <Text className="text-2xl font-playfair italic text-primary-900">
+              <View className="mb-4 flex-row items-center gap-4">
+                <Text className="font-playfair text-2xl italic text-primary-900">
                   01
                 </Text>
-                <Text className="text-[10px] font-bold uppercase tracking-widest pt-1">
+                <Text className="pt-1 text-[10px] font-bold uppercase tracking-widest">
                   Object Identity
                 </Text>
               </View>
 
               <View className="lg:grid lg:grid-cols-2 lg:gap-6">
                 <View className="my-4">
-                  <Text className="text-[10px] font-bold uppercase tracking-widest text-brand-tertiary mb-1">
+                  <Text className="mb-1 text-[10px] font-bold uppercase tracking-widest text-brand-tertiary">
                     Design/Object Name
                   </Text>
                   <TextInput
-                    className="w-full py-2 border-b border-border bg-transparent text-brand-primary"
+                    className="w-full border-b border-border bg-transparent py-2 text-brand-primary"
                     placeholder="e.g. Wassily Chair Model B3"
                     placeholderTextColor={Colors.brand.tertiary}
                     value={title}
@@ -144,11 +144,11 @@ export const CreateListing = () => {
                   />
                 </View>
                 <View className="my-4">
-                  <Text className="text-[10px] font-bold uppercase tracking-widest text-brand-tertiary mb-1">
+                  <Text className="mb-1 text-[10px] font-bold uppercase tracking-widest text-brand-tertiary">
                     Origin Year
                   </Text>
                   <TextInput
-                    className="w-full py-2 border-b border-border bg-transparent text-brand-primary"
+                    className="w-full border-b border-border bg-transparent py-2 text-brand-primary"
                     placeholder="YYYY"
                     placeholderTextColor={Colors.brand.tertiary}
                     value={year}
@@ -162,21 +162,21 @@ export const CreateListing = () => {
 
             {/* 02 Provenance & History */}
             <View className="mb-10">
-              <View className="flex-row items-center gap-4 mb-4">
-                <Text className="text-2xl font-playfair italic text-primary-900">
+              <View className="mb-4 flex-row items-center gap-4">
+                <Text className="font-playfair text-2xl italic text-primary-900">
                   02
                 </Text>
-                <Text className="text-[10px] font-bold uppercase tracking-widest pt-1">
+                <Text className="pt-1 text-[10px] font-bold uppercase tracking-widest">
                   Provenance & History
                 </Text>
               </View>
 
               <View className="my-4">
-                <Text className="text-[10px] font-bold uppercase tracking-widest text-brand-tertiary mb-2">
+                <Text className="mb-2 text-[10px] font-bold uppercase tracking-widest text-brand-tertiary">
                   Historical Narrative
                 </Text>
                 <TextInput
-                  className="w-full p-4 border border-border bg-transparent text-brand-primary leading-relaxed"
+                  className="w-full border border-border bg-transparent p-4 leading-relaxed text-brand-primary"
                   placeholder="Document the object's journey, previous owners, and any restoration history..."
                   placeholderTextColor={Colors.brand.tertiary}
                   value={description}
@@ -184,37 +184,37 @@ export const CreateListing = () => {
                   multiline
                   numberOfLines={6}
                   textAlignVertical="top"
-                  style={{ minHeight: 140 }}
+                  style={{minHeight: 140}}
                 />
               </View>
             </View>
 
             {/* 03 Classification */}
             <View className="mb-10">
-              <View className="flex-row items-center gap-4 mb-6">
-                <Text className="text-2xl font-playfair italic text-primary-900">
+              <View className="mb-6 flex-row items-center gap-4">
+                <Text className="font-playfair text-2xl italic text-primary-900">
                   03
                 </Text>
-                <Text className="text-[10px] font-bold uppercase tracking-widest pt-1">
+                <Text className="pt-1 text-[10px] font-bold uppercase tracking-widest">
                   Classification
                 </Text>
               </View>
 
               <View>
-                <Text className="text-[10px] font-bold uppercase tracking-widest text-brand-tertiary mb-4">
+                <Text className="mb-4 text-[10px] font-bold uppercase tracking-widest text-brand-tertiary">
                   Category
                 </Text>
                 <View className="flex-row flex-wrap gap-2">
-                  {categories.map((cat) => (
+                  {categories.map(cat => (
                     <TouchableOpacity
                       key={cat}
                       onPress={() => setSelectedCategory(cat)}
-                      className="px-4 py-2 border"
+                      className="border px-4 py-2"
                       style={{
                         backgroundColor:
                           selectedCategory === cat
                             ? Colors.brand.secondary
-                            : "transparent",
+                            : 'transparent',
                         borderColor:
                           selectedCategory === cat
                             ? Colors.brand.secondary
@@ -239,7 +239,7 @@ export const CreateListing = () => {
               </View>
 
               <View className="mt-6">
-                <Text className="text-[10px] font-bold uppercase tracking-widest text-brand-tertiary mb-4">
+                <Text className="mb-4 text-[10px] font-bold uppercase tracking-widest text-brand-tertiary">
                   Condition
                 </Text>
                 <ScrollView
@@ -248,16 +248,16 @@ export const CreateListing = () => {
                   className="overflow-visible"
                 >
                   <View className="flex-row gap-2 py-2">
-                    {conditions.map((condition) => (
+                    {conditions.map(condition => (
                       <TouchableOpacity
                         key={condition}
                         onPress={() => setSelectedCondition(condition)}
-                        className="px-4 py-2 border"
+                        className="border px-4 py-2"
                         style={{
                           backgroundColor:
                             selectedCondition === condition
                               ? Colors.brand.secondary
-                              : "transparent",
+                              : 'transparent',
                           borderColor:
                             selectedCondition === condition
                               ? Colors.brand.secondary
@@ -284,10 +284,10 @@ export const CreateListing = () => {
             </View>
 
             {/* Submit Section */}
-            <View className="pt-8 border-t border-border">
-              <View className="lg:flex-row lg:justify-between lg:items-end gap-6">
+            <View className="border-t border-border pt-8">
+              <View className="gap-6 lg:flex-row lg:items-end lg:justify-between">
                 <View className="lg:flex-1 lg:pr-8">
-                  <Text className="text-sm italic text-brand-tertiary mb-1">
+                  <Text className="mb-1 text-sm italic text-brand-tertiary">
                     Estimated appraisal time: 48-72 hours.
                   </Text>
                   <Text className="text-[10px] uppercase tracking-widest text-brand-tertiary">
@@ -295,8 +295,8 @@ export const CreateListing = () => {
                   </Text>
                 </View>
                 <TouchableOpacity
-                  className="lg:w-auto lg:px-12 w-full py-5 flex items-center justify-center"
-                  style={{ backgroundColor: Colors.brand.secondary }}
+                  className="flex w-full items-center justify-center py-5 lg:w-auto lg:px-12"
+                  style={{backgroundColor: Colors.brand.secondary}}
                   activeOpacity={0.8}
                 >
                   <Text className="text-[12px] font-bold uppercase tracking-[0.25em] text-white">
@@ -311,16 +311,16 @@ export const CreateListing = () => {
 
       {/* Footer */}
       <View
-        className="px-6 pb-10 pt-4 border-t border-border"
-        style={{ borderTopColor: Colors.light.border }}
+        className="border-t border-border px-6 pb-10 pt-4"
+        style={{borderTopColor: Colors.light.border}}
       >
-        <View className="lg:grid lg:grid-cols-4 flex-row justify-between">
+        <View className="flex-row justify-between lg:grid lg:grid-cols-4">
           <View className="lg:col-span-2">
-            <Text className="text-2xl font-playfair tracking-widest text-primary-900">
+            <Text className="font-playfair text-2xl tracking-widest text-primary-900">
               THE ARCHIVIST
             </Text>
           </View>
-          <View className="lg:col-span-2 flex-row lg:justify-end gap-6 mt-4 lg:mt-0">
+          <View className="mt-4 flex-row gap-6 lg:col-span-2 lg:mt-0 lg:justify-end">
             <TouchableOpacity>
               <Text className="text-[10px] uppercase tracking-widest text-brand-tertiary">
                 Guidelines

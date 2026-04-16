@@ -1,5 +1,5 @@
-import { Colors } from "@/constants/theme";
-import { Text, TouchableOpacity, View } from "react-native";
+import {Colors} from '@/constants/theme';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 type CuratorTabsProps = {
   tabs: string[];
@@ -14,10 +14,10 @@ export const CuratorTabs = ({
 }: CuratorTabsProps) => {
   return (
     <View
-      style={{ borderBottomColor: Colors.light.border }}
+      style={{borderBottomColor: Colors.light.border}}
       className="flex-row border-b"
     >
-      {tabs.map((tab) => (
+      {tabs.map(tab => (
         <TouchableOpacity
           key={tab}
           onPress={() => onTabChange(tab)}

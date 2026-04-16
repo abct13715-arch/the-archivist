@@ -1,14 +1,14 @@
-import { Colors } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {Colors} from '@/constants/theme';
+import {Ionicons} from '@expo/vector-icons';
+import {router} from 'expo-router';
+import {Text, TouchableOpacity, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 type NavbarProps = {
   routeName: string;
 };
 
-export const Navbar = ({ routeName }: NavbarProps) => {
+export const Navbar = ({routeName}: NavbarProps) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -18,14 +18,14 @@ export const Navbar = ({ routeName }: NavbarProps) => {
         borderBottomColor: Colors.light.border,
         paddingTop: insets.top,
       }}
-      className="w-full px-4 pb-4 border-b flex-row justify-between items-center"
+      className="w-full flex-row items-center justify-between border-b px-4 pb-4"
     >
-      <Text className="text-2xl font-playfair text-primary-900">
+      <Text className="font-playfair text-2xl text-primary-900">
         THE ARCHIVIST
       </Text>
 
-      {["index", "browse", "profile", "saved"].includes(routeName) ? (
-        <TouchableOpacity onPress={() => router.push("/drawer")}>
+      {['index', 'browse', 'profile', 'saved'].includes(routeName) ? (
+        <TouchableOpacity onPress={() => router.push('/drawer')}>
           <Ionicons name="menu-outline" size={30} color={Colors.light.icon} />
         </TouchableOpacity>
       ) : (

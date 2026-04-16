@@ -1,9 +1,9 @@
-import { ListingDetail, getListingById } from "@/features";
-import { useLocalSearchParams } from "expo-router";
-import { Text, View } from "react-native";
+import {getListingById, ListingDetail} from '@/features';
+import {useLocalSearchParams} from 'expo-router';
+import {Text, View} from 'react-native';
 
 export default function ListingDetailPage() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const {id} = useLocalSearchParams<{id: string}>();
 
   const listing = getListingById(id);
 
@@ -20,13 +20,13 @@ export default function ListingDetailPage() {
       listing={listing}
       showFullDetails={true}
       onAddToCart={() => {
-        console.log("Add to cart:", listing.id);
+        console.log('Add to cart:', listing.id);
       }}
       onSaveLater={() => {
-        console.log("Save for later:", listing.id);
+        console.log('Save for later:', listing.id);
       }}
-      onRelatedListingPress={(relatedId) => {
-        console.log("Navigate to related listing:", relatedId);
+      onRelatedListingPress={relatedId => {
+        console.log('Navigate to related listing:', relatedId);
       }}
     />
   );

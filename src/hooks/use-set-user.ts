@@ -1,7 +1,8 @@
-import { useCallback } from 'react';
-import { STORAGE_KEYS } from '@/constants/storage-keys';
-import { User } from '@/models/user';
-import { storage } from '@/lib/storage';
+import {useCallback} from 'react';
+import {STORAGE_KEYS} from '@/constants/storage-keys';
+import {User} from '@/models/user';
+
+import {storage} from '@/lib/storage';
 
 export const useSetUser = () => {
   const setUser = useCallback(async (user: User) => {
@@ -12,5 +13,5 @@ export const useSetUser = () => {
     await storage.deleteItem(STORAGE_KEYS.USER);
   }, []);
 
-  return { setUser, clearUser };
+  return {setUser, clearUser};
 };

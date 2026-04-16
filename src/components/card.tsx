@@ -1,12 +1,7 @@
-import { Colors } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
-import { Image } from "expo-image";
-import {
-  ImageSourcePropType,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import {Colors} from '@/constants/theme';
+import {Ionicons} from '@expo/vector-icons';
+import {Image} from 'expo-image';
+import {ImageSourcePropType, Text, TouchableOpacity, View} from 'react-native';
 
 type CardProps = {
   image: ImageSourcePropType;
@@ -29,7 +24,7 @@ export const Card = ({
         backgroundColor: Colors.light.surface,
         borderColor: Colors.light.border,
       }}
-      className="border p-6 items-center gap-4 my-2"
+      className="my-2 items-center gap-4 border p-6"
     >
       <Image
         source={image}
@@ -47,7 +42,7 @@ export const Card = ({
         <Text
           style={{
             color: Colors.light.text,
-            fontFamily: "PlayfairDisplay_700Bold",
+            fontFamily: 'PlayfairDisplay_700Bold',
           }}
           className="text-lg"
         >
@@ -56,7 +51,7 @@ export const Card = ({
         <View className="flex-row items-center gap-1">
           <Ionicons name="star" size={14} color={Colors.brand.secondary} />
           <Text
-            style={{ color: Colors.light.textSecondary }}
+            style={{color: Colors.light.textSecondary}}
             className="text-xs tracking-widest"
           >
             {rating.toFixed(1)} RATING
@@ -65,20 +60,20 @@ export const Card = ({
       </View>
 
       <Text
-        style={{ color: Colors.light.text }}
-        className="text-sm text-center italic leading-6 px-4"
+        style={{color: Colors.light.text}}
+        className="px-4 text-center text-sm italic leading-6"
       >
         &ldquo;{description}&rdquo;
       </Text>
 
       <TouchableOpacity
         onPress={onPress}
-        style={{ borderColor: Colors.light.border }}
-        className="border px-auto py-4 mt-2 w-full"
+        style={{borderColor: Colors.light.border}}
+        className="px-auto mt-2 w-full border py-4"
       >
         <Text
-          style={{ color: Colors.light.text }}
-          className="text-xs tracking-widest text-center"
+          style={{color: Colors.light.text}}
+          className="text-center text-xs tracking-widest"
         >
           VIEW SHOP
         </Text>

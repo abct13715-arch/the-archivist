@@ -1,6 +1,6 @@
-import { Colors } from "@/constants/theme";
-import { Image } from "expo-image";
-import { ImageSourcePropType, Text, TouchableOpacity, View } from "react-native";
+import {Colors} from '@/constants/theme';
+import {Image} from 'expo-image';
+import {ImageSourcePropType, Text, TouchableOpacity, View} from 'react-native';
 
 type CuratorListingCardProps = {
   index: string;
@@ -25,33 +25,33 @@ export const CuratorListingCard = ({
       style={{
         borderColor: Colors.light.border,
       }}
-      className="border overflow-hidden bg-surface"
+      className="overflow-hidden border bg-surface"
     >
       <Image
         source={image}
         contentFit="cover"
-        style={{ width: "100%", aspectRatio: 4 / 5 }}
+        style={{width: '100%', aspectRatio: 4 / 5}}
         className="grayscale"
       />
       <View
-        style={{ borderTopColor: Colors.light.border }}
+        style={{borderTopColor: Colors.light.border}}
         className="border-t px-6 py-4"
       >
-        <View className="flex-row justify-between items-start">
+        <View className="flex-row items-start justify-between">
           <View className="flex-1">
             <Text
               style={{
                 color: Colors.brand.secondary,
                 letterSpacing: 2,
               }}
-              className="text-[10px] mb-1"
+              className="mb-1 text-[10px]"
             >
               {category.toUpperCase()}
             </Text>
             <Text
               style={{
                 color: Colors.light.text,
-                fontFamily: "PlayfairDisplay_700Bold",
+                fontFamily: 'PlayfairDisplay_700Bold',
               }}
               className="text-2xl"
             >
@@ -61,7 +61,7 @@ export const CuratorListingCard = ({
           <Text
             style={{
               color: Colors.light.text,
-              fontFamily: "PlayfairDisplay_700Bold",
+              fontFamily: 'PlayfairDisplay_700Bold',
             }}
             className="text-lg"
           >

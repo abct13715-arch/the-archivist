@@ -1,12 +1,13 @@
-import { Pagination } from "@/components";
-import { Colors } from "@/constants/theme";
-import { useState } from "react";
-import { ScrollView, View } from "react-native";
-import { browseListings } from "../data";
-import { BrowseListingCard } from "./browse-listing-card";
-import { CategoryGrid } from "./category-grid";
-import { FeaturedCollections } from "./featured-collections";
-import { SearchBar } from "./search-bar";
+import {useState} from 'react';
+import {Pagination} from '@/components';
+import {Colors} from '@/constants/theme';
+import {ScrollView, View} from 'react-native';
+
+import {browseListings} from '../data';
+import {BrowseListingCard} from './browse-listing-card';
+import {CategoryGrid} from './category-grid';
+import {FeaturedCollections} from './featured-collections';
+import {SearchBar} from './search-bar';
 
 export const Browse = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,19 +28,19 @@ export const Browse = () => {
   return (
     <ScrollView
       className="flex-1"
-      style={{ backgroundColor: Colors.brand.neutral }}
+      style={{backgroundColor: Colors.brand.neutral}}
     >
       <SearchBar />
       <FeaturedCollections />
       <CategoryGrid />
 
-      <View className="px-6 py-10 flex-row flex-wrap justify-between gap-y-2">
-        {browseListings.map((listing) => (
+      <View className="flex-row flex-wrap justify-between gap-y-2 px-6 py-10">
+        {browseListings.map(listing => (
           <BrowseListingCard
             key={listing.id}
             listing={listing}
             onToggleBookmark={(id, bookmarked) => {
-              console.log("Bookmark toggled:", id, bookmarked);
+              console.log('Bookmark toggled:', id, bookmarked);
             }}
           />
         ))}

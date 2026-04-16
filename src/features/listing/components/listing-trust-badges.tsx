@@ -1,5 +1,5 @@
-import { Ionicons } from "@expo/vector-icons";
-import { Text, View } from "react-native";
+import {Ionicons} from '@expo/vector-icons';
+import {Text, View} from 'react-native';
 
 type TrustBadge = {
   icon: keyof typeof Ionicons.glyphMap;
@@ -9,23 +9,23 @@ type TrustBadge = {
 
 const trustBadges: TrustBadge[] = [
   {
-    icon: "shield-checkmark-outline",
-    title: "Authenticity Guaranteed",
+    icon: 'shield-checkmark-outline',
+    title: 'Authenticity Guaranteed',
     description:
-      "Each piece in our archive undergoes expert verification by our curation team.",
+      'Each piece in our archive undergoes expert verification by our curation team.',
   },
   {
-    icon: "cube-outline",
-    title: "Insured White-Glove Delivery",
+    icon: 'cube-outline',
+    title: 'Insured White-Glove Delivery',
     description:
-      "Complimentary global shipping with full insurance coverage to your door.",
+      'Complimentary global shipping with full insurance coverage to your door.',
   },
 ];
 
 export const ListingTrustBadges = () => {
   return (
-    <View className="gap-6 mt-10 pb-10">
-      {trustBadges.map((badge) => (
+    <View className="mt-10 gap-6 pb-10">
+      {trustBadges.map(badge => (
         <View key={badge.title} className="flex-row items-start gap-4">
           <Ionicons
             name={badge.icon}
@@ -34,7 +34,7 @@ export const ListingTrustBadges = () => {
             className="mt-0.5"
           />
           <View className="flex-1">
-            <Text className="text-xs font-bold uppercase tracking-label-md text-brand-primary mb-1">
+            <Text className="mb-1 text-xs font-bold uppercase tracking-label-md text-brand-primary">
               {badge.title}
             </Text>
             <Text className="text-sm leading-relaxed text-tertiary-500">

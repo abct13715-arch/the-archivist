@@ -1,13 +1,13 @@
-import { Colors } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, {useState} from 'react';
+import {Colors} from '@/constants/theme';
+import {Ionicons} from '@expo/vector-icons';
 import {
   Text,
   TextInput,
   TextInputProps,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 
 interface AuthInputProps extends TextInputProps {
   label: string;
@@ -26,14 +26,14 @@ export const AuthInput = ({
 
   return (
     <View className="relative mt-8">
-      <View className="absolute -top-2 left-3 bg-brand-neutral px-1 z-10">
+      <View className="absolute -top-2 left-3 z-10 bg-brand-neutral px-1">
         <Text className="text-[10px] uppercase tracking-widest text-brand-tertiary">
           {label}
         </Text>
       </View>
       <View className="relative">
         <TextInput
-          className="w-full px-4 py-4 border border-border text-brand-primary pr-12"
+          className="w-full border border-border px-4 py-4 pr-12 text-brand-primary"
           placeholderTextColor={Colors.brand.tertiary}
           secureTextEntry={isSecure}
           {...props}
@@ -45,7 +45,7 @@ export const AuthInput = ({
             activeOpacity={0.7}
           >
             <Ionicons
-              name={isPasswordVisible ? "eye-off-outline" : "eye-outline"}
+              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
               size={20}
               color={Colors.brand.tertiary}
             />

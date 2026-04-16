@@ -1,10 +1,5 @@
-import { Image } from "expo-image";
-import {
-  ImageSourcePropType,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import {Image} from 'expo-image';
+import {ImageSourcePropType, Text, TouchableOpacity, View} from 'react-native';
 
 type CollectionItemCardProps = {
   name: string;
@@ -25,12 +20,12 @@ export const CollectionItemCard = ({
     <TouchableOpacity onPress={onPress} className="py-8">
       <Image
         source={image}
-        style={{ width: "100%", aspectRatio: 1 }}
+        style={{width: '100%', aspectRatio: 1}}
         contentFit="cover"
       />
-      <View className="flex-row justify-between items-center py-3">
+      <View className="flex-row items-center justify-between py-3">
         <View>
-          <Text className="text-xs tracking-label-lg text-tertiary-500 mb-1">
+          <Text className="mb-1 text-xs tracking-label-lg text-tertiary-500">
             {category}
           </Text>
           <Text className="font-playfair text-lg text-primary-900">{name}</Text>

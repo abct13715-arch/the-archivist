@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import {Text, TouchableOpacity, View} from 'react-native';
 
 type CuratorArrowNavProps = {
   onPrev: () => void;
@@ -14,15 +14,15 @@ export const CuratorArrowNav = ({
   canGoNext,
 }: CuratorArrowNavProps) => {
   return (
-    <View className="flex-row gap-3 mt-4">
+    <View className="mt-4 flex-row gap-3">
       {canGoPrev && (
         <TouchableOpacity
           onPress={onPrev}
           disabled={!canGoPrev}
-          className="border border-primary-900 w-10 h-10 items-center justify-center"
+          className="h-10 w-10 items-center justify-center border border-primary-900"
         >
           <Text
-            className={`text-base ${canGoPrev ? "text-primary-900" : "text-tertiary-300"}`}
+            className={`text-base ${canGoPrev ? 'text-primary-900' : 'text-tertiary-300'}`}
           >
             ←
           </Text>
@@ -32,10 +32,10 @@ export const CuratorArrowNav = ({
         <TouchableOpacity
           onPress={onNext}
           disabled={!canGoNext}
-          className="border border-primary-900 w-10 h-10 items-center justify-center"
+          className="h-10 w-10 items-center justify-center border border-primary-900"
         >
           <Text
-            className={`text-base ${canGoNext ? "text-primary-900" : "text-tertiary-300"}`}
+            className={`text-base ${canGoNext ? 'text-primary-900' : 'text-tertiary-300'}`}
           >
             →
           </Text>

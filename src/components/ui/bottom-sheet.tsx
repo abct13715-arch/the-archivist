@@ -1,19 +1,19 @@
+import React, {forwardRef, useEffect, useRef} from 'react';
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetScrollView,
   BottomSheetView,
-} from "@gorhom/bottom-sheet";
-import React, { forwardRef, useEffect, useRef } from "react";
+} from '@gorhom/bottom-sheet';
 import {
   Animated,
   Dimensions,
   Modal,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 
-const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 
 interface BottomSheetProps {
   visible: boolean;
@@ -21,11 +21,7 @@ interface BottomSheetProps {
   children?: React.ReactNode;
 }
 
-export const BottomSheet = ({
-  visible,
-  onClose,
-  children,
-}: BottomSheetProps) => {
+export const BottomSheet = ({visible, onClose, children}: BottomSheetProps) => {
   const translateY = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
 
   useEffect(() => {
@@ -54,15 +50,12 @@ export const BottomSheet = ({
           onPress={onClose}
         />
         <Animated.View
-          style={[
-            { transform: [{ translateY }] },
-            { height: SCREEN_HEIGHT * 0.9 },
-          ]}
-          className="bg-[#F5F2EC] rounded-t-[32px] overflow-hidden"
+          style={[{transform: [{translateY}]}, {height: SCREEN_HEIGHT * 0.9}]}
+          className="overflow-hidden rounded-t-[32px] bg-[#F5F2EC]"
         >
           {/* Handle Bar Area */}
-          <View className="items-center py-4 bg-[#F5F2EC]">
-            <View className="w-12 h-[3px] bg-neutral-300 rounded-full" />
+          <View className="items-center bg-[#F5F2EC] py-4">
+            <View className="h-[3px] w-12 rounded-full bg-neutral-300" />
           </View>
 
           <View className="flex-1 bg-white">{children}</View>
@@ -81,7 +74,7 @@ interface BottomSheetComponentProps {
 export const BottomSheetComponent = forwardRef<
   BottomSheetModal,
   BottomSheetComponentProps
->(({ children, snapPoints = ["50%"], useScroll = false }, ref) => {
+>(({children, snapPoints = ['50%'], useScroll = false}, ref) => {
   const renderBackdrop = React.useCallback(
     (props: any) => (
       <BottomSheetBackdrop
@@ -101,8 +94,8 @@ export const BottomSheetComponent = forwardRef<
       snapPoints={snapPoints}
       backdropComponent={renderBackdrop}
       enablePanDownToClose
-      backgroundStyle={{ backgroundColor: "white", borderRadius: 32 }}
-      handleIndicatorStyle={{ backgroundColor: "#D1D5DB", width: 48 }}
+      backgroundStyle={{backgroundColor: 'white', borderRadius: 32}}
+      handleIndicatorStyle={{backgroundColor: '#D1D5DB', width: 48}}
     >
       {useScroll ? (
         <BottomSheetScrollView className="flex-1">
@@ -117,4 +110,4 @@ export const BottomSheetComponent = forwardRef<
   );
 });
 
-BottomSheetComponent.displayName = "BottomSheetComponent";
+BottomSheetComponent.displayName = 'BottomSheetComponent';

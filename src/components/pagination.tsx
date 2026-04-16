@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import {Text, TouchableOpacity, View} from 'react-native';
 
 type PaginationProps = {
   currentPage: number;
@@ -10,18 +10,18 @@ type PaginationProps = {
 
 const getPageNumbers = (currentPage: number, totalPages: number) => {
   if (totalPages <= 5) {
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
+    return Array.from({length: totalPages}, (_, i) => i + 1);
   }
 
   if (currentPage <= 3) {
-    return [1, 2, 3, 4, "...", totalPages - 1, totalPages];
+    return [1, 2, 3, 4, '...', totalPages - 1, totalPages];
   }
 
   if (currentPage >= totalPages - 2) {
     return [
       1,
       2,
-      "...",
+      '...',
       totalPages - 3,
       totalPages - 2,
       totalPages - 1,
@@ -31,11 +31,11 @@ const getPageNumbers = (currentPage: number, totalPages: number) => {
 
   return [
     1,
-    "...",
+    '...',
     currentPage - 1,
     currentPage,
     currentPage + 1,
-    "...",
+    '...',
     totalPages,
   ];
 };
@@ -50,7 +50,7 @@ export const Pagination = ({
   const pages = getPageNumbers(currentPage, totalPages);
 
   return (
-    <View className="border-t border-tertiary-100 pt-6 mx-6 mb-10">
+    <View className="mx-6 mb-10 border-t border-tertiary-100 pt-6">
       <View className="flex-row items-center justify-center gap-6">
         <TouchableOpacity
           onPress={onPrev}
@@ -58,7 +58,7 @@ export const Pagination = ({
           className="flex-row items-center gap-2 py-3"
         >
           <Text
-            className={`text-xs tracking-label-lg font-bold ${currentPage === 1 ? "text-tertiary-300" : "text-primary-900"}`}
+            className={`text-xs font-bold tracking-label-lg ${currentPage === 1 ? 'text-tertiary-300' : 'text-primary-900'}`}
           >
             ← PREV
           </Text>
@@ -66,10 +66,10 @@ export const Pagination = ({
 
         <View className="flex-row items-center gap-4">
           {pages.map((page, index) =>
-            page === "..." ? (
+            page === '...' ? (
               <Text
                 key={`dots-${index}`}
-                className="text-xs text-tertiary-300 font-bold"
+                className="text-xs font-bold text-tertiary-300"
               >
                 ...
               </Text>
@@ -80,9 +80,9 @@ export const Pagination = ({
                 className="items-center gap-1"
               >
                 <Text
-                  className={`text-xs tracking-label-lg font-bold ${page === currentPage ? "text-secondary-500" : "text-tertiary-300"}`}
+                  className={`text-xs font-bold tracking-label-lg ${page === currentPage ? 'text-secondary-500' : 'text-tertiary-300'}`}
                 >
-                  {String(page).padStart(2, "0")}
+                  {String(page).padStart(2, '0')}
                 </Text>
                 {page === currentPage && (
                   <View className="h-px w-full bg-secondary-500" />
@@ -98,7 +98,7 @@ export const Pagination = ({
           className="flex-row items-center gap-2 py-3"
         >
           <Text
-            className={`text-xs tracking-label-lg font-bold ${currentPage === totalPages ? "text-tertiary-300" : "text-primary-900"}`}
+            className={`text-xs font-bold tracking-label-lg ${currentPage === totalPages ? 'text-tertiary-300' : 'text-primary-900'}`}
           >
             NEXT →
           </Text>

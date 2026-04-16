@@ -1,18 +1,19 @@
-import { Navbar } from "@/components";
-import { Colors } from "@/constants/theme";
+import {useEffect} from 'react';
+import {Navbar} from '@/components';
+import {Colors} from '@/constants/theme';
 import {
   PlayfairDisplay_700Bold,
   useFonts,
-} from "@expo-google-fonts/playfair-display";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import "react-native-reanimated";
-import "../global.css";
+} from '@expo-google-fonts/playfair-display';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {DefaultTheme, ThemeProvider} from '@react-navigation/native';
+import {Stack} from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import {StatusBar} from 'expo-status-bar';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+
+import 'react-native-reanimated';
+import '../global.css';
 
 const ArchivistTheme = {
   ...DefaultTheme,
@@ -27,17 +28,17 @@ const ArchivistTheme = {
 };
 
 export default function RootLayout() {
-  const [loaded] = useFonts({ PlayfairDisplay_700Bold });
+  const [loaded] = useFonts({PlayfairDisplay_700Bold});
 
   useEffect(() => {
     if (loaded) SplashScreen.hideAsync();
   }, [loaded]);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{flex: 1}}>
       <BottomSheetModalProvider>
         <ThemeProvider value={ArchivistTheme}>
-          <Stack screenOptions={{ headerShown: false }}>
+          <Stack screenOptions={{headerShown: false}}>
             <Stack.Screen name="(auth)/onboarding" />
             <Stack.Screen name="(auth)/login" />
             <Stack.Screen name="(auth)/register" />

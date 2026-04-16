@@ -1,2 +1,3 @@
-import { Onboarding } from "@/features/auth";
+import {Onboarding} from '@/features/auth';
+
 export default Onboarding;

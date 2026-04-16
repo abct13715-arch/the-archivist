@@ -1,1 +1,1 @@
-export { CreateListing as default } from "@/features";
+export {CreateListing as default} from '@/features';

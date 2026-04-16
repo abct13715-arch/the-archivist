@@ -1,3 +1,3 @@
-export * from "./collection";
-export * from "./collection-detail";
-export * from "./collection-item-card";
+export * from './collection';
+export * from './collection-detail';
+export * from './collection-item-card';

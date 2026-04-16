@@ -1,2 +1,3 @@
-import { Register } from "@/features/auth";
+import {Register} from '@/features/auth';
+
 export default Register;

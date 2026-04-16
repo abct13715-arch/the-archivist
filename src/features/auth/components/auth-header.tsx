@@ -1,8 +1,8 @@
-import { Colors } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import React from 'react';
+import {Colors} from '@/constants/theme';
+import {Ionicons} from '@expo/vector-icons';
+import {useRouter} from 'expo-router';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 interface AuthHeaderProps {
   showBack?: boolean;
@@ -12,19 +12,19 @@ interface AuthHeaderProps {
 
 export const AuthHeader = ({
   showBack = false,
-  title = "THE ARCHIVIST",
+  title = 'THE ARCHIVIST',
   onBack,
 }: AuthHeaderProps) => {
   const router = useRouter();
 
   return (
-    <View className="w-full px-6 py-4 border-b border-border flex-row justify-between items-center bg-brand-neutral">
+    <View className="w-full flex-row items-center justify-between border-b border-border bg-brand-neutral px-6 py-4">
       {showBack && (
         <TouchableOpacity onPress={onBack || (() => router.back())}>
           <Ionicons name="arrow-back" size={24} color={Colors.brand.primary} />
         </TouchableOpacity>
       )}
-      <Text className="text-3xl font-playfair tracking-tighter uppercase font-bold text-brand-primary">
+      <Text className="font-playfair text-3xl font-bold uppercase tracking-tighter text-brand-primary">
         {title}
       </Text>
     </View>

@@ -1,6 +1,6 @@
-import { TFeaturedCollection } from "@/types";
-import { Image } from "expo-image";
-import { Text, TouchableOpacity, View } from "react-native";
+import {TFeaturedCollection} from '@/types';
+import {Image} from 'expo-image';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 type FeaturedCollectionProps = {
   collection: TFeaturedCollection;
@@ -13,56 +13,56 @@ export const FeaturedCollection = ({
   onExplore,
   onViewAll,
 }: FeaturedCollectionProps) => {
-  const [firstLine, secondLine] = collection.title.split("\n");
+  const [firstLine, secondLine] = collection.title.split('\n');
 
   return (
     <View>
-      <View className="px-6 pt-10 pb-6">
-        <View className="border border-primary-900 self-start px-3 py-1">
-          <Text className="text-xs tracking-label-lg text-primary-900 font-bold">
+      <View className="px-6 pb-6 pt-10">
+        <View className="self-start border border-primary-900 px-3 py-1">
+          <Text className="text-xs font-bold tracking-label-lg text-primary-900">
             {collection.volume}
           </Text>
         </View>
 
         <View className="mt-4">
-          <Text className="font-playfair text-6xl text-primary-900 leading-tight">
+          <Text className="font-playfair text-6xl leading-tight text-primary-900">
             {firstLine}
           </Text>
-          <Text className="font-playfair text-6xl text-brand-secondary italic leading-tight">
+          <Text className="font-playfair text-6xl italic leading-tight text-brand-secondary">
             {secondLine}
           </Text>
         </View>
 
-        <Text className="text-base leading-7 text-tertiary-500 mt-3">
+        <Text className="mt-3 text-base leading-7 text-tertiary-500">
           {collection.description}
         </Text>
 
-        <View className="gap-3 mt-6">
+        <View className="mt-6 gap-3">
           <TouchableOpacity
             onPress={onExplore}
-            className="bg-primary-900 px-6 py-4 self-start"
+            className="self-start bg-primary-900 px-6 py-4"
           >
-            <Text className="text-neutral-100 text-xs tracking-label-lg font-bold">
+            <Text className="text-xs font-bold tracking-label-lg text-neutral-100">
               EXPLORE THE COLLECTION
             </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={onViewAll}
-            className="border border-primary-900 px-6 py-4 self-start"
+            className="self-start border border-primary-900 px-6 py-4"
           >
-            <Text className="text-primary-900 text-xs tracking-label-lg">
+            <Text className="text-xs tracking-label-lg text-primary-900">
               VIEW ALL COLLECTIONS
             </Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      <View className="pb-8 px-6">
+      <View className="px-6 pb-8">
         <View className="relative">
           <Image
             source={collection.image}
-            style={{ width: "100%", aspectRatio: 3 / 4 }}
+            style={{width: '100%', aspectRatio: 3 / 4}}
             contentFit="cover"
           />
 

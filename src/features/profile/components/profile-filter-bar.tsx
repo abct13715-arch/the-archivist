@@ -1,5 +1,5 @@
-import { Colors } from "@/constants/theme";
-import { Text, TouchableOpacity, View } from "react-native";
+import {Colors} from '@/constants/theme';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 type ProfileFilterBarProps = {
   filters: string[];
@@ -13,16 +13,16 @@ export const ProfileFilterBar = ({
   onSelect,
 }: ProfileFilterBarProps) => (
   <View
-    style={{ borderBottomColor: Colors.light.border }}
-    className="border-b px-4 pb-3 gap-2"
+    style={{borderBottomColor: Colors.light.border}}
+    className="gap-2 border-b px-4 pb-3"
   >
     <Text
-      style={{ color: Colors.light.textSecondary, letterSpacing: 2 }}
-      className="text-xs mt-3"
+      style={{color: Colors.light.textSecondary, letterSpacing: 2}}
+      className="mt-3 text-xs"
     >
       FILTERS
     </Text>
-    {filters.map((f) => (
+    {filters.map(f => (
       <TouchableOpacity
         key={f}
         onPress={() => onSelect(f)}

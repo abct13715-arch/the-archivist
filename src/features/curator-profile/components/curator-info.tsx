@@ -1,5 +1,5 @@
-import { Colors } from "@/constants/theme";
-import { Text, View } from "react-native";
+import {Colors} from '@/constants/theme';
+import {Text, View} from 'react-native';
 
 type TCuratorStats = {
   selections: number;
@@ -14,30 +14,35 @@ type CuratorInfoProps = {
   stats: TCuratorStats;
 };
 
-export const CuratorInfo = ({ role, name, location, stats }: CuratorInfoProps) => {
+export const CuratorInfo = ({
+  role,
+  name,
+  location,
+  stats,
+}: CuratorInfoProps) => {
   return (
     <View
       style={{
         backgroundColor: Colors.light.surface,
         borderColor: Colors.light.border,
       }}
-      className="p-8 border"
+      className="border p-8"
     >
-      <View className="flex-col md:flex-row md:items-end justify-between gap-8">
+      <View className="flex-col justify-between gap-8 md:flex-row md:items-end">
         <View>
           <Text
             style={{
               color: Colors.light.textSecondary,
               letterSpacing: 2,
             }}
-            className="text-xs mb-2"
+            className="mb-2 text-xs"
           >
             {role.toUpperCase()}
           </Text>
           <Text
             style={{
               color: Colors.light.text,
-              fontFamily: "PlayfairDisplay_700Bold",
+              fontFamily: 'PlayfairDisplay_700Bold',
             }}
             className="text-5xl tracking-tighter"
           >
@@ -48,18 +53,18 @@ export const CuratorInfo = ({ role, name, location, stats }: CuratorInfoProps) =
               color: Colors.brand.secondary,
               letterSpacing: 2,
             }}
-            className="text-sm mt-4"
+            className="mt-4 text-sm"
           >
             {location}
           </Text>
         </View>
 
-        <View className="flex-row md:flex-col gap-8 md:gap-4 md:border-t-0 md:border-l border-t border-[#D8D8D0] pt-6 md:pt-0 md:pl-8">
+        <View className="flex-row gap-8 border-t border-[#D8D8D0] pt-6 md:flex-col md:gap-4 md:border-l md:border-t-0 md:pl-8 md:pt-0">
           <View className="items-center md:items-start">
             <Text
               style={{
                 color: Colors.light.text,
-                fontFamily: "PlayfairDisplay_700Bold",
+                fontFamily: 'PlayfairDisplay_700Bold',
               }}
               className="text-2xl"
             >
@@ -79,7 +84,7 @@ export const CuratorInfo = ({ role, name, location, stats }: CuratorInfoProps) =
             <Text
               style={{
                 color: Colors.light.text,
-                fontFamily: "PlayfairDisplay_700Bold",
+                fontFamily: 'PlayfairDisplay_700Bold',
               }}
               className="text-2xl"
             >
@@ -99,7 +104,7 @@ export const CuratorInfo = ({ role, name, location, stats }: CuratorInfoProps) =
             <Text
               style={{
                 color: Colors.light.text,
-                fontFamily: "PlayfairDisplay_700Bold",
+                fontFamily: 'PlayfairDisplay_700Bold',
               }}
               className="text-2xl"
             >

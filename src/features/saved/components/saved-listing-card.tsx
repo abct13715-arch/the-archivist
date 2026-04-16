@@ -1,33 +1,34 @@
-import { Colors } from "@/constants/theme";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Image } from "expo-image";
-import { router } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
-import { TSavedListing } from "../data";
+import {Colors} from '@/constants/theme';
+import {MaterialIcons} from '@expo/vector-icons';
+import {Image} from 'expo-image';
+import {router} from 'expo-router';
+import {Text, TouchableOpacity, View} from 'react-native';
+
+import {TSavedListing} from '../data';
 
 type Props = {
   listing: TSavedListing;
 };
 
-export const SavedListingCard = ({ listing }: Props) => {
+export const SavedListingCard = ({listing}: Props) => {
   const handlePress = () => {
     router.push(`/listing/${listing.id}`);
   };
 
   return (
-    <View className="border border-neutral-300 bg-surface overflow-hidden">
+    <View className="overflow-hidden border border-neutral-300 bg-surface">
       <View className="overflow-hidden">
         <Image
           source={listing.image}
-          style={{ width: "100%", aspectRatio: 1 }}
+          style={{width: '100%', aspectRatio: 1}}
           contentFit="cover"
         />
       </View>
 
-      <View className="px-6 pt-6 border-t border-neutral-300">
-        <View className="flex-row justify-between items-start mb-2">
+      <View className="border-t border-neutral-300 px-6 pt-6">
+        <View className="mb-2 flex-row items-start justify-between">
           <Text
-            className="font-playfair text-2xl text-primary-900 leading-tight flex-1 mr-2"
+            className="mr-2 flex-1 font-playfair text-2xl leading-tight text-primary-900"
             numberOfLines={2}
           >
             {listing.title}
@@ -39,18 +40,18 @@ export const SavedListingCard = ({ listing }: Props) => {
           />
         </View>
 
-        <Text className="text-[10px] font-bold tracking-widest text-tertiary-500 uppercase mb-2">
+        <Text className="mb-2 text-[10px] font-bold uppercase tracking-widest text-tertiary-500">
           {listing.studio}
         </Text>
 
         <Text className="text-lg text-primary-900">{listing.price}</Text>
       </View>
-      <View className="py-2 px-2">
+      <View className="px-2 py-2">
         <TouchableOpacity
           onPress={handlePress}
           className="border border-primary-900 px-6 py-2"
         >
-          <Text className="text-[10px] font-bold tracking-widest text-primary-900 uppercase text-center">
+          <Text className="text-center text-[10px] font-bold uppercase tracking-widest text-primary-900">
             VIEW PIECE
           </Text>
         </TouchableOpacity>

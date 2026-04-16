@@ -1,34 +1,34 @@
-import { Colors } from "@/constants/theme";
-import { Text, TouchableOpacity, View } from "react-native";
+import {Colors} from '@/constants/theme';
+import {Text, TouchableOpacity, View} from 'react-native';
 
-type TabType = "objects" | "collections";
+type TabType = 'objects' | 'collections';
 
 type Props = {
   activeTab: TabType;
   onTabChange: (tab: TabType) => void;
 };
 
-export const SavedTabToggle = ({ activeTab, onTabChange }: Props) => {
+export const SavedTabToggle = ({activeTab, onTabChange}: Props) => {
   const handleTabPress = (tab: TabType) => {
     onTabChange(tab);
   };
 
   return (
-    <View className="flex-row gap-12 mb-12 border-b border-neutral-300">
+    <View className="mb-12 flex-row gap-12 border-b border-neutral-300">
       <TouchableOpacity
-        onPress={() => handleTabPress("objects")}
+        onPress={() => handleTabPress('objects')}
         className="pb-4"
         style={{
           borderBottomWidth: 2,
           borderBottomColor:
-            activeTab === "objects" ? Colors.palette.primary900 : "transparent",
+            activeTab === 'objects' ? Colors.palette.primary900 : 'transparent',
         }}
       >
         <Text
-          className="text-[11px] font-bold tracking-widest uppercase"
+          className="text-[11px] font-bold uppercase tracking-widest"
           style={{
             color:
-              activeTab === "objects"
+              activeTab === 'objects'
                 ? Colors.palette.primary900
                 : Colors.light.textSecondary,
           }}
@@ -38,21 +38,21 @@ export const SavedTabToggle = ({ activeTab, onTabChange }: Props) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => handleTabPress("collections")}
+        onPress={() => handleTabPress('collections')}
         className="pb-4"
         style={{
           borderBottomWidth: 2,
           borderBottomColor:
-            activeTab === "collections"
+            activeTab === 'collections'
               ? Colors.palette.primary900
-              : "transparent",
+              : 'transparent',
         }}
       >
         <Text
-          className="text-[11px] font-bold tracking-widest uppercase"
+          className="text-[11px] font-bold uppercase tracking-widest"
           style={{
             color:
-              activeTab === "collections"
+              activeTab === 'collections'
                 ? Colors.palette.primary900
                 : Colors.light.textSecondary,
           }}

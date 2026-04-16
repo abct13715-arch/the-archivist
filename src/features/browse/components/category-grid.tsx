@@ -1,26 +1,27 @@
-import { Text, TouchableOpacity, View } from "react-native";
-import { categories } from "../data";
-import { useState } from "react";
+import {useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+
+import {categories} from '../data';
 
 export const CategoryGrid = () => {
-  const [active, setActive] = useState("FURNITURE");
+  const [active, setActive] = useState('FURNITURE');
 
   return (
-    <View className="px-6 py-8 border-b border-neutral-300">
+    <View className="border-b border-neutral-300 px-6 py-8">
       <View className="flex-row flex-wrap gap-3">
-        {categories.map((category) => (
+        {categories.map(category => (
           <TouchableOpacity
             key={category}
             onPress={() => setActive(category)}
-            className={`w-[47%] py-3 border ${
+            className={`w-[47%] border py-3 ${
               active === category
-                ? "bg-primary-900 border-primary-900"
-                : "border-neutral-300"
+                ? 'border-primary-900 bg-primary-900'
+                : 'border-neutral-300'
             }`}
           >
             <Text
-              className={`text-[10px] font-bold tracking-widest text-center ${
-                active === category ? "text-white" : "text-primary-900"
+              className={`text-center text-[10px] font-bold tracking-widest ${
+                active === category ? 'text-white' : 'text-primary-900'
               }`}
             >
               {category}

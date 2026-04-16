@@ -1,5 +1,5 @@
-import { Feather } from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from 'react';
+import {Feather} from '@expo/vector-icons';
 import {
   Animated,
   Dimensions,
@@ -9,53 +9,55 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const CATEGORIES = [
-  "FURNITURE",
-  "LIGHTING",
-  "TEXTILES",
-  "CERAMICS",
-  "OBJECTS",
-  "ARCHIVE",
+  'FURNITURE',
+  'LIGHTING',
+  'TEXTILES',
+  'CERAMICS',
+  'OBJECTS',
+  'ARCHIVE',
 ];
 
 const LOCATIONS = [
-  "NEW YORK",
-  "LOS ANGELES",
-  "CHICAGO",
-  "SAN FRANCISCO",
-  "LONDON",
-  "PARIS",
-  "BERLIN",
-  "TOKYO",
+  'NEW YORK',
+  'LOS ANGELES',
+  'CHICAGO',
+  'SAN FRANCISCO',
+  'LONDON',
+  'PARIS',
+  'BERLIN',
+  'TOKYO',
 ];
 
 const PRICE_RANGES = [
-  { label: "Under $500", min: 0, max: 500 },
-  { label: "$500 - $1,000", min: 500, max: 1000 },
-  { label: "$1,000 - $2,500", min: 1000, max: 2500 },
-  { label: "$2,500 - $5,000", min: 2500, max: 5000 },
-  { label: "$5,000+", min: 5000, max: Infinity },
+  {label: 'Under $500', min: 0, max: 500},
+  {label: '$500 - $1,000', min: 500, max: 1000},
+  {label: '$1,000 - $2,500', min: 1000, max: 2500},
+  {label: '$2,500 - $5,000', min: 2500, max: 5000},
+  {label: '$5,000+', min: 5000, max: Infinity},
 ];
 
 export default function BrowseSearchBar() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [visible, setVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
-  const [selectedPriceRange, setSelectedPriceRange] = useState<typeof PRICE_RANGES[0] | null>(null);
+  const [selectedPriceRange, setSelectedPriceRange] = useState<
+    (typeof PRICE_RANGES)[0] | null
+  >(null);
 
   const translateY = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
 
   const openFilter = () => {
     setVisible(true);
-    
+
     // Reset position before animating
     translateY.setValue(SCREEN_HEIGHT);
-    
+
     // Small delay to ensure Modal is rendered
     setTimeout(() => {
       Animated.timing(translateY, {
@@ -77,7 +79,7 @@ export default function BrowseSearchBar() {
   };
 
   const handleApplyFilters = () => {
-    console.log("Filters Applied:", {
+    console.log('Filters Applied:', {
       search,
       category: selectedCategory,
       location: selectedLocation,
@@ -91,14 +93,14 @@ export default function BrowseSearchBar() {
     setSelectedCategory(null);
     setSelectedLocation(null);
     setSelectedPriceRange(null);
-    console.log("Filters Cleared");
+    console.log('Filters Cleared');
   };
 
   return (
     <>
       {/* SEARCH BAR */}
-      <View className="px-5 mt-4">
-        <View className="flex-row items-center border border-primary-900 px-4 py-3 bg-surface">
+      <View className="mt-4 px-5">
+        <View className="flex-row items-center border border-primary-900 bg-surface px-4 py-3">
           <Feather name="search" size={16} color="#7A7A6E" />
 
           <TextInput
@@ -106,14 +108,14 @@ export default function BrowseSearchBar() {
             onChangeText={setSearch}
             placeholder="SEARCH THE ARCHIVE..."
             placeholderTextColor="#8A8880"
-            className="flex-1 ml-3 text-[13px] tracking-label-md text-primary-900"
+            className="ml-3 flex-1 text-[13px] tracking-label-md text-primary-900"
           />
 
-          <View className="w-px h-5 bg-neutral-300 mx-3" />
+          <View className="mx-3 h-5 w-px bg-neutral-300" />
 
           <TouchableOpacity
             onPress={openFilter}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
           >
             <Text className="text-[11px] tracking-label-lg text-primary-900">
               FILTER
@@ -128,55 +130,61 @@ export default function BrowseSearchBar() {
         <TouchableOpacity
           activeOpacity={1}
           onPress={closeFilter}
-          className="flex-1 bg-black/40 justify-end"
+          className="flex-1 justify-end bg-black/40"
         >
           {/* Bottom Sheet */}
           <Animated.View
-            style={{ transform: [{ translateY }] }}
-            className="bg-neutral-100 rounded-t-none border-t border-primary-900"
+            style={{transform: [{translateY}]}}
+            className="rounded-t-none border-t border-primary-900 bg-neutral-100"
           >
             {/* Handle Bar */}
             <View className="items-center py-4">
-              <View className="w-12 h-1 bg-neutral-500 rounded-full" />
+              <View className="h-1 w-12 rounded-full bg-neutral-500" />
             </View>
 
             {/* Header */}
-            <View className="flex-row justify-between items-center px-6 pb-4 border-b border-neutral-300">
-              <Text className="text-2xl font-playfair text-primary-900 tracking-tighter">
+            <View className="flex-row items-center justify-between border-b border-neutral-300 px-6 pb-4">
+              <Text className="font-playfair text-2xl tracking-tighter text-primary-900">
                 FILTER
               </Text>
 
-              <TouchableOpacity onPress={closeFilter} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+              <TouchableOpacity
+                onPress={closeFilter}
+                hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+              >
                 <Feather name="x" size={24} color="#1A1A1A" />
               </TouchableOpacity>
             </View>
 
             {/* Filter Content */}
-            <ScrollView className="max-h-[60vh]" showsVerticalScrollIndicator={false}>
+            <ScrollView
+              className="max-h-[60vh]"
+              showsVerticalScrollIndicator={false}
+            >
               {/* CATEGORY */}
-              <View className="px-6 py-5 border-b border-neutral-300">
-                <Text className="text-[10px] tracking-label-xl text-tertiary-500 mb-3">
+              <View className="border-b border-neutral-300 px-6 py-5">
+                <Text className="mb-3 text-[10px] tracking-label-xl text-tertiary-500">
                   CATEGORY
                 </Text>
                 <View className="flex-row flex-wrap gap-2">
-                  {CATEGORIES.map((category) => (
+                  {CATEGORIES.map(category => (
                     <TouchableOpacity
                       key={category}
                       onPress={() => {
                         setSelectedCategory(category);
-                        console.log("Category Selected:", category);
+                        console.log('Category Selected:', category);
                       }}
-                      className={`px-4 py-3 border ${
+                      className={`border px-4 py-3 ${
                         selectedCategory === category
-                          ? "bg-primary-900 border-primary-900"
-                          : "border-neutral-300 bg-surface"
+                          ? 'border-primary-900 bg-primary-900'
+                          : 'border-neutral-300 bg-surface'
                       }`}
                     >
                       <Text
                         className={`text-[10px] tracking-label-lg ${
                           selectedCategory === category
-                            ? "text-white"
-                            : "text-primary-900"
+                            ? 'text-white'
+                            : 'text-primary-900'
                         }`}
                       >
                         {category}
@@ -187,29 +195,29 @@ export default function BrowseSearchBar() {
               </View>
 
               {/* LOCATION */}
-              <View className="px-6 py-5 border-b border-neutral-300">
-                <Text className="text-[10px] tracking-label-xl text-tertiary-500 mb-3">
+              <View className="border-b border-neutral-300 px-6 py-5">
+                <Text className="mb-3 text-[10px] tracking-label-xl text-tertiary-500">
                   LOCATION
                 </Text>
                 <View className="flex-row flex-wrap gap-2">
-                  {LOCATIONS.map((location) => (
+                  {LOCATIONS.map(location => (
                     <TouchableOpacity
                       key={location}
                       onPress={() => {
                         setSelectedLocation(location);
-                        console.log("Location Selected:", location);
+                        console.log('Location Selected:', location);
                       }}
-                      className={`px-4 py-3 border ${
+                      className={`border px-4 py-3 ${
                         selectedLocation === location
-                          ? "bg-primary-900 border-primary-900"
-                          : "border-neutral-300 bg-surface"
+                          ? 'border-primary-900 bg-primary-900'
+                          : 'border-neutral-300 bg-surface'
                       }`}
                     >
                       <Text
                         className={`text-[10px] tracking-label-lg ${
                           selectedLocation === location
-                            ? "text-white"
-                            : "text-primary-900"
+                            ? 'text-white'
+                            : 'text-primary-900'
                         }`}
                       >
                         {location}
@@ -220,8 +228,8 @@ export default function BrowseSearchBar() {
               </View>
 
               {/* PRICE RANGE */}
-              <View className="px-6 py-5 border-b border-neutral-300">
-                <Text className="text-[10px] tracking-label-xl text-tertiary-500 mb-3">
+              <View className="border-b border-neutral-300 px-6 py-5">
+                <Text className="mb-3 text-[10px] tracking-label-xl text-tertiary-500">
                   PRICE RANGE
                 </Text>
                 <View className="gap-2">
@@ -230,19 +238,19 @@ export default function BrowseSearchBar() {
                       key={index}
                       onPress={() => {
                         setSelectedPriceRange(range);
-                        console.log("Price Range Selected:", range);
+                        console.log('Price Range Selected:', range);
                       }}
-                      className={`flex-row justify-between items-center px-4 py-3 border ${
+                      className={`flex-row items-center justify-between border px-4 py-3 ${
                         selectedPriceRange === range
-                          ? "bg-primary-900 border-primary-900"
-                          : "border-neutral-300 bg-surface"
+                          ? 'border-primary-900 bg-primary-900'
+                          : 'border-neutral-300 bg-surface'
                       }`}
                     >
                       <Text
                         className={`text-[10px] tracking-label-lg ${
                           selectedPriceRange === range
-                            ? "text-white"
-                            : "text-primary-900"
+                            ? 'text-white'
+                            : 'text-primary-900'
                         }`}
                       >
                         {range.label}
@@ -257,11 +265,11 @@ export default function BrowseSearchBar() {
             </ScrollView>
 
             {/* Footer Actions */}
-            <View className="px-6 py-5 border-t border-neutral-300 bg-neutral-100">
+            <View className="border-t border-neutral-300 bg-neutral-100 px-6 py-5">
               <View className="flex-row gap-3">
                 <TouchableOpacity
                   onPress={handleClearFilters}
-                  className="flex-1 py-3 border border-primary-900 bg-surface items-center"
+                  className="flex-1 items-center border border-primary-900 bg-surface py-3"
                 >
                   <Text className="text-[11px] tracking-label-lg text-primary-900">
                     CLEAR ALL
@@ -270,7 +278,7 @@ export default function BrowseSearchBar() {
 
                 <TouchableOpacity
                   onPress={handleApplyFilters}
-                  className="flex-1 py-3 bg-secondary-500 items-center"
+                  className="flex-1 items-center bg-secondary-500 py-3"
                 >
                   <Text className="text-[11px] tracking-label-lg text-white">
                     APPLY FILTERS

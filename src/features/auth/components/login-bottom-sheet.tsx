@@ -1,10 +1,10 @@
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { useRouter } from "expo-router";
-import React, { forwardRef } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import React, {forwardRef} from 'react';
+import {Colors} from '@/constants/theme';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {useRouter} from 'expo-router';
+import {Text, TouchableOpacity, View} from 'react-native';
 
-import { BottomSheetComponent } from "@/components/ui/bottom-sheet";
-import { Colors } from "@/constants/theme";
+import {BottomSheetComponent} from '@/components/ui/bottom-sheet';
 
 interface LoginBottomSheetRef {
   present: () => void;
@@ -18,7 +18,7 @@ interface LoginBottomSheetProps {
 export const LoginBottomSheet = forwardRef<
   LoginBottomSheetRef,
   LoginBottomSheetProps
->(({ onClose }, ref) => {
+>(({onClose}, ref) => {
   const router = useRouter();
   const internalRef = React.useRef<BottomSheetModal>(null);
 
@@ -29,12 +29,12 @@ export const LoginBottomSheet = forwardRef<
 
   const handleCreateAccount = () => {
     internalRef.current?.dismiss();
-    router.push("/(auth)/register");
+    router.push('/(auth)/register');
   };
 
   const handleLogin = () => {
     internalRef.current?.dismiss();
-    router.push("/(auth)/login");
+    router.push('/(auth)/login');
   };
 
   const handleClose = () => {
@@ -45,14 +45,14 @@ export const LoginBottomSheet = forwardRef<
   return (
     <BottomSheetComponent
       ref={internalRef}
-      snapPoints={["65%"]}
+      snapPoints={['65%']}
       useScroll={false}
     >
-      <View style={{ flex: 1, position: "relative" }}>
+      <View style={{flex: 1, position: 'relative'}}>
         {/* Close Button */}
         <TouchableOpacity
           style={{
-            position: "absolute",
+            position: 'absolute',
             top: 8,
             right: 16,
             zIndex: 10,
@@ -76,7 +76,7 @@ export const LoginBottomSheet = forwardRef<
         <View
           style={{
             flex: 1,
-            justifyContent: "center",
+            justifyContent: 'center',
             paddingHorizontal: 24,
             paddingTop: 48,
             paddingBottom: 32,
@@ -85,9 +85,9 @@ export const LoginBottomSheet = forwardRef<
           {/* Title */}
           <Text
             style={{
-              fontFamily: "PlayfairDisplay_700Bold",
+              fontFamily: 'PlayfairDisplay_700Bold',
               fontSize: 36,
-              fontWeight: "700",
+              fontWeight: '700',
               color: Colors.brand.primary,
               letterSpacing: -2,
               lineHeight: 40,
@@ -112,22 +112,22 @@ export const LoginBottomSheet = forwardRef<
           </Text>
 
           {/* CTAs */}
-          <View style={{ gap: 16 }}>
+          <View style={{gap: 16}}>
             <TouchableOpacity
               style={{
                 backgroundColor: Colors.brand.secondary,
                 paddingVertical: 20,
                 paddingHorizontal: 32,
-                alignItems: "center",
+                alignItems: 'center',
               }}
               onPress={handleCreateAccount}
               activeOpacity={0.85}
             >
               <Text
                 style={{
-                  color: "#FFFFFF",
+                  color: '#FFFFFF',
                   fontSize: 11,
-                  fontWeight: "700",
+                  fontWeight: '700',
                   letterSpacing: 4,
                 }}
               >
@@ -139,10 +139,10 @@ export const LoginBottomSheet = forwardRef<
               style={{
                 borderWidth: 1,
                 borderColor: Colors.brand.primary,
-                backgroundColor: "transparent",
+                backgroundColor: 'transparent',
                 paddingVertical: 20,
                 paddingHorizontal: 32,
-                alignItems: "center",
+                alignItems: 'center',
               }}
               onPress={handleLogin}
               activeOpacity={0.85}
@@ -151,7 +151,7 @@ export const LoginBottomSheet = forwardRef<
                 style={{
                   color: Colors.brand.primary,
                   fontSize: 11,
-                  fontWeight: "700",
+                  fontWeight: '700',
                   letterSpacing: 4,
                 }}
               >
@@ -165,4 +165,4 @@ export const LoginBottomSheet = forwardRef<
   );
 });
 
-LoginBottomSheet.displayName = "LoginBottomSheet";
+LoginBottomSheet.displayName = 'LoginBottomSheet';

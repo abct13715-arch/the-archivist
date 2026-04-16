@@ -1,8 +1,9 @@
-import { Colors } from "@/constants/theme";
-import { Image } from "expo-image";
-import { useState } from "react";
-import { ImageSourcePropType, Text, View } from "react-native";
-import { ProfileFilterBar } from "./profile-filter-bar";
+import {useState} from 'react';
+import {Colors} from '@/constants/theme';
+import {Image} from 'expo-image';
+import {ImageSourcePropType, Text, View} from 'react-native';
+
+import {ProfileFilterBar} from './profile-filter-bar';
 
 export type Listing = {
   id: string;
@@ -10,7 +11,7 @@ export type Listing = {
   title: string;
   category: string;
   price: string;
-  badge?: "AVAILABLE" | "RESERVED";
+  badge?: 'AVAILABLE' | 'RESERVED';
 };
 
 type ProfileListingsTabProps = {
@@ -19,19 +20,19 @@ type ProfileListingsTabProps = {
   quoteAuthor: string;
 };
 
-const filters = ["ALL ITEMS", "FURNITURE", "LIGHTING", "RARE BOOKS"];
+const filters = ['ALL ITEMS', 'FURNITURE', 'LIGHTING', 'RARE BOOKS'];
 
 export const ProfileListingsTab = ({
   listings,
   quote,
   quoteAuthor,
 }: ProfileListingsTabProps) => {
-  const [selectedFilter, setSelectedFilter] = useState("ALL ITEMS");
+  const [selectedFilter, setSelectedFilter] = useState('ALL ITEMS');
 
   const filtered =
-    selectedFilter === "ALL ITEMS"
+    selectedFilter === 'ALL ITEMS'
       ? listings
-      : listings.filter((l) =>
+      : listings.filter(l =>
           l.category.toLowerCase().includes(selectedFilter.toLowerCase()),
         );
 
@@ -44,54 +45,54 @@ export const ProfileListingsTab = ({
       />
 
       <View
-        style={{ backgroundColor: Colors.palette.neutral100 }}
+        style={{backgroundColor: Colors.palette.neutral100}}
         className="mx-4 my-4 p-4"
       >
         <Text
           style={{
             color: Colors.light.text,
-            fontFamily: "PlayfairDisplay_700Bold",
+            fontFamily: 'PlayfairDisplay_700Bold',
             lineHeight: 24,
           }}
-          className="text-base italic mb-1"
+          className="mb-1 text-base italic"
         >
           "{quote}"
         </Text>
         <Text
-          style={{ color: Colors.light.textSecondary, letterSpacing: 1 }}
+          style={{color: Colors.light.textSecondary, letterSpacing: 1}}
           className="text-xs"
         >
           {quoteAuthor}
         </Text>
       </View>
 
-      {filtered.map((item) => (
+      {filtered.map(item => (
         <View
           key={item.id}
-          style={{ borderTopColor: Colors.light.border }}
-          className="border-t mx-4"
+          style={{borderTopColor: Colors.light.border}}
+          className="mx-4 border-t"
         >
-          <View style={{ position: "relative" }}>
+          <View style={{position: 'relative'}}>
             <Image
               source={item.image}
               contentFit="cover"
-              style={{ width: "100%", aspectRatio: 4 / 3 }}
+              style={{width: '100%', aspectRatio: 4 / 3}}
             />
             {item.badge && (
               <View
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   top: 12,
                   right: 12,
                   backgroundColor:
-                    item.badge === "AVAILABLE"
+                    item.badge === 'AVAILABLE'
                       ? Colors.brand.secondary
                       : Colors.palette.primary500,
                 }}
                 className="px-2 py-1"
               >
                 <Text
-                  style={{ color: Colors.light.surface, letterSpacing: 1 }}
+                  style={{color: Colors.light.surface, letterSpacing: 1}}
                   className="text-xs"
                 >
                   {item.badge}
@@ -99,19 +100,19 @@ export const ProfileListingsTab = ({
               </View>
             )}
           </View>
-          <View className="py-3 gap-1">
+          <View className="gap-1 py-3">
             <Text
               style={{
                 color: Colors.light.text,
-                fontFamily: "PlayfairDisplay_700Bold",
+                fontFamily: 'PlayfairDisplay_700Bold',
               }}
               className="text-lg"
             >
               {item.title}
             </Text>
-            <View className="flex-row justify-between items-center">
+            <View className="flex-row items-center justify-between">
               <Text
-                style={{ color: Colors.light.textSecondary, letterSpacing: 1 }}
+                style={{color: Colors.light.textSecondary, letterSpacing: 1}}
                 className="text-xs"
               >
                 {item.category}
@@ -119,7 +120,7 @@ export const ProfileListingsTab = ({
               <Text
                 style={{
                   color: Colors.light.text,
-                  fontFamily: "PlayfairDisplay_700Bold",
+                  fontFamily: 'PlayfairDisplay_700Bold',
                 }}
                 className="text-base"
               >
