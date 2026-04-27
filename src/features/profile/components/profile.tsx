@@ -1,15 +1,24 @@
 import {useState} from 'react';
 import {images} from '@/assets/images';
 import {Colors} from '@/constants/theme';
+import {useAuth} from '@/contexts/auth-context';
 import {Image} from 'expo-image';
+import {useRouter} from 'expo-router';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 
 import {filters, listings, reviews, tabs} from '../data';
 import {ProfileCard} from './profile-card';
 
 export const Profile = () => {
+  const {signOut} = useAuth();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('LISTINGS');
   const [selectedFilter, setSelectedFilter] = useState('ALL ITEMS');
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.replace('/(auth)/onboarding');
+  };
 
   const filtered =
     selectedFilter === 'ALL ITEMS'
@@ -119,13 +128,13 @@ export const Profile = () => {
                 }}
                 className="mb-1 text-base italic"
               >
-                "Curating the forgotten and the permanent."
+                &quot;Curating the forgotten and the permanent.&quot;
               </Text>
               <Text
                 style={{color: Colors.light.textSecondary, letterSpacing: 1}}
                 className="text-xs"
               >
-                ARCHIVIST'S NOTE
+                ARCHIVIST&apos;S NOTE
               </Text>
             </View>
 
@@ -225,12 +234,12 @@ export const Profile = () => {
                     {review.name}
                   </Text>
                   <View className="flex-row gap-1">
-                    {Array.from({length: 5}).map((_, i) => (
+                    {Array.from({length: 5}).map((_, index) => (
                       <Text
-                        key={i}
+                        key={index}
                         style={{
                           color:
-                            i < review.rating
+                            index < review.rating
                               ? Colors.brand.secondary
                               : Colors.light.border,
                         }}
@@ -269,6 +278,15 @@ export const Profile = () => {
             </Text>
           </View>
         )}
+
+        <TouchableOpacity
+          onPress={handleSignOut}
+          className="m-6 items-center border border-red-500 py-4"
+        >
+          <Text className="text-xs font-bold tracking-[2px] text-red-500">
+            SIGN OUT
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

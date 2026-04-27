@@ -6,9 +6,11 @@ import {LinearGradient} from 'expo-linear-gradient';
 import {useRouter} from 'expo-router';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useAuth} from '@/contexts/auth-context';
 
 export const Onboarding = () => {
   const router = useRouter();
+  const {loginAsGuest} = useAuth();
 
   return (
     <View className="flex-1 bg-black">
@@ -80,8 +82,8 @@ export const Onboarding = () => {
 
               <TouchableOpacity
                 className="mt-2 items-center"
-                onPress={() => {
-                  router.dismissAll();
+                onPress={async () => {
+                  await loginAsGuest();
                   router.replace('/');
                 }}
               >

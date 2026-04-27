@@ -6,7 +6,7 @@ import {Text, TouchableOpacity, View} from 'react-native';
 
 import {BottomSheetComponent} from '@/components/ui/bottom-sheet';
 
-interface LoginBottomSheetRef {
+interface LoginBottomSheetReference {
   present: () => void;
   dismiss: () => void;
 }
@@ -16,35 +16,35 @@ interface LoginBottomSheetProps {
 }
 
 export const LoginBottomSheet = forwardRef<
-  LoginBottomSheetRef,
+  LoginBottomSheetReference,
   LoginBottomSheetProps
->(({onClose}, ref) => {
+>(({onClose}, reference) => {
   const router = useRouter();
-  const internalRef = React.useRef<BottomSheetModal>(null);
+  const internalReference = React.useRef<BottomSheetModal>(null);
 
-  React.useImperativeHandle(ref, () => ({
-    present: () => internalRef.current?.present(),
-    dismiss: () => internalRef.current?.dismiss(),
+  React.useImperativeHandle(reference, () => ({
+    present: () => internalReference.current?.present(),
+    dismiss: () => internalReference.current?.dismiss(),
   }));
 
   const handleCreateAccount = () => {
-    internalRef.current?.dismiss();
+    internalReference.current?.dismiss();
     router.push('/(auth)/register');
   };
 
   const handleLogin = () => {
-    internalRef.current?.dismiss();
+    internalReference.current?.dismiss();
     router.push('/(auth)/login');
   };
 
   const handleClose = () => {
     onClose?.();
-    internalRef.current?.dismiss();
+    internalReference.current?.dismiss();
   };
 
   return (
     <BottomSheetComponent
-      ref={internalRef}
+      ref={internalReference}
       snapPoints={['65%']}
       useScroll={false}
     >

@@ -48,7 +48,6 @@ export const Login = () => {
       if (error) throw error;
 
       if (authData.session) {
-        router.dismissAll();
         router.replace('/');
       }
     } catch (error: any) {

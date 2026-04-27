@@ -10,23 +10,24 @@ import {TBrowseListing} from '../data';
 type Props = {
   listing: TBrowseListing;
   isBookmarked?: boolean;
-  onToggleBookmark?: (id: string, bookmark: boolean) => void;
+  onRequireAuth?: () => void;
 };
 
 export const BrowseListingCard = ({
   listing,
   isBookmarked = false,
-  onToggleBookmark,
+  onRequireAuth,
 }: Props) => {
   const [bookmarked, setBookmarked] = useState(isBookmarked);
 
   const handleToggle = useCallback(() => {
+    if (onRequireAuth) {
+      onRequireAuth();
+      return;
+    }
     const newState = !bookmarked;
     setBookmarked(newState);
-    if (onToggleBookmark) {
-      onToggleBookmark(listing.id, newState);
-    }
-  }, [bookmarked, onToggleBookmark, listing.id]);
+  }, [bookmarked, onRequireAuth]);
 
   const handlePress = useCallback(() => {
     router.push(`/listing/${listing.id}`);

@@ -1,6 +1,7 @@
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import {Pagination} from '@/components';
 import {Colors} from '@/constants/theme';
+import {LoginBottomSheet} from '@/features/auth';
 import {ScrollView, View} from 'react-native';
 
 import {browseListings} from '../data';
@@ -10,6 +11,7 @@ import {FeaturedCollections} from './featured-collections';
 import {SearchBar} from './search-bar';
 
 export const Browse = () => {
+  const bottomSheetReference = useRef<any>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 12;
 
@@ -39,8 +41,8 @@ export const Browse = () => {
           <BrowseListingCard
             key={listing.id}
             listing={listing}
-            onToggleBookmark={(id, bookmarked) => {
-              console.log('Bookmark toggled:', id, bookmarked);
+            onRequireAuth={() => {
+              bottomSheetReference.current?.present();
             }}
           />
         ))}
@@ -53,6 +55,7 @@ export const Browse = () => {
         onPrev={handlePrevious}
         onPagePress={handlePagePress}
       />
+      <LoginBottomSheet ref={bottomSheetReference} />
     </ScrollView>
   );
 };

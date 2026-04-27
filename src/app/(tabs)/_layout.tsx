@@ -6,12 +6,12 @@ import {router, Tabs} from 'expo-router';
 import {PanResponder, View} from 'react-native';
 
 import {IconSymbol} from '@/components/ui/icon-symbol';
-// import {useAuth} from '@/hooks/use-auth';
+import {useAuth} from '@/contexts/auth-context';
 import {HapticTab} from '@/components/haptic-tab';
 
 function TabLayoutContent() {
-  // const {user, isGuest} = useAuth();
-  // const isLoggedIn = user && !isGuest;
+  const {user, isGuest} = useAuth();
+  const isLoggedIn = user && !isGuest;
 
   const swipeResponder = useRef(
     PanResponder.create({
@@ -87,8 +87,7 @@ function TabLayoutContent() {
         <Tabs.Screen
           name="profile"
           options={{
-            // title: isLoggedIn ? 'Profile' : 'Login',
-            title: 'Profile',
+            title: isLoggedIn ? 'Profile' : 'Login',
             tabBarIcon: ({color}) => (
               <IconSymbol size={28} name="person.fill" color={color} />
             ),

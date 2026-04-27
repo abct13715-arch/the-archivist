@@ -99,7 +99,10 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
       credentials: SignUpWithPasswordCredentials,
     ): Promise<AuthResponse> => {
       try {
-        const {data, error} = await supabase.auth.signUp(credentials);
+        const {data, error} = await supabase.auth.signUp({
+          ...credentials,
+          options: {emailRedirectTo: 'marketplace://'},
+        });
         if (error) throw error;
         return {data, error: null} as AuthResponse;
       } catch (error) {

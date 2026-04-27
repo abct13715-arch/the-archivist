@@ -54,7 +54,6 @@ export const Register = () => {
       if (error) throw error;
 
       if (authData.session) {
-        router.dismissAll();
         router.replace('/');
       } else {
         Alert.alert(
