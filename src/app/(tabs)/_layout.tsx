@@ -5,13 +5,13 @@ import {isHorizontalScrollingRef} from '@/contexts/horizontal-scroll-context';
 import {router, Tabs} from 'expo-router';
 import {PanResponder, View} from 'react-native';
 
-import {useAuth} from '@/hooks/use-auth';
 import {IconSymbol} from '@/components/ui/icon-symbol';
+// import {useAuth} from '@/hooks/use-auth';
 import {HapticTab} from '@/components/haptic-tab';
 
 function TabLayoutContent() {
-  const {user, isGuest} = useAuth();
-  const isLoggedIn = user && !isGuest;
+  // const {user, isGuest} = useAuth();
+  // const isLoggedIn = user && !isGuest;
 
   const swipeResponder = useRef(
     PanResponder.create({
@@ -87,13 +87,10 @@ function TabLayoutContent() {
         <Tabs.Screen
           name="profile"
           options={{
-            title: isLoggedIn ? 'Profile' : 'Login',
+            // title: isLoggedIn ? 'Profile' : 'Login',
+            title: 'Profile',
             tabBarIcon: ({color}) => (
-              <IconSymbol
-                size={28}
-                name={isLoggedIn ? 'person.fill' : 'arrow.right.circle.fill'}
-                color={color}
-              />
+              <IconSymbol size={28} name="person.fill" color={color} />
             ),
           }}
         />

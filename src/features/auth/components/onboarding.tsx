@@ -82,7 +82,7 @@ export const Onboarding = () => {
                 className="mt-2 items-center"
                 onPress={() => {
                   router.dismissAll();
-                  router.replace('/(tabs)');
+                  router.replace('/');
                 }}
               >
                 <Text className="text-[11px] uppercase tracking-[0.2em] text-white/60">

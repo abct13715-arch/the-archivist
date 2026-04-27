@@ -1,8 +1,11 @@
-import React from 'react';
-import {Colors} from '@/constants/theme';
-import {Ionicons} from '@expo/vector-icons';
+import React, {useState} from 'react';
+import {useAuth} from '@/contexts/auth-context';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {useRouter} from 'expo-router';
+import {Controller, useForm} from 'react-hook-form';
 import {
+  ActivityIndicator,
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -12,12 +15,64 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
+import {RegisterFormData, registerSchema} from '../models';
 import {AuthHeader} from './auth-header';
 import {AuthInput} from './auth-input';
 import {SocialLogin} from './social-login';
 
 export const Register = () => {
   const router = useRouter();
+  const {signUp} = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      fullName: '',
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = async (data: RegisterFormData) => {
+    setIsSubmitting(true);
+    try {
+      const {data: authData, error} = await signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: {
+            full_name: data.fullName,
+          },
+        },
+      });
+
+      if (error) throw error;
+
+      if (authData.session) {
+        router.dismissAll();
+        router.replace('/');
+      } else {
+        Alert.alert(
+          'Verification Required',
+          'Please check your email for a verification link to activate your account.',
+          [{text: 'OK', onPress: () => router.replace('/(auth)/login')}],
+        );
+      }
+    } catch (error: any) {
+      console.log(error);
+      Alert.alert(
+        'Registration Failed',
+        error.message || 'An unexpected error occurred',
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-brand-neutral">
@@ -55,17 +110,53 @@ export const Register = () => {
               </View>
 
               <View className="space-y-6">
-                <AuthInput label="Full Name" placeholder="ALEXANDER VOGUE" />
-                <AuthInput
-                  label="Email Address"
-                  placeholder="ARCHIVIST@STUDIO.COM"
-                  keyboardType="email-address"
-                  autoCapitalize="none"
+                <Controller
+                  control={control}
+                  name="fullName"
+                  render={({field: {onChange, onBlur, value}}) => (
+                    <AuthInput
+                      label="Full Name"
+                      placeholder="ALEXANDER VOGUE"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                      error={errors.fullName?.message}
+                      autoCapitalize="words"
+                    />
+                  )}
                 />
-                <AuthInput
-                  label="Password"
-                  placeholder="••••••••••••"
-                  showPasswordToggle
+
+                <Controller
+                  control={control}
+                  name="email"
+                  render={({field: {onChange, onBlur, value}}) => (
+                    <AuthInput
+                      label="Email Address"
+                      placeholder="ARCHIVIST@STUDIO.COM"
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                      error={errors.email?.message}
+                    />
+                  )}
+                />
+
+                <Controller
+                  control={control}
+                  name="password"
+                  render={({field: {onChange, onBlur, value}}) => (
+                    <AuthInput
+                      label="Password"
+                      placeholder="••••••••••••"
+                      showPasswordToggle
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                      error={errors.password?.message}
+                    />
+                  )}
                 />
               </View>
 
@@ -86,14 +177,16 @@ export const Register = () => {
 
               <TouchableOpacity
                 className="mt-10 w-full items-center bg-brand-secondary py-5"
-                onPress={() => {
-                  router.dismissAll();
-                  router.push('/(tabs)');
-                }}
+                onPress={handleSubmit(onSubmit)}
+                disabled={isSubmitting}
               >
-                <Text className="text-[12px] font-bold uppercase tracking-[0.2em] text-white">
-                  Sign Up
-                </Text>
+                {isSubmitting ? (
+                  <ActivityIndicator color="white" />
+                ) : (
+                  <Text className="text-[12px] font-bold uppercase tracking-[0.2em] text-white">
+                    Sign Up
+                  </Text>
+                )}
               </TouchableOpacity>
 
               <View className="mt-10 items-center border-t border-border pt-6">

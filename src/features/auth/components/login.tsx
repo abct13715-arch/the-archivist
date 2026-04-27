@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {useRouter} from 'expo-router';
+import {Controller, useForm} from 'react-hook-form';
 import {
+  ActivityIndicator,
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -10,12 +14,52 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
+import {useAuth} from '@/contexts/auth-context';
+import {LoginFormData, loginSchema} from '../models';
 import {AuthHeader} from './auth-header';
 import {AuthInput} from './auth-input';
 import {SocialLogin} from './social-login';
 
 export const Login = () => {
   const router = useRouter();
+  const {signIn} = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = async (data: LoginFormData) => {
+    setIsSubmitting(true);
+    try {
+      const {data: authData, error} = await signIn({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (error) throw error;
+
+      if (authData.session) {
+        router.dismissAll();
+        router.replace('/');
+      }
+    } catch (error: any) {
+      Alert.alert(
+        'Login Failed',
+        error.message || 'Please check your credentials and try again.',
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-brand-neutral">
@@ -53,36 +97,60 @@ export const Login = () => {
               </View>
 
               <View className="space-y-8">
-                <AuthInput
-                  label="Email Address"
-                  placeholder="email@example.com"
-                  keyboardType="email-address"
-                  autoCapitalize="none"
+                <Controller
+                  control={control}
+                  name="email"
+                  render={({field: {onChange, onBlur, value}}) => (
+                    <AuthInput
+                      label="Email Address"
+                      placeholder="email@example.com"
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                      error={errors.email?.message}
+                    />
+                  )}
                 />
 
                 <View className="relative">
-                  <AuthInput
-                    label="Password"
-                    placeholder="••••••••"
-                    showPasswordToggle
+                  <Controller
+                    control={control}
+                    name="password"
+                    render={({field: {onChange, onBlur, value}}) => (
+                      <AuthInput
+                        label="Password"
+                        placeholder="••••••••"
+                        showPasswordToggle
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                        value={value}
+                        error={errors.password?.message}
+                      />
+                    )}
                   />
-                  <TouchableOpacity className="absolute bottom-[-8] right-4">
-                    <Text className="text-[10px] uppercase tracking-widest text-brand-tertiary underline">
-                      Forgot?
-                    </Text>
-                  </TouchableOpacity>
+                  {!errors.password && (
+                    <TouchableOpacity className="absolute bottom-[-8] right-4">
+                      <Text className="text-[10px] uppercase tracking-widest text-brand-tertiary underline">
+                        Forgot?
+                      </Text>
+                    </TouchableOpacity>
+                  )}
                 </View>
 
                 <TouchableOpacity
                   className="mt-8 w-full items-center bg-brand-secondary py-5"
-                  onPress={() => {
-                    router.dismissAll();
-                    router.push('/(tabs)');
-                  }}
+                  onPress={handleSubmit(onSubmit)}
+                  disabled={isSubmitting}
                 >
-                  <Text className="text-[12px] font-bold uppercase tracking-[0.25em] text-white">
-                    Log In
-                  </Text>
+                  {isSubmitting ? (
+                    <ActivityIndicator color="white" />
+                  ) : (
+                    <Text className="text-[12px] font-bold uppercase tracking-[0.25em] text-white">
+                      Log In
+                    </Text>
+                  )}
                 </TouchableOpacity>
               </View>
 

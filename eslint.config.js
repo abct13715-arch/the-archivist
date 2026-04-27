@@ -14,6 +14,7 @@ module.exports = defineConfig([
       // -------------------
       // Disabled rules
       // -------------------
+      'unicorn/no-null': 'off',
       'no-console': 'off',
       'no-plusplus': 'off',
       'no-await-in-loop': 'off',

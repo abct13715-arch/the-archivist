@@ -12,12 +12,14 @@ import {
 interface AuthInputProps extends TextInputProps {
   label: string;
   showPasswordToggle?: boolean;
+  error?: string;
 }
 
 export const AuthInput = ({
   label,
   showPasswordToggle,
   secureTextEntry,
+  error,
   ...props
 }: AuthInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -33,7 +35,9 @@ export const AuthInput = ({
       </View>
       <View className="relative">
         <TextInput
-          className="w-full border border-border px-4 py-4 pr-12 text-brand-primary"
+          className={`w-full border ${
+            error ? 'border-red-500' : 'border-border'
+          } px-4 py-4 pr-12 text-brand-primary`}
           placeholderTextColor={Colors.brand.tertiary}
           secureTextEntry={isSecure}
           {...props}
@@ -52,6 +56,11 @@ export const AuthInput = ({
           </TouchableOpacity>
         )}
       </View>
+      {error && (
+        <Text className="mt-1 text-[10px] uppercase tracking-wide text-red-500">
+          {error}
+        </Text>
+      )}
     </View>
   );
 };
