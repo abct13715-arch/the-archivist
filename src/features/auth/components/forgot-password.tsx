@@ -15,45 +15,38 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {useAuth} from '@/contexts/auth-context';
-import {LoginFormData, loginSchema} from '../models';
+import {ForgotPasswordFormData, forgotPasswordSchema} from '../models';
 import {AuthHeader} from './auth-header';
 import {AuthInput} from './auth-input';
-import {SocialLogin} from './social-login';
 
-export const Login = () => {
+export const ForgotPassword = () => {
   const router = useRouter();
-  const {signIn} = useAuth();
+  const {resetPassword} = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<ForgotPasswordFormData>({
+    resolver: zodResolver(forgotPasswordSchema),
     defaultValues: {
       email: '',
-      password: '',
     },
   });
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async (data: ForgotPasswordFormData) => {
     setIsSubmitting(true);
     try {
-      const {data: authData, error} = await signIn({
-        email: data.email,
-        password: data.password,
-      });
+      const {error} = await resetPassword(data.email);
 
       if (error) throw error;
 
-      if (authData.session) {
-        router.replace('/');
-      }
+      router.replace('/(auth)/forgot-password-success');
     } catch (error: any) {
       Alert.alert(
-        'Login Failed',
-        error.message || 'Please check your credentials and try again.',
+        'Request Failed',
+        error.message || 'Please check your email and try again.',
       );
     } finally {
       setIsSubmitting(false);
@@ -77,22 +70,12 @@ export const Login = () => {
           >
             <View className="w-full max-w-md self-center px-6 py-12">
               <View className="mb-12">
-                <Text className="mb-2 font-playfair text-5xl font-bold uppercase tracking-tighter text-brand-primary">
-                  LOGIN
+                <Text className="mb-2 font-playfair text-4xl font-bold uppercase tracking-tighter text-brand-primary">
+                  FORGOT PASSWORD
                 </Text>
                 <Text className="text-[10px] uppercase tracking-[0.2em] text-brand-tertiary">
-                  Enter the modern archive
+                  Enter your email to receive a reset link
                 </Text>
-              </View>
-
-              <SocialLogin />
-
-              <View className="relative mb-10 flex-row items-center">
-                <View className="h-[1px] flex-1 bg-border" />
-                <Text className="mx-4 text-[10px] uppercase tracking-[0.3em] text-brand-tertiary">
-                  OR
-                </Text>
-                <View className="h-[1px] flex-1 bg-border" />
               </View>
 
               <View className="space-y-8">
@@ -113,34 +96,6 @@ export const Login = () => {
                   )}
                 />
 
-                <View className="relative">
-                  <Controller
-                    control={control}
-                    name="password"
-                    render={({field: {onChange, onBlur, value}}) => (
-                      <AuthInput
-                        label="Password"
-                        placeholder="••••••••"
-                        showPasswordToggle
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                        error={errors.password?.message}
-                      />
-                    )}
-                  />
-                  {!errors.password && (
-                    <TouchableOpacity
-                      className="absolute bottom-[-8] right-4"
-                      onPress={() => router.push('/(auth)/forgot-password')}
-                    >
-                      <Text className="text-[10px] uppercase tracking-widest text-brand-tertiary underline">
-                        Forgot?
-                      </Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
-
                 <TouchableOpacity
                   className="mt-8 w-full items-center bg-brand-secondary py-5"
                   onPress={handleSubmit(onSubmit)}
@@ -150,22 +105,9 @@ export const Login = () => {
                     <ActivityIndicator color="white" />
                   ) : (
                     <Text className="text-[12px] font-bold uppercase tracking-[0.25em] text-white">
-                      Log In
+                      Send Reset Link
                     </Text>
                   )}
-                </TouchableOpacity>
-              </View>
-
-              <View className="mt-12 items-center border-t border-border pt-8">
-                <TouchableOpacity
-                  onPress={() => router.replace('/(auth)/register')}
-                >
-                  <Text className="text-[11px] uppercase tracking-widest text-brand-tertiary">
-                    Don&apos;t have an account?{' '}
-                    <Text className="font-bold text-brand-primary">
-                      Sign Up
-                    </Text>
-                  </Text>
                 </TouchableOpacity>
               </View>
             </View>

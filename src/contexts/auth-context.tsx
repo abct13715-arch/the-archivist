@@ -33,6 +33,10 @@ type AuthContextType = {
   signUp: (credentials: SignUpWithPasswordCredentials) => Promise<AuthResponse>;
   signOut: () => Promise<{error: AuthError | null}>;
   signInWithGoogle: () => Promise<void>;
+  resetPassword: (email: string) => Promise<{error: AuthError | null}>;
+  updatePassword: (password: string) => Promise<{error: AuthError | null}>;
+  resendVerificationEmail: (email: string) => Promise<{error: AuthError | null}>;
+  deleteAccount: () => Promise<{error: AuthError | null}>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -67,6 +71,12 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
         setSession(session);
         setUser(session?.user ?? null);
         setIsLoading(false);
+
+        if (event === 'PASSWORD_RECOVERY') {
+          router.push('/(auth)/reset-password');
+          return;
+        }
+
         if (session) {
           setIsGuest(false);
           await storage.deleteItem(IS_GUEST_KEY);
@@ -192,6 +202,52 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     }
   }, []);
 
+  const resetPassword = useCallback(async (email: string) => {
+    try {
+      const {error} = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: Linking.createURL('/reset-password'),
+      });
+      return {error};
+    } catch (error) {
+      return {error: error as AuthError};
+    }
+  }, []);
+
+  const updatePassword = useCallback(async (password: string) => {
+    try {
+      const {error} = await supabase.auth.updateUser({password});
+      return {error};
+    } catch (error) {
+      return {error: error as AuthError};
+    }
+  }, []);
+
+  const resendVerificationEmail = useCallback(async (email: string) => {
+    try {
+      const {error} = await supabase.auth.resend({
+        type: 'signup',
+        email,
+        options: {
+          emailRedirectTo: Linking.createURL('/'),
+        },
+      });
+      return {error};
+    } catch (error) {
+      return {error: error as AuthError};
+    }
+  }, []);
+
+  const deleteAccount = useCallback(async () => {
+    try {
+      const {error} = await supabase.rpc('delete_user_account');
+      if (error) throw error;
+      await signOut();
+      return {error: null};
+    } catch (error) {
+      return {error: error as AuthError};
+    }
+  }, [signOut]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -204,6 +260,10 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
         signUp,
         signOut,
         signInWithGoogle,
+        resetPassword,
+        updatePassword,
+        resendVerificationEmail,
+        deleteAccount,
       }}
     >
       {children}
