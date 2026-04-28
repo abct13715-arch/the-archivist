@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Colors} from '@/constants/theme';
+import {useAuth} from '@/contexts/auth-context';
 import {Ionicons} from '@expo/vector-icons';
 import {
   ActivityIndicator,
@@ -10,11 +11,13 @@ import {
 } from 'react-native';
 
 export const SocialLogin = () => {
+  const {signInWithGoogle} = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleGoogleLogin = async () => {
     setIsSubmitting(true);
     try {
+      await signInWithGoogle();
     } catch (error: any) {
       Alert.alert(
         'Login Error',

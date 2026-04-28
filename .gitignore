@@ -51,3 +51,4 @@ tmp_design_images/
 .qwen/
 .windsurf/
 skills
+.env
