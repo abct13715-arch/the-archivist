@@ -7,6 +7,7 @@ import {
 } from '@expo-google-fonts/playfair-display';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {DefaultTheme, ThemeProvider} from '@react-navigation/native';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {Stack} from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import {StatusBar} from 'expo-status-bar';
@@ -30,6 +31,8 @@ const ArchivistTheme = {
     primary: Colors.brand.secondary,
   },
 };
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [loaded] = useFonts({PlayfairDisplay_700Bold});
@@ -63,55 +66,57 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <BottomSheetModalProvider>
-        <AuthProvider>
-          <ThemeProvider value={ArchivistTheme}>
-            <Stack screenOptions={{headerShown: false}}>
-              <Stack.Screen name="(auth)/onboarding" />
-              <Stack.Screen name="(auth)/login" />
-              <Stack.Screen name="(auth)/register" />
-              <Stack.Screen name="(tabs)" />
-              <Stack.Screen
-                name="collection/index"
-                options={{
-                  headerShown: true,
-                  header: () => <Navbar routeName="collection" />,
-                }}
-              />
-              <Stack.Screen
-                name="collection/[id]"
-                options={{
-                  headerShown: true,
-                  header: () => <Navbar routeName="collection/detail" />,
-                }}
-              />
-              <Stack.Screen name="drawer/[path]" />
-              <Stack.Screen
-                name="listing/[id]"
-                options={{
-                  headerShown: true,
-                  header: () => <Navbar routeName="listing-detail" />,
-                }}
-              />
-              <Stack.Screen
-                name="listing/create"
-                options={{
-                  headerShown: true,
-                  header: () => <Navbar routeName="Create listing" />,
-                }}
-              />
-              <Stack.Screen
-                name="curator/[id]"
-                options={{
-                  headerShown: true,
-                  header: () => <Navbar routeName="curator" />,
-                }}
-              />
-            </Stack>
-            <StatusBar style="dark" />
-          </ThemeProvider>
-        </AuthProvider>
-      </BottomSheetModalProvider>
+      <QueryClientProvider client={queryClient}>
+        <BottomSheetModalProvider>
+          <AuthProvider>
+            <ThemeProvider value={ArchivistTheme}>
+              <Stack screenOptions={{headerShown: false}}>
+                <Stack.Screen name="(auth)/onboarding" />
+                <Stack.Screen name="(auth)/login" />
+                <Stack.Screen name="(auth)/register" />
+                <Stack.Screen name="(tabs)" />
+                <Stack.Screen
+                  name="collection/index"
+                  options={{
+                    headerShown: true,
+                    header: () => <Navbar routeName="collection" />,
+                  }}
+                />
+                <Stack.Screen
+                  name="collection/[id]"
+                  options={{
+                    headerShown: true,
+                    header: () => <Navbar routeName="collection/detail" />,
+                  }}
+                />
+                <Stack.Screen name="drawer/[path]" />
+                <Stack.Screen
+                  name="listing/[id]"
+                  options={{
+                    headerShown: true,
+                    header: () => <Navbar routeName="listing-detail" />,
+                  }}
+                />
+                <Stack.Screen
+                  name="listing/create"
+                  options={{
+                    headerShown: true,
+                    header: () => <Navbar routeName="Create listing" />,
+                  }}
+                />
+                <Stack.Screen
+                  name="curator/[id]"
+                  options={{
+                    headerShown: true,
+                    header: () => <Navbar routeName="curator" />,
+                  }}
+                />
+              </Stack>
+              <StatusBar style="dark" />
+            </ThemeProvider>
+          </AuthProvider>
+        </BottomSheetModalProvider>
+      </QueryClientProvider>
     </GestureHandlerRootView>
   );
 }
