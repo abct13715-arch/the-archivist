@@ -1,0 +1,7 @@
+[
+  { "id": "c-1", "archivist_id": "uuid-1", "title": "The Brutalist Series", "description": "Exploring the raw beauty of concrete.", "cover_path": "series-1.png", "is_featured": true },
+  { "id": "c-2", "archivist_id": "uuid-2", "title": "Mid-Century Modern", "description": "The golden era of organic curves.", "cover_path": "series-2.png", "is_featured": false },
+  { "id": "c-3", "archivist_id": "uuid-3", "title": "Japanese Minimalism", "description": "Silence translated into space.", "cover_path": "series-3.png", "is_featured": false },
+  { "id": "c-4", "archivist_id": "uuid-4", "title": "Modernist Glass", "description": "Transparency and reflection.", "cover_path": "series-4.png", "is_featured": false },
+  { "id": "c-5", "archivist_id": "uuid-5", "title": "Industrial Utility", "description": "Objects born from necessity.", "cover_path": "series-5.png", "is_featured": false }
+]

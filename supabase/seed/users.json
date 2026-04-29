@@ -1,0 +1,38 @@
+[
+  {
+    "id": "uuid-1",
+    "display_name": "Marcus Thorne",
+    "role": "archivist",
+    "avatar_path": "curator-1.png"
+  },
+  {
+    "id": "uuid-2",
+    "display_name": "Sienna Leigh",
+    "role": "archivist",
+    "avatar_path": "curator-2.png"
+  },
+  {
+    "id": "uuid-3",
+    "display_name": "Kenji Sato",
+    "role": "archivist",
+    "avatar_path": "curator-3.png"
+  },
+  {
+    "id": "uuid-4",
+    "display_name": "Generic Archivist 1",
+    "role": "archivist",
+    "avatar_path": "curator-4.png"
+  },
+  {
+    "id": "uuid-5",
+    "display_name": "Generic Archivist 2",
+    "role": "archivist",
+    "avatar_path": "curator-5.png"
+  },
+  {
+    "id": "uuid-6",
+    "display_name": "John Collector",
+    "role": "collector",
+    "avatar_path": "profile-face.png"
+  }
+]

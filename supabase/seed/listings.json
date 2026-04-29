@@ -1,0 +1,5 @@
+[
+  { "id": "l-1", "archivist_id": "uuid-1", "category_id": 1, "title": "Monolith Lounge", "price": 4200, "condition": "excellent", "status": "active" },
+  { "id": "l-2", "archivist_id": "uuid-2", "category_id": 2, "title": "GWR Brass Lantern", "price": 1800, "condition": "good", "status": "active" },
+  { "id": "l-3", "archivist_id": "uuid-3", "category_id": 2, "title": "Temple Bowl", "price": 940, "condition": "excellent", "status": "active" }
+]

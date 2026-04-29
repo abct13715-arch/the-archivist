@@ -1,0 +1,9 @@
+[
+  { "id": 1, "name": "Furniture" },
+  { "id": 2, "name": "Ceramics" },
+  { "id": 3, "name": "Paintings" },
+  { "id": 4, "name": "Sculptures" },
+  { "id": 5, "name": "Vintage Watches" },
+  { "id": 6, "name": "Botanical Specimens" },
+  { "id": 7, "name": "Handwritten Manuscripts" }
+]
