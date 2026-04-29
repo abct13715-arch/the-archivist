@@ -56,11 +56,10 @@ export const Register = () => {
       if (authData.session) {
         router.replace('/');
       } else {
-        Alert.alert(
-          'Verification Required',
-          'Please check your email for a verification link to activate your account.',
-          [{text: 'OK', onPress: () => router.replace('/(auth)/login')}],
-        );
+        router.push({
+          pathname: '/(auth)/verify-email',
+          params: {email: data.email},
+        });
       }
     } catch (error: any) {
       console.log(error);

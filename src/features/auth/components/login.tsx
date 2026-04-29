@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useAuth} from '@/contexts/auth-context';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useRouter} from 'expo-router';
 import {Controller, useForm} from 'react-hook-form';
@@ -14,7 +15,6 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import {useAuth} from '@/contexts/auth-context';
 import {LoginFormData, loginSchema} from '../models';
 import {AuthHeader} from './auth-header';
 import {AuthInput} from './auth-input';
@@ -51,10 +51,28 @@ export const Login = () => {
         router.replace('/');
       }
     } catch (error: any) {
-      Alert.alert(
-        'Login Failed',
-        error.message || 'Please check your credentials and try again.',
-      );
+      if (error.message === 'Email not confirmed') {
+        Alert.alert(
+          'Email Not Verified',
+          'Please verify your email address to continue.',
+          [
+            {text: 'Cancel', style: 'cancel'},
+            {
+              text: 'Verify Now',
+              onPress: () =>
+                router.push({
+                  pathname: '/(auth)/verify-email',
+                  params: {email: data.email},
+                }),
+            },
+          ],
+        );
+      } else {
+        Alert.alert(
+          'Login Failed',
+          error.message || 'Please check your credentials and try again.',
+        );
+      }
     } finally {
       setIsSubmitting(false);
     }
