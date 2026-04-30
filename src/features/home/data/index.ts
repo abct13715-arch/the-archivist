@@ -24,28 +24,28 @@ export const useAcquisitions = () => {
   const acquisitions: TAcquisition[] = [
     {
       id: '1',
-      image: require('@/assets/images/bowl.png'),
+      image: images.bowl,
       category: 'CERAMICS',
       name: 'Porous Vessel No. 14',
       price: '$240.00',
     },
     {
       id: '2',
-      image: require('@/assets/images/stone-monolith.png'),
+      image: images.stoneMonolith,
       category: 'FOUNDRY',
       name: 'Obsidian Pillar Mount',
       price: '$165.00',
     },
     {
       id: '3',
-      image: require('@/assets/images/chair.png'),
+      image: images.chair,
       category: 'TEXTILES',
       name: 'Raw Flax Runner',
       price: '$95.00',
     },
     {
       id: '4',
-      image: require('@/assets/images/clock.png'),
+      image: images.clock,
       category: 'WOODWORK',
       name: 'Charred Oak Plinth',
       price: '$310.00',
@@ -68,7 +68,7 @@ export const useCurators = () => {
   const curators: TCurator[] = [
     {
       id: '1',
-      image: require('@/assets/images/curator-1.png'),
+      image: images.curator1,
       location: 'STOCKHOLM, SE',
       name: 'Marcus Thorne',
       quote: 'Beauty is found in the removal of the unnecessary.',
@@ -76,7 +76,7 @@ export const useCurators = () => {
     },
     {
       id: '2',
-      image: require('@/assets/images/curator-2.png'),
+      image: images.curator2,
       location: 'LONDON, UK',
       name: 'Sienna Leigh',
       quote: 'Objects tell the stories that history books forget.',
@@ -84,7 +84,7 @@ export const useCurators = () => {
     },
     {
       id: '3',
-      image: require('@/assets/images/profile-face.png'),
+      image: images.profileFace,
       location: 'TOKYO, JP',
       name: 'Kenji Sato',
       quote: 'The grain of the wood dictates the final form.',

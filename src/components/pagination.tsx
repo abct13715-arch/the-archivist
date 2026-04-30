@@ -10,7 +10,7 @@ type PaginationProps = {
 
 const getPageNumbers = (currentPage: number, totalPages: number) => {
   if (totalPages <= 5) {
-    return Array.from({length: totalPages}, (_, i) => i + 1);
+    return Array.from({length: totalPages}, (_, index) => index + 1);
   }
 
   if (currentPage <= 3) {

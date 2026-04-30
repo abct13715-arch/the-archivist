@@ -1,3 +1,4 @@
+import {images} from '@/assets/images';
 import {ImageSourcePropType} from 'react-native';
 
 export type TListingSpecs = {
@@ -38,7 +39,7 @@ export type TListingDetail = {
 export const ListingList: TListingDetail[] = [
   {
     id: '1',
-    image: require('@/assets/images/bottle-1.png'),
+    image: images.bottle1,
     condition: 'CURATED',
     title: 'Earthen Vessel No. 04',
     subtitle: 'Ceramic • Stoneware',
@@ -67,20 +68,20 @@ export const ListingList: TListingDetail[] = [
         brand: 'CERAMICS',
         title: 'Bowl No. 07',
         price: '$180.00',
-        image: require('@/assets/images/bowl.png'),
+        image: images.bowl,
       },
       {
         id: '3',
         brand: 'CERAMICS',
         title: 'Vase No. 12',
         price: '$320.00',
-        image: require('@/assets/images/bottle-2.png'),
+        image: images.bottle2,
       },
     ],
   },
   {
     id: '2',
-    image: require('@/assets/images/chair-2.png'),
+    image: images.chair2,
     condition: 'CURATED',
     title: 'The Artek Lounge',
     subtitle: 'Furniture • Teak',
@@ -107,7 +108,7 @@ export const ListingList: TListingDetail[] = [
   },
   {
     id: '3',
-    image: require('@/assets/images/light.png'),
+    image: images.light,
     condition: 'CURATED',
     title: 'Brushed Brass Task Lamp',
     subtitle: 'Lighting • Brass',
@@ -128,7 +129,7 @@ export const ListingList: TListingDetail[] = [
   },
   {
     id: '4',
-    image: require('@/assets/images/folio.png'),
+    image: images.folio,
     condition: 'CURATED',
     title: 'Linear Study 09',
     subtitle: 'Objects • Brass',
@@ -140,7 +141,7 @@ export const ListingList: TListingDetail[] = [
   },
   {
     id: '5',
-    image: require('@/assets/images/bowl.png'),
+    image: images.bowl,
     condition: 'CURATED',
     title: 'Hand-Turned Oak Bowl',
     subtitle: 'Ceramics • Oak',
@@ -152,7 +153,7 @@ export const ListingList: TListingDetail[] = [
   },
   {
     id: '6',
-    image: require('@/assets/images/clock.png'),
+    image: images.clock,
     condition: 'CURATED',
     title: 'Minimalist Wall Clock',
     subtitle: 'Objects • Steel',

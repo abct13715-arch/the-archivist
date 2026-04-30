@@ -1,9 +1,10 @@
+import {images} from '@/assets/images';
 import {TListing, TReview} from '@/types';
 
 export const listings: TListing[] = [
   {
     id: '1',
-    image: require('@/assets/images/chair-2.png'),
+    image: images.chair2,
     title: '1954 Wegner Lounge Chair',
     category: 'FURNITURE • DENMARK',
     price: '€4,200',
@@ -11,21 +12,21 @@ export const listings: TListing[] = [
   },
   {
     id: '2',
-    image: require('@/assets/images/light.png'),
+    image: images.light,
     title: 'Brutalist Concrete Lamp',
     category: 'LIGHTING • GERMANY',
     price: '€850',
   },
   {
     id: '3',
-    image: require('@/assets/images/camera.png'),
+    image: images.camera,
     title: 'Leica M3 Single Stroke',
     category: 'OPTICS • WETZLAR',
     price: '€2,800',
   },
   {
     id: '4',
-    image: require('@/assets/images/folio.png'),
+    image: images.folio,
     title: 'Le Corbusier 1923 Folio',
     category: 'ARCHIVE • FRANCE',
     price: '€1,100',
