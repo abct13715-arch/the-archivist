@@ -1,4 +1,14 @@
 [
-  { "reviewer_id": "uuid-6", "archivist_id": "uuid-1", "text": "Exceptional provenance documentation.", "rating": 5 },
-  { "reviewer_id": "uuid-6", "archivist_id": "uuid-2", "text": "Very knowledgeable curator.", "rating": 5 }
+  {
+    "reviewer_id": "uuid-6",
+    "archivist_id": "uuid-1",
+    "text": "Exceptional provenance documentation.",
+    "rating": 5
+  },
+  {
+    "reviewer_id": "uuid-6",
+    "archivist_id": "uuid-2",
+    "text": "Very knowledgeable curator.",
+    "rating": 5
+  }
 ]

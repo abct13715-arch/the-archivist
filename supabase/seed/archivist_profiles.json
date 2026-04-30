@@ -1,7 +1,32 @@
 [
-  { "user_id": "uuid-1", "whatsapp_number": "+46000000001", "bio": "Marcus Thorne has spent the last decade sourcing and cataloguing the forgotten monuments...", "location": "STOCKHOLM, SE" },
-  { "user_id": "uuid-2", "whatsapp_number": "+44000000002", "bio": "Sienna Leigh is a London-based curator specializing in British industrial design...", "location": "LONDON, UK" },
-  { "user_id": "uuid-3", "whatsapp_number": "+81000000003", "bio": "Kenji Sato works between Tokyo and Kyoto, specializing in traditional Japanese craft...", "location": "TOKYO, JP" },
-  { "user_id": "uuid-4", "whatsapp_number": "+10000000004", "bio": "Archivist bio placeholder 1.", "location": "NEW YORK, US" },
-  { "user_id": "uuid-5", "whatsapp_number": "+33000000005", "bio": "Archivist bio placeholder 2.", "location": "PARIS, FR" }
+  {
+    "user_id": "uuid-1",
+    "whatsapp_number": "+46000000001",
+    "bio": "Marcus Thorne has spent the last decade sourcing and cataloguing the forgotten monuments...",
+    "location": "STOCKHOLM, SE"
+  },
+  {
+    "user_id": "uuid-2",
+    "whatsapp_number": "+44000000002",
+    "bio": "Sienna Leigh is a London-based curator specializing in British industrial design...",
+    "location": "LONDON, UK"
+  },
+  {
+    "user_id": "uuid-3",
+    "whatsapp_number": "+81000000003",
+    "bio": "Kenji Sato works between Tokyo and Kyoto, specializing in traditional Japanese craft...",
+    "location": "TOKYO, JP"
+  },
+  {
+    "user_id": "uuid-4",
+    "whatsapp_number": "+10000000004",
+    "bio": "Archivist bio placeholder 1.",
+    "location": "NEW YORK, US"
+  },
+  {
+    "user_id": "uuid-5",
+    "whatsapp_number": "+33000000005",
+    "bio": "Archivist bio placeholder 2.",
+    "location": "PARIS, FR"
+  }
 ]

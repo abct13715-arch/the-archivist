@@ -1,12 +1,12 @@
 import {useRef} from 'react';
 import {Navbar} from '@/components';
 import {Colors} from '@/constants/theme';
+import {useAuth} from '@/contexts/auth-context';
 import {isHorizontalScrollingRef} from '@/contexts/horizontal-scroll-context';
 import {router, Tabs} from 'expo-router';
 import {PanResponder, View} from 'react-native';
 
 import {IconSymbol} from '@/components/ui/icon-symbol';
-import {useAuth} from '@/contexts/auth-context';
 import {HapticTab} from '@/components/haptic-tab';
 
 function TabLayoutContent() {

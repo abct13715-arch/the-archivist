@@ -1,13 +1,13 @@
-import { images } from '@/assets';
-import { Colors } from '@/constants/theme';
-import { useAuth } from '@/contexts/auth-context';
-import { GuestDrawerFooter } from '@/features/auth/components/guest-drawer-footer';
-import { Ionicons } from '@expo/vector-icons';
-import { BlurView } from 'expo-blur';
-import { Image } from 'expo-image';
-import { router } from 'expo-router';
-import { useCallback } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {useCallback} from 'react';
+import {images} from '@/assets';
+import {Colors} from '@/constants/theme';
+import {useAuth} from '@/contexts/auth-context';
+import {GuestDrawerFooter} from '@/features/auth/components/guest-drawer-footer';
+import {Ionicons} from '@expo/vector-icons';
+import {BlurView} from 'expo-blur';
+import {Image} from 'expo-image';
+import {router} from 'expo-router';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 
 const ARCHIVIST_LINKS = [
   {

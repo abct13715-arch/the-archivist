@@ -1,9 +1,10 @@
 import React from 'react';
+import {Colors} from '@/constants/theme';
+import {Ionicons} from '@expo/vector-icons';
 import {useRouter} from 'expo-router';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Ionicons} from '@expo/vector-icons';
-import {Colors} from '@/constants/theme';
+
 import {AuthHeader} from './auth-header';
 
 export const ForgotPasswordSuccess = () => {
@@ -17,13 +18,14 @@ export const ForgotPasswordSuccess = () => {
           <View className="mb-8 h-24 w-24 items-center justify-center rounded-full border border-brand-primary/20 bg-white/50">
             <Ionicons name="checkmark" size={48} color={Colors.brand.primary} />
           </View>
-          
+
           <Text className="mb-4 font-playfair text-3xl font-bold uppercase tracking-tighter text-brand-primary">
             Email Sent
           </Text>
-          
+
           <Text className="mb-12 text-center text-[12px] uppercase leading-relaxed tracking-[0.15em] text-brand-tertiary">
-            We have sent a recovery link to your email.{'\n'}Please check your inbox to continue.
+            We have sent a recovery link to your email.{'\n'}Please check your
+            inbox to continue.
           </Text>
 
           <TouchableOpacity

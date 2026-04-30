@@ -35,7 +35,9 @@ type AuthContextType = {
   signInWithGoogle: () => Promise<void>;
   resetPassword: (email: string) => Promise<{error: AuthError | null}>;
   updatePassword: (password: string) => Promise<{error: AuthError | null}>;
-  resendVerificationEmail: (email: string) => Promise<{error: AuthError | null}>;
+  resendVerificationEmail: (
+    email: string,
+  ) => Promise<{error: AuthError | null}>;
   deleteAccount: () => Promise<{error: AuthError | null}>;
 };
 

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useAuth} from '@/contexts/auth-context';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useRouter} from 'expo-router';
 import {Controller, useForm} from 'react-hook-form';
@@ -14,7 +15,6 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import {useAuth} from '@/contexts/auth-context';
 import {ResetPasswordFormData, resetPasswordSchema} from '../models';
 import {AuthHeader} from './auth-header';
 import {AuthInput} from './auth-input';
@@ -43,11 +43,9 @@ export const ResetPassword = () => {
 
       if (error) throw error;
 
-      Alert.alert(
-        'Success',
-        'Your password has been reset successfully.',
-        [{text: 'OK', onPress: () => router.replace('/(auth)/login')}],
-      );
+      Alert.alert('Success', 'Your password has been reset successfully.', [
+        {text: 'OK', onPress: () => router.replace('/(auth)/login')},
+      ]);
     } catch (error: any) {
       Alert.alert(
         'Reset Failed',

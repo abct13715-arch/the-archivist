@@ -1,12 +1,12 @@
 import React from 'react';
 import {images} from '@/assets/images';
+import {useAuth} from '@/contexts/auth-context';
 import {Ionicons} from '@expo/vector-icons';
 import {Image} from 'expo-image';
 import {LinearGradient} from 'expo-linear-gradient';
 import {useRouter} from 'expo-router';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useAuth} from '@/contexts/auth-context';
 
 export const Onboarding = () => {
   const router = useRouter();

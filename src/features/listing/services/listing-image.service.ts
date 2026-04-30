@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import {supabase} from '@/lib/supabase';
 
 export const listingImageService = {
   getListingImages: async () => {
@@ -6,10 +6,10 @@ export const listingImageService = {
   },
 
   uploadImage: async (file: File | Blob, path: string) => {
-    const { data, error } = await supabase.storage
+    const {data, error} = await supabase.storage
       .from('listings')
       .upload(path, file);
-    return { data, error };
+    return {data, error};
   },
 
   getPublicUrl: (path: string) => {

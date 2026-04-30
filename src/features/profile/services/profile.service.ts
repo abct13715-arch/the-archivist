@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import {supabase} from '@/lib/supabase';
 
 export const profileService = {
   getProfiles: async () => {
@@ -6,10 +6,10 @@ export const profileService = {
   },
 
   uploadAvatar: async (file: File | Blob, path: string) => {
-    const { data, error } = await supabase.storage
+    const {data, error} = await supabase.storage
       .from('avatars')
       .upload(path, file);
-    return { data, error };
+    return {data, error};
   },
 
   getAvatarUrl: (path: string) => {
