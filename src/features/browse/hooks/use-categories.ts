@@ -1,5 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 
+import {categoriesSchema} from '../models/schema';
 import {categoryService} from '../services/category.service';
 
 export const useGetCategories = () => {
@@ -9,7 +10,7 @@ export const useGetCategories = () => {
       const {data, error} = await categoryService.getCategories();
 
       if (error) throw new Error(error.message);
-      return data;
+      return categoriesSchema.parse(data);
     },
   });
 };

@@ -26,7 +26,7 @@ export const useGetCollectionById = (id: string) => {
   });
 };
 
-export const useGetFeaturedCollections = () => {
+export const useGetFeaturedCollection = () => {
   return useQuery({
     queryKey: ['collections', 'featured'],
     queryFn: async () => {
@@ -34,9 +34,8 @@ export const useGetFeaturedCollections = () => {
       if (error) throw new Error(error.message);
 
       try {
-        const collection = collectionSchema.parse(data);
+        const collection = collectionSchema.parse(data[0]);
 
-        // If there's a path and it's not already a full URL, get the public URL
         if (
           collection.cover_path &&
           !collection.cover_path.startsWith('http')
@@ -47,6 +46,36 @@ export const useGetFeaturedCollections = () => {
         }
 
         return collection;
+      } catch (error) {
+        console.error('Detailed Zod Error:', JSON.stringify(error, null, 2));
+        throw error;
+      }
+    },
+  });
+};
+
+export const useGetFeaturedCollections = () => {
+  return useQuery({
+    queryKey: ['all', 'collections', 'featured'],
+    queryFn: async () => {
+      const {data, error} = await collectionService.getFeaturedCollections();
+      if (error) throw new Error(error.message);
+
+      try {
+        const collections = collectionSchema.array().parse(data);
+
+        for (const collection of collections) {
+          if (
+            collection.cover_path &&
+            !collection.cover_path.startsWith('http')
+          ) {
+            collection.cover_path = collectionService.getCoverUrl(
+              collection.cover_path,
+            );
+          }
+        }
+
+        return collections;
       } catch (error) {
         console.error('Detailed Zod Error:', JSON.stringify(error, null, 2));
         throw error;

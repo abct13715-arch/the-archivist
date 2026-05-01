@@ -25,7 +25,14 @@ export const collectionService = {
       .from('collections')
       .select('*')
       .eq('is_featured', true)
-      .single();
+      .limit(1);
+  },
+
+  getFeaturedCollections: async () => {
+    return await supabase
+      .from('collections')
+      .select('*')
+      .eq('is_featured', true);
   },
 
   uploadCoverImage: async (file: File | Blob, path: string) => {

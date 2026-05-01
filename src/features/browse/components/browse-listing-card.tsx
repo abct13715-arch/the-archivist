@@ -1,14 +1,13 @@
 import {useCallback, useState} from 'react';
 import {Colors} from '@/constants/theme';
+import {TListing} from '@/features/listing/models';
 import {MaterialIcons} from '@expo/vector-icons';
 import {Image} from 'expo-image';
 import {router} from 'expo-router';
 import {Text, TouchableOpacity, View} from 'react-native';
 
-import {TBrowseListing} from '../data';
-
 type Props = {
-  listing: TBrowseListing;
+  listing: TListing;
   isBookmarked?: boolean;
   onRequireAuth?: () => void;
 };
@@ -37,7 +36,7 @@ export const BrowseListingCard = ({
     <TouchableOpacity onPress={handlePress} className="mb-10 w-[46%]">
       <View className="relative mb-4 border border-neutral-300">
         <Image
-          source={listing.image}
+          source={listing.images[0].image_path}
           style={{width: '100%', aspectRatio: 3 / 4}}
           contentFit="cover"
         />

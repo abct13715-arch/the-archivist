@@ -5,7 +5,6 @@ import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 
 import {BottomSheetComponent} from '../../../components/ui/bottom-sheet';
-import {categories} from '../data';
 
 interface FilterBottomSheetProps {
   onApply?: (filters: any) => void;
@@ -16,7 +15,6 @@ export const FilterBottomSheet = forwardRef<
   BottomSheetModal,
   FilterBottomSheetProps
 >(({onApply, onClear}, reference) => {
-  const [selectedCategory, setSelectedCategory] = useState('EVERYTHING');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [condition, setCondition] = useState('All');
@@ -24,7 +22,6 @@ export const FilterBottomSheet = forwardRef<
 
   const handleApply = () => {
     onApply?.({
-      category: selectedCategory,
       price: {min: minPrice, max: maxPrice},
       condition,
       rating,
@@ -34,7 +31,6 @@ export const FilterBottomSheet = forwardRef<
   };
 
   const handleClear = () => {
-    setSelectedCategory('EVERYTHING');
     setMinPrice('');
     setMaxPrice('');
     setCondition('All');
@@ -59,34 +55,6 @@ export const FilterBottomSheet = forwardRef<
               Clear All
             </Text>
           </TouchableOpacity>
-        </View>
-
-        {/* Categories */}
-        <View>
-          <Text className="mb-4 text-[10px] font-bold uppercase tracking-label-xl text-tertiary-500">
-            Collection
-          </Text>
-          <View className="flex-row flex-wrap gap-2">
-            {categories.map(cat => (
-              <TouchableOpacity
-                key={cat}
-                onPress={() => setSelectedCategory(cat)}
-                className={`border px-5 py-3 ${
-                  selectedCategory === cat
-                    ? 'border-secondary-500 bg-secondary-500'
-                    : 'border-neutral-300 bg-surface'
-                } rounded-none`}
-              >
-                <Text
-                  className={`text-[10px] font-bold uppercase tracking-label-lg ${
-                    selectedCategory === cat ? 'text-white' : 'text-primary-900'
-                  }`}
-                >
-                  {cat}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
         </View>
 
         {/* Price Range */}
@@ -136,7 +104,7 @@ export const FilterBottomSheet = forwardRef<
             Condition
           </Text>
           <View className="flex-row gap-2">
-            {['All', 'New', 'Vintage', 'Restored'].map(c => (
+            {['All', 'mint', 'excellent', 'good', 'fair'].map(c => (
               <TouchableOpacity
                 key={c}
                 onPress={() => setCondition(c)}
@@ -151,7 +119,7 @@ export const FilterBottomSheet = forwardRef<
                     condition === c ? 'text-white' : 'text-primary-900'
                   }`}
                 >
-                  {c}
+                  {c.toUpperCase()}
                 </Text>
               </TouchableOpacity>
             ))}
