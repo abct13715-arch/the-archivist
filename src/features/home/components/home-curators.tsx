@@ -1,15 +1,15 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
+import {useGetArchivistProfiles} from '@/features/curator-profile/hooks/use-archivist-profiles';
 import {router} from 'expo-router';
-import {Text, View} from 'react-native';
+import {ActivityIndicator, Text, View} from 'react-native';
 
-import {useCurators} from '../data';
 import {CuratorArrowNav} from './curator-arrow-nav';
 import {CuratorCard} from './curator-card';
 
 const ITEMS_PER_PAGE = 3;
 
 export const HomeCurators = () => {
-  const {curators} = useCurators();
+  const {data: curators = [], isLoading} = useGetArchivistProfiles();
   const [page, setPage] = useState(0);
 
   const totalPages = Math.ceil(curators.length / ITEMS_PER_PAGE);
@@ -18,9 +18,15 @@ export const HomeCurators = () => {
     page * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
   );
 
-  useEffect(() => {
-    console.log('curators', curators);
-  }, [curators]);
+  if (isLoading) {
+    return (
+      <View className="px-6 py-10">
+        <ActivityIndicator color="#C8522A" />
+      </View>
+    );
+  }
+
+  if (curators.length === 0) return null;
 
   return (
     <View className="px-6 pt-4">
@@ -65,23 +71,6 @@ export const HomeCurators = () => {
           <Text className="text-xs tracking-label-xl text-tertiary-300">
             PERMANENT DESIGN LABORATORY
           </Text>
-        </View>
-
-        <View className="mt-4 flex-row justify-center gap-16">
-          <View className="gap-3">
-            <Text className="text-xs font-bold tracking-label-lg text-brand-secondary">
-              JOURNAL
-            </Text>
-            <Text className="text-sm text-neutral-100">Essays</Text>
-            <Text className="text-sm text-neutral-100">Interviews</Text>
-          </View>
-          <View className="gap-3">
-            <Text className="text-xs font-bold tracking-label-lg text-brand-secondary">
-              ARCHIVE
-            </Text>
-            <Text className="text-sm text-neutral-100">Objects</Text>
-            <Text className="text-sm text-neutral-100">Makers</Text>
-          </View>
         </View>
 
         <Text className="mt-4 text-center text-xs tracking-label-lg text-tertiary-500">
