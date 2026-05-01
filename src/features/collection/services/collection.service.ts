@@ -20,6 +20,14 @@ export const collectionService = {
       .single();
   },
 
+  getFeaturedCollection: async () => {
+    return await supabase
+      .from('collections')
+      .select('*')
+      .eq('is_featured', true)
+      .single();
+  },
+
   uploadCoverImage: async (file: File | Blob, path: string) => {
     const {data, error} = await supabase.storage
       .from('collections')

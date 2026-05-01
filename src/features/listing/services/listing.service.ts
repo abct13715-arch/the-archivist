@@ -2,7 +2,11 @@ import {supabase} from '@/lib/supabase';
 
 export const listingService = {
   getListings: async () => {
-    return await supabase.from('listings').select('*');
+    return await supabase.from('listings').select(`
+        *,
+        category:categories(name),
+        images:listing_images(*)
+      `);
   },
 
   getListingById: async (id: string) => {

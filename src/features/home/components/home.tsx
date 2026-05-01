@@ -1,30 +1,49 @@
+import {useState} from 'react';
 import {Colors} from '@/constants/theme';
+import {useGetFeaturedCollections} from '@/features/collection/hooks/use-collections';
 import {router} from 'expo-router';
-import {ScrollView} from 'react-native';
+import {ActivityIndicator, ScrollView, View} from 'react-native';
 
-import {featuredCollection} from '../data';
 import {FeaturedCollection} from './featured-collection';
 import {HomeAcquisitions} from './home-acquisitions';
 import {HomeCurators} from './home-curators';
 
 export const Home = () => {
+  const {data: featuredData, isLoading} = useGetFeaturedCollections();
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const showLoader = isLoading || !featuredData || !imageLoaded;
+
   return (
-    <ScrollView
-      className="flex-1"
-      style={{backgroundColor: Colors.brand.neutral}}
-    >
-      <FeaturedCollection
-        collection={featuredCollection}
-        onExplore={() =>
-          router.push({
-            pathname: '/collection/[id]',
-            params: {id: featuredCollection.id},
-          })
-        }
-        onViewAll={() => router.push('/collection')}
-      />
-      <HomeAcquisitions />
-      <HomeCurators />
-    </ScrollView>
+    <View className="flex-1" style={{backgroundColor: Colors.brand.neutral}}>
+      {showLoader && (
+        <View className="absolute inset-0 z-50 items-center justify-center bg-brand-neutral">
+          <ActivityIndicator size="large" color="#C8522A" />
+        </View>
+      )}
+
+      <ScrollView
+        style={{
+          backgroundColor: Colors.brand.neutral,
+          opacity: showLoader ? 0 : 1,
+        }}
+      >
+        {featuredData && (
+          <FeaturedCollection
+            collection={featuredData}
+            onImageLoad={() => setImageLoaded(true)}
+            onExplore={() =>
+              router.push({
+                pathname: '/collection/[id]',
+                params: {id: featuredData.id},
+              })
+            }
+            onViewAll={() => router.push('/collection')}
+          />
+        )}
+        <HomeAcquisitions />
+        <HomeCurators />
+      </ScrollView>
+    </View>
   );
 };

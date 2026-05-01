@@ -1,5 +1,20 @@
 import {z} from 'zod';
 
+// Auth schemas (from migrations)
+export const userRoleEnum = z.enum(['collector', 'archivist', 'admin']);
+export const userSchema = z.object({
+  id: z.string(),
+  role: userRoleEnum.default('collector'),
+  display_name: z.string(),
+  avatar_path: z.string().nullable(),
+  created_at: z.string().nullable().optional(),
+});
+
+export type TUser = z.infer<typeof userSchema>;
+
+export const usersSchema = z.array(userSchema);
+
+// Existing auth schemas
 export const registerSchema = z.object({
   fullName: z.string().min(2, 'Full name is required'),
   email: z.string().email('Invalid email address'),

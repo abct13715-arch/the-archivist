@@ -44,17 +44,19 @@
     location = EXCLUDED.location;
 
   -- 4. Seed Collections
-  INSERT INTO collections (id, archivist_id, title, description, cover_path, is_featured) VALUES
-    ('c0000001-0001-4001-c001-000000000001', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 'The Brutalist Series', 'Exploring the raw, unadorned beauty of concrete monoliths and structural honesty.', 'series-1.png', true),
-    ('c0000002-0002-4002-c002-000000000002', '245e78ab-a512-4108-9298-b4d382e3d1ba', 'Mid-Century Modern', 'The golden era of organic curves and functional elegance.', 'series-2.png', false),
-    ('c0000003-0003-4003-c003-000000000003', 'a9ce4650-1a19-47f6-adf3-ff2bd42c970a', 'Japanese Minimalism', 'Silence translated into space. A study of Ma and the art of subtraction.', 'series-3.png', false),
-    ('c0000004-0004-4004-c004-000000000004', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 'Modernist Glass', 'Transparency, reflection, and the dissolution of boundaries.', 'series-4.png', false),
-    ('c0000005-0005-4005-c005-000000000005', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 'Industrial Utility', 'Objects born from necessity, celebrated for their functionality.', 'series-5.png', false)
+  INSERT INTO collections (id, archivist_id, title, description, cover_path, is_featured, volume, image_caption) VALUES
+    ('c0000001-0001-4001-c001-000000000001', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 'Curating the\nUnseen\nPresence.', 'Exploring the raw, unadorned beauty of concrete monoliths and structural honesty.', 'series-1.png', true, 'VOLUME 04 / ISSUE 02', 'ARCHITECTURAL MONOLITH 01'),
+    ('c0000002-0002-4002-c002-000000000002', '245e78ab-a512-4108-9298-b4d382e3d1ba', 'Mid-Century Modern', 'The golden era of organic curves and functional elegance.', 'series-2.png', false, 'VOLUME 02 / ISSUE 01', 'EAMES STUDY'),
+    ('c0000003-0003-4003-c003-000000000003', 'a9ce4650-1a19-47f6-adf3-ff2bd42c970a', 'Japanese Minimalism', 'Silence translated into space. A study of Ma and the art of subtraction.', 'series-3.png', false, 'VOLUME 03 / ISSUE 04', 'ZEN FORM'),
+    ('c0000004-0004-4004-c004-000000000004', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 'Modernist Glass', 'Transparency, reflection, and the dissolution of boundaries.', 'series-4.png', false, 'VOLUME 01 / ISSUE 12', 'REFLECTIVE SURFACE'),
+    ('c0000005-0005-4005-c005-000000000005', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 'Industrial Utility', 'Objects born from necessity, celebrated for their functionality.', 'series-5.png', false, 'VOLUME 05 / ISSUE 03', 'UTILITY STUDY')
   ON CONFLICT (id) DO UPDATE SET 
     title = EXCLUDED.title,
     description = EXCLUDED.description,
     cover_path = EXCLUDED.cover_path,
-    is_featured = EXCLUDED.is_featured;
+    is_featured = EXCLUDED.is_featured,
+    volume = EXCLUDED.volume,
+    image_caption = EXCLUDED.image_caption;
 
   -- 5. Seed Listings
 
