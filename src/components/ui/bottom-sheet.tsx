@@ -74,7 +74,7 @@ interface BottomSheetComponentProps {
 export const BottomSheetComponent = forwardRef<
   BottomSheetModal,
   BottomSheetComponentProps
->(({children, snapPoints = ['50%'], useScroll = false}, ref) => {
+>(({children, snapPoints = ['50%'], useScroll = false}, reference) => {
   const renderBackdrop = React.useCallback(
     (props: any) => (
       <BottomSheetBackdrop
@@ -89,12 +89,12 @@ export const BottomSheetComponent = forwardRef<
 
   return (
     <BottomSheetModal
-      ref={ref}
+      ref={reference}
       index={0}
       snapPoints={snapPoints}
       backdropComponent={renderBackdrop}
       enablePanDownToClose
-      backgroundStyle={{backgroundColor: 'white', borderRadius: 32}}
+      backgroundStyle={{backgroundColor: '#F5F2EC', borderRadius: 32}}
       handleIndicatorStyle={{backgroundColor: '#D1D5DB', width: 48}}
     >
       {useScroll ? (

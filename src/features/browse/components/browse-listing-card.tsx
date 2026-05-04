@@ -58,9 +58,17 @@ export const BrowseListingCard = ({
       >
         {listing.title}
       </Text>
-      <Text className="text-[11px] font-bold uppercase tracking-widest text-secondary-500">
-        {listing.price}
-      </Text>
+      <View className="flex-row items-center justify-between">
+        <Text className="text-[11px] font-bold uppercase tracking-widest text-secondary-500">
+          ${listing.price}
+        </Text>
+        <View className="flex-row items-center gap-1">
+          <MaterialIcons name="star" size={14} color={Colors.brand.secondary} />
+          <Text className="text-[11px] font-bold text-primary-900">
+            {listing.rating ? listing.rating.toFixed(1) : 'N/A'}
+          </Text>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 };

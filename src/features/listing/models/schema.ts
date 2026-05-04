@@ -32,6 +32,7 @@ export const listingSchema = z.object({
   condition: listingConditionEnum.optional(),
   status: listingStatusEnum.optional(),
   created_at: z.string().nullable().optional(),
+  rating: z.number().nullable().optional(),
   category: z.any().optional(),
   images: z.any().optional(),
 });

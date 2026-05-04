@@ -103,12 +103,12 @@ export const FilterBottomSheet = forwardRef<
           <Text className="mb-4 text-[10px] font-bold uppercase tracking-label-xl text-tertiary-500">
             Condition
           </Text>
-          <View className="flex-row gap-2">
+          <View className="flex-row flex-wrap gap-2">
             {['All', 'mint', 'excellent', 'good', 'fair'].map(c => (
               <TouchableOpacity
                 key={c}
                 onPress={() => setCondition(c)}
-                className={`flex-1 items-center justify-center border py-4 ${
+                className={`items-center justify-center border px-5 py-4 ${
                   condition === c
                     ? 'border-secondary-500 bg-secondary-500'
                     : 'border-neutral-300 bg-surface'

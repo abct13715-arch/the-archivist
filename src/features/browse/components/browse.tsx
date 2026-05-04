@@ -1,8 +1,8 @@
-import {useMemo, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {Pagination} from '@/components';
 import {Colors} from '@/constants/theme';
 import {LoginBottomSheet} from '@/features/auth';
-import {useGetListings} from '@/features/listing/hooks/use-listings';
+import {usePaginatedListings} from '@/features/listing/hooks/use-paginated-listings';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
 
@@ -18,49 +18,52 @@ interface FilterCriteria {
   rating?: number;
 }
 
-const ITEMS_PER_PAGE = 6;
-
 export const Browse = () => {
-  const bottomSheetReference = useRef<BottomSheetModal>(null);
-  const {data: listings = [], isLoading} = useGetListings();
+  const filterBottomSheetReference = useRef<BottomSheetModal>(null);
+  const authBottomSheetReference = useRef<BottomSheetModal>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeCategoryId, setActiveCategoryId] = useState<number>(0);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [filters, setFilters] = useState<FilterCriteria>({});
 
-  const filteredListings = useMemo(() => {
-    let result = listings;
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(inputValue);
+      setCurrentPage(1);
+    }, 500);
 
-    if (activeCategoryId !== 0) {
-      result = result.filter(l => l.category_id === activeCategoryId);
-    }
+    return () => clearTimeout(handler);
+  }, [inputValue]);
 
-    if (searchQuery) {
-      result = result.filter(l =>
-        l.title.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
-    }
+  const isFilterActive =
+    (filters.price?.min !== '' && filters.price?.min !== undefined) ||
+    (filters.price?.max !== '' && filters.price?.max !== undefined) ||
+    (filters.condition && filters.condition !== 'All') ||
+    (filters.rating && filters.rating > 0);
 
-    if (filters.price?.min || filters.price?.max) {
-      const min = Number.parseFloat(filters.price.min) || 0;
-      const max = Number.parseFloat(filters.price.max) || Infinity;
-      result = result.filter(l => l.price >= min && l.price <= max);
-    }
+  const hasActiveFilters =
+    activeCategoryId !== 0 || debouncedQuery.length > 0 || isFilterActive;
 
-    if (filters.condition && filters.condition !== 'All') {
-      result = result.filter(l => l.condition === filters.condition);
-    }
+  const {data: response, isLoading} = usePaginatedListings({
+    category_id: activeCategoryId === 0 ? undefined : activeCategoryId,
+    minPrice: filters.price?.min
+      ? Number.parseFloat(filters.price.min)
+      : undefined,
+    maxPrice: filters.price?.max
+      ? Number.parseFloat(filters.price.max)
+      : undefined,
+    condition:
+      filters.condition && filters.condition !== 'All'
+        ? filters.condition
+        : undefined,
+    searchQuery: debouncedQuery,
+    rating: filters.rating && filters.rating > 0 ? filters.rating : undefined,
+    page: currentPage,
+  });
 
-    return result;
-  }, [listings, activeCategoryId, searchQuery, filters]);
-
-  const totalPages = Math.ceil(filteredListings.length / ITEMS_PER_PAGE) || 1;
-  const paginatedListings = useMemo(() => {
-    return filteredListings.slice(
-      (currentPage - 1) * ITEMS_PER_PAGE,
-      currentPage * ITEMS_PER_PAGE,
-    );
-  }, [filteredListings, currentPage]);
+  const listings = response?.data || [];
+  const totalPages = response?.count ? Math.ceil(response.count / 6) : 1;
 
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -80,11 +83,14 @@ export const Browse = () => {
       style={{backgroundColor: Colors.brand.neutral}}
     >
       <SearchBar
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-        onFilterPress={() => bottomSheetReference.current?.present()}
+        value={inputValue}
+        onChangeText={text => {
+          setInputValue(text);
+        }}
+        onFilterPress={() => filterBottomSheetReference.current?.present()}
+        hasActiveFilters={!!isFilterActive}
       />
-      <FeaturedCollections />
+      {!hasActiveFilters && <FeaturedCollections />}
       <CategoryGrid
         activeCategoryId={activeCategoryId}
         onSelect={id => {
@@ -97,7 +103,7 @@ export const Browse = () => {
         <View className="py-20">
           <ActivityIndicator color="#C8522A" />
         </View>
-      ) : filteredListings.length === 0 ? (
+      ) : listings.length === 0 ? (
         <View className="items-center px-6 py-20">
           <Text className="text-tertiary-500">
             No listings found matching these criteria.
@@ -106,12 +112,12 @@ export const Browse = () => {
       ) : (
         <>
           <View className="flex-row flex-wrap justify-between gap-y-2 px-6 pt-10">
-            {paginatedListings.map(listing => (
+            {listings.map(listing => (
               <BrowseListingCard
                 key={listing.id}
                 listing={listing}
                 onRequireAuth={() => {
-                  bottomSheetReference.current?.present();
+                  authBottomSheetReference.current?.present();
                 }}
               />
             ))}
@@ -128,14 +134,14 @@ export const Browse = () => {
         </>
       )}
       <FilterBottomSheet
-        ref={bottomSheetReference}
+        ref={filterBottomSheetReference}
         onApply={newFilters => {
           setFilters(newFilters);
           setCurrentPage(1);
         }}
         onClear={() => setFilters({})}
       />
-      <LoginBottomSheet ref={bottomSheetReference} />
+      <LoginBottomSheet ref={authBottomSheetReference} />
     </ScrollView>
   );
 };
