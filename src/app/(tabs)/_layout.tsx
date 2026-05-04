@@ -79,6 +79,7 @@ function TabLayoutContent() {
           name="saved"
           options={{
             title: 'Saved',
+            href: isLoggedIn ? '/(tabs)/saved' : null,
             tabBarIcon: ({color}) => (
               <IconSymbol size={28} name="bookmark.fill" color={color} />
             ),
