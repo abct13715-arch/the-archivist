@@ -12,7 +12,7 @@ export const archivistProfileSchema = z.object({
   user: z
     .object({
       display_name: z.string(),
-      avatar_url: z.string().nullable(),
+      avatar_path: z.string().nullable(),
     })
     .optional(),
   listings: z

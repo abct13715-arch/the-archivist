@@ -11,12 +11,27 @@ export const collectionService = {
       .select(
         `
         *,
-        listings:collection_listings(
-          listing:listings(*)
+        archivist:users(
+          *,
+          profile:archivist_profiles(*)
+        ),
+        collection_listings(
+          collection_id,
+          listing_id,
+          display_order,
+          listing:listings(
+            *,
+            category:categories(name),
+            listing_images(*)
+          )
         )
       `,
       )
       .eq('id', id)
+      .order('display_order', {
+        foreignTable: 'collection_listings',
+        ascending: true,
+      })
       .single();
   },
 

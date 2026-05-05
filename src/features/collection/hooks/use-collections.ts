@@ -1,6 +1,7 @@
+import {listingImageService} from '@/features/listing/services/listing-image.service';
 import {useQuery} from '@tanstack/react-query';
 
-import {collectionSchema} from '../models';
+import {collectionSchema, collectionsSchema} from '../models';
 import {collectionService} from '../services/collection.service';
 
 export const useGetCollections = () => {
@@ -9,7 +10,26 @@ export const useGetCollections = () => {
     queryFn: async () => {
       const {data, error} = await collectionService.getCollections();
       if (error) throw new Error(error.message);
-      return data;
+
+      try {
+        const collections = collectionsSchema.parse(data);
+
+        for (const collection of collections) {
+          if (
+            collection.cover_path &&
+            !collection.cover_path.startsWith('http')
+          ) {
+            collection.cover_path = collectionService.getCoverUrl(
+              collection.cover_path,
+            );
+          }
+        }
+
+        return collections;
+      } catch (error) {
+        console.error('Detailed Zod Error:', JSON.stringify(error, null, 2));
+        throw error;
+      }
     },
   });
 };
@@ -20,12 +40,35 @@ export const useGetCollectionById = (id: string) => {
     queryFn: async () => {
       const {data, error} = await collectionService.getCollectionById(id);
       if (error) throw new Error(error.message);
-      return data;
+
+      const collection = collectionSchema.parse(data);
+
+      // Resolve collection cover URL
+      if (collection.cover_path && !collection.cover_path.startsWith('http')) {
+        collection.cover_path = collectionService.getCoverUrl(
+          collection.cover_path,
+        );
+      }
+
+      // Resolve listing image URLs
+      if (collection.collection_listings) {
+        for (const cl of collection.collection_listings) {
+          if (cl.listing.listing_images) {
+            for (const img of cl.listing.listing_images) {
+              if (img.image_path && !img.image_path.startsWith('http')) {
+                img.image_path = listingImageService.getPublicUrl(
+                  img.image_path,
+                );
+              }
+            }
+          }
+        }
+      }
+      return collection;
     },
     enabled: !!id,
   });
 };
-
 export const useGetFeaturedCollection = () => {
   return useQuery({
     queryKey: ['collections', 'featured'],

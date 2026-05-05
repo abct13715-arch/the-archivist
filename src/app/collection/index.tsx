@@ -1,3 +1,1 @@
-import {Collection} from '@/features/collection';
-
-export default Collection;
+export {Collection as default} from '@/features/collection';

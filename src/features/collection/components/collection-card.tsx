@@ -1,11 +1,11 @@
-import {Image} from 'expo-image';
-import {ImageSourcePropType, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ImageSource} from 'expo-image';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 type CollectionCardProps = {
   seriesNumber: string;
   title: string;
   description: string;
-  image: ImageSourcePropType;
+  image?: ImageSource | string | number | null;
   onPress: () => void;
 };
 

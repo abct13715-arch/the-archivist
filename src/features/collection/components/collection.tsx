@@ -1,16 +1,27 @@
-import {useEffect} from 'react';
 import {router} from 'expo-router';
-import {ScrollView, Text, View} from 'react-native';
+import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
 
-import {useCollection} from '../data';
+import {useGetCollections} from '../hooks/use-collections';
 import {CollectionCard} from './collection-card';
 
 export const Collection = () => {
-  const {collections} = useCollection();
+  const {data: collections, isLoading, isError} = useGetCollections();
 
-  useEffect(() => {
-    console.log('collections', collections);
-  }, [collections]);
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-neutral-100">
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (isError || !collections) {
+    return (
+      <View className="flex-1 items-center justify-center bg-neutral-100">
+        <Text>Error loading collections.</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView className="flex-1 bg-neutral-100">
@@ -31,13 +42,13 @@ export const Collection = () => {
       </View>
       <View className="px-6">
         {collections.map((item, index) => (
-          <View key={index}>
+          <View key={item.id}>
             <CollectionCard
               key={item.id}
-              seriesNumber={item.seriesNumber}
+              seriesNumber={item.volume || ''}
               title={item.title}
-              description={item.description}
-              image={item.image}
+              description={item.description || ''}
+              image={item.cover_path ? {uri: item.cover_path} : undefined}
               onPress={() => router.push(`/collection/${item.id}`)}
             />
 
@@ -45,8 +56,8 @@ export const Collection = () => {
               <View className="mb-10 border-y border-tertiary-100 py-10">
                 <View className="border-l-2 border-brand-secondary py-2 pl-5">
                   <Text className="font-playfair text-3xl italic leading-10 text-primary-700">
-                    "Design is not just what it looks like and feels like.
-                    Design is how it works."
+                    &ldquo;Design is not just what it looks like and feels like.
+                    Design is how it works.&rdquo;
                   </Text>
                   <Text className="mt-3 text-xs tracking-label-lg text-tertiary-500">
                     — THE ARCHIVIST MANIFESTO
