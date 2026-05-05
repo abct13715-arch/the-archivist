@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 
-import {listingsSchema} from '../models';
+import {listingSchema, listingsSchema} from '../models';
 import {listingImageService} from '../services/listing-image.service';
 import {listingService} from '../services/listing.service';
 
@@ -46,9 +46,69 @@ export const useGetListingById = (id: string) => {
     queryFn: async () => {
       const {data, error} = await listingService.getListingById(id);
       if (error) throw new Error(error.message);
-      return data;
+
+      const listing = listingSchema.parse(data);
+
+      const images = (listing.images || []).map((img: any) => ({
+        uri: img.image_path.startsWith('http')
+          ? img.image_path
+          : listingImageService.getPublicUrl(img.image_path),
+      }));
+
+      return {
+        ...listing,
+        image: images[0] || null,
+        images: images,
+        formattedPrice: new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: listing.currency || 'USD',
+        }).format(listing.price),
+        condition: (listing.condition || 'curated').toUpperCase(),
+        curatedBy: listing.archivist?.display_name || 'Archivist',
+        totalRatings: listing.reviews?.length || 0,
+        descriptionArray: listing.description
+          ? listing.description.split('\n\n')
+          : [],
+      };
     },
     enabled: !!id,
+  });
+};
+
+export const useGetRelatedListings = (
+  archivistId: string,
+  excludeId: string,
+) => {
+  return useQuery({
+    queryKey: ['listings', 'related', archivistId, excludeId],
+    queryFn: async () => {
+      const {data, error} = await listingService.getRelatedListings(
+        archivistId,
+        excludeId,
+      );
+      if (error) throw new Error(error.message);
+
+      return data.map((item: any) => {
+        const listing = listingSchema.parse(item);
+        const imgPath = listing.images?.[0]?.image_path;
+        return {
+          ...listing,
+          brand: listing.category?.name || 'Curation',
+          formattedPrice: new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: listing.currency || 'USD',
+          }).format(listing.price),
+          image: imgPath
+            ? {
+                uri: imgPath.startsWith('http')
+                  ? imgPath
+                  : listingImageService.getPublicUrl(imgPath),
+              }
+            : null,
+        };
+      });
+    },
+    enabled: !!archivistId,
   });
 };
 

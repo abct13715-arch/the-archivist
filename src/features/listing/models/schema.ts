@@ -35,6 +35,12 @@ export const listingSchema = z.object({
   rating: z.number().nullable().optional(),
   category: z.any().optional(),
   images: z.any().optional(),
+  subtitle: z.string().nullable().optional(),
+  price_label: z.string().nullable().optional(),
+  quote: z.string().nullable().optional(),
+  specs: z.any().nullable().optional(),
+  archivist: z.any().optional(),
+  reviews: z.any().optional(),
 });
 
 export type TListing = z.infer<typeof listingSchema>;

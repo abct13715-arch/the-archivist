@@ -15,12 +15,12 @@ export type TRelatedListing = {
   brand: string;
   title: string;
   price: string;
-  image: ImageSourcePropType;
+  image: ImageSourcePropType | null;
 };
 
 export type TListingDetail = {
   id: string;
-  image: ImageSourcePropType;
+  image: ImageSourcePropType | null;
   images?: ImageSourcePropType[];
   condition: string;
   title: string;

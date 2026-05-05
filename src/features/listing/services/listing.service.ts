@@ -75,11 +75,28 @@ export const listingService = {
       .select(
         `
         *,
-        archivist:users(*)
+        archivist:users(*),
+        images:listing_images(*),
+        category:categories(name),
+        reviews(*)
       `,
       )
       .eq('id', id)
       .single();
+  },
+
+  getRelatedListings: async (archivistId: string, excludeId: string) => {
+    return await supabase
+      .from('listings')
+      .select(
+        `
+        *,
+        images:listing_images(*)
+      `,
+      )
+      .eq('archivist_id', archivistId)
+      .neq('id', excludeId)
+      .limit(4);
   },
 
   getListingsByArchivistId: async (archivistId: string) => {

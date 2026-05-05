@@ -61,60 +61,80 @@
   -- 5. Seed Listings
 
   -- 5.1 Marcus Thorne Listings
-  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description) VALUES
-    ('11111111-1111-4111-a111-111111111111', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 1, 'Monolith Lounge', 4200, 'USD', 'excellent', 'active', 'A definitive expression of minimal form, this vessel embodies wabi-sabi aesthetics.'),
-    ('22222222-2222-4222-a222-222222222222', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 2, 'Basalt Form IV', 850, 'USD', 'excellent', 'active', 'A raw basalt sculpture that anchors any space with its silent presence.'),
-    ('33333333-3333-4333-a333-333333333333', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 8, 'Linear Beam', 1100, 'USD', 'excellent', 'active', 'Industrial lighting that celebrates the honesty of structural steel.'),
-    ('44444444-4444-4444-a444-444444444444', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 9, 'Woven Silence', 2800, 'USD', 'good', 'active', 'Hand-loomed textiles inspired by Nordic landscape textures.'),
-    ('55555555-5555-4555-a555-555555555555', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 4, 'Concrete Resolve', 3400, 'USD', 'excellent', 'active', 'A study in permanence through raw cast concrete.'),
-    ('66666666-6666-4666-a666-666666666666', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 1, 'Oak Fragment', 1650, 'USD', 'good', 'active', 'Salvaged oak beam repurposed into a minimalist functional plinth.')
+  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description, subtitle, price_label, quote, specs) VALUES
+    ('11111111-1111-4111-a111-111111111111', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 1, 'Monolith Lounge', 4200, 'USD', 'excellent', 'active', 'A definitive expression of minimal form, this vessel embodies wabi-sabi aesthetics.', 'Furniture • Concrete', 'Available for immediate acquisition', 'The honesty of material defines the presence of space.', '{"year": "2023", "caseMaterial": "Concrete", "condition": "Excellent"}'),
+    ('22222222-2222-4222-a222-222222222222', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 2, 'Basalt Form IV', 850, 'USD', 'excellent', 'active', 'A raw basalt sculpture that anchors any space with its silent presence.', 'Sculpture • Basalt', NULL, NULL, NULL),
+    ('33333333-3333-4333-a333-333333333333', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 8, 'Linear Beam', 1100, 'USD', 'excellent', 'active', 'Industrial lighting that celebrates the honesty of structural steel.', 'Lighting • Steel', NULL, NULL, NULL),
+    ('44444444-4444-4444-a444-444444444444', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 9, 'Woven Silence', 2800, 'USD', 'good', 'active', 'Hand-loomed textiles inspired by Nordic landscape textures.', 'Textiles • Linen', NULL, NULL, NULL),
+    ('55555555-5555-4555-a555-555555555555', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 4, 'Concrete Resolve', 3400, 'USD', 'excellent', 'active', 'A study in permanence through raw cast concrete.', 'Sculpture • Concrete', NULL, NULL, NULL),
+    ('66666666-6666-4666-a666-666666666666', 'afd7da31-fe60-4147-9825-cf0512b5f2d1', 1, 'Oak Fragment', 1650, 'USD', 'good', 'active', 'Salvaged oak beam repurposed into a minimalist functional plinth.', 'Furniture • Oak', NULL, NULL, NULL)
   ON CONFLICT (id) DO UPDATE SET 
     title = EXCLUDED.title,
     price = EXCLUDED.price,
-    description = EXCLUDED.description;
+    description = EXCLUDED.description,
+    subtitle = EXCLUDED.subtitle,
+    price_label = EXCLUDED.price_label,
+    quote = EXCLUDED.quote,
+    specs = EXCLUDED.specs;
 
   -- 5.2 Sienna Leigh Listings
-  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description) VALUES
-    ('77777777-7777-4777-a777-777777777777', '245e78ab-a512-4108-9298-b4d382e3d1ba', 8, 'GWR Brass Lantern', 1800, 'USD', 'good', 'active', 'A genuine Great Western Railway lantern, restored with original patina.'),
-    ('88888888-8888-4888-a888-888888888888', '245e78ab-a512-4108-9298-b4d382e3d1ba', 10, 'Penguin 1000', 420, 'USD', 'excellent', 'active', 'A complete set of early Penguin paperbacks in remarkable condition.'),
-    ('99999999-9999-4999-a999-999999999999', '245e78ab-a512-4108-9298-b4d382e3d1ba', 2, 'Studio Vessel', 680, 'USD', 'excellent', 'active', 'British studio pottery emphasizing the artisan mark.'),
-    ('aaaaaaaa-aaaa-4aaa-baaa-aaaaaaaaaaaa', '245e78ab-a512-4108-9298-b4d382e3d1ba', 1, 'Riveted Stool', 2100, 'USD', 'good', 'active', 'Industrial seating with visible structural joinery.')
+  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description, subtitle, price_label, quote, specs) VALUES
+    ('77777777-7777-4777-a777-777777777777', '245e78ab-a512-4108-9298-b4d382e3d1ba', 8, 'GWR Brass Lantern', 1800, 'USD', 'good', 'active', 'A genuine Great Western Railway lantern, restored with original patina.', 'Lighting • Brass', 'Historic Piece', 'A beacon from the golden age of steam.', '{"year": "1920", "caseMaterial": "Brass", "condition": "Restored"}'),
+    ('88888888-8888-4888-a888-888888888888', '245e78ab-a512-4108-9298-b4d382e3d1ba', 10, 'Penguin 1000', 420, 'USD', 'excellent', 'active', 'A complete set of early Penguin paperbacks in remarkable condition.', 'Archive • Paper', NULL, NULL, NULL),
+    ('99999999-9999-4999-a999-999999999999', '245e78ab-a512-4108-9298-b4d382e3d1ba', 2, 'Studio Vessel', 680, 'USD', 'excellent', 'active', 'British studio pottery emphasizing the artisan mark.', 'Ceramics • Clay', NULL, NULL, NULL),
+    ('aaaaaaaa-aaaa-4aaa-baaa-aaaaaaaaaaaa', '245e78ab-a512-4108-9298-b4d382e3d1ba', 1, 'Riveted Stool', 2100, 'USD', 'good', 'active', 'Industrial seating with visible structural joinery.', 'Furniture • Steel', NULL, NULL, NULL)
   ON CONFLICT (id) DO UPDATE SET 
     title = EXCLUDED.title,
     price = EXCLUDED.price,
-    description = EXCLUDED.description;
+    description = EXCLUDED.description,
+    subtitle = EXCLUDED.subtitle,
+    price_label = EXCLUDED.price_label,
+    quote = EXCLUDED.quote,
+    specs = EXCLUDED.specs;
 
   -- 5.3 Kenji Sato Listings
-  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description) VALUES
-    ('bbbbbbbb-bbbb-4bbb-abbb-bbbbbbbbbbbb', 'a9ce4650-1a19-47f6-adf3-ff2bd42c970a', 2, 'Temple Bowl', 940, 'USD', 'excellent', 'active', 'Edo-period ceremonial bowl with deep contemplative qualities.'),
-    ('cccccccc-cccc-4ccc-accc-cccccccccccc', 'a9ce4650-1a19-47f6-adf3-ff2bd42c970a', 13, 'Cedar Form', 3200, 'USD', 'excellent', 'active', 'Sculpted from ancient Yakushima cedar, celebrating the grain.'),
-    ('dddddddd-dddd-4ddd-addd-dddddddddddd', 'a9ce4650-1a19-47f6-adf3-ff2bd42c970a', 12, 'Iron Garden', 1500, 'USD', 'good', 'active', 'Cast iron meditative object for interior gardens.')
+  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description, subtitle, price_label, quote, specs) VALUES
+    ('bbbbbbbb-bbbb-4bbb-abbb-bbbbbbbbbbbb', 'a9ce4650-1a19-47f6-adf3-ff2bd42c970a', 2, 'Temple Bowl', 940, 'USD', 'excellent', 'active', 'Edo-period ceremonial bowl with deep contemplative qualities.', 'Ceramics • Edo Period', 'Ceremonial', 'The void is the vessel.', '{"year": "1850", "caseMaterial": "Ceramic", "condition": "Excellent"}'),
+    ('cccccccc-cccc-4ccc-accc-cccccccccccc', 'a9ce4650-1a19-47f6-adf3-ff2bd42c970a', 13, 'Cedar Form', 3200, 'USD', 'excellent', 'active', 'Sculpted from ancient Yakushima cedar, celebrating the grain.', 'Woodwork • Cedar', NULL, NULL, NULL),
+    ('dddddddd-dddd-4ddd-addd-dddddddddddd', 'a9ce4650-1a19-47f6-adf3-ff2bd42c970a', 12, 'Iron Garden', 1500, 'USD', 'good', 'active', 'Cast iron meditative object for interior gardens.', 'Metalwork • Iron', NULL, NULL, NULL)
   ON CONFLICT (id) DO UPDATE SET 
     title = EXCLUDED.title,
     price = EXCLUDED.price,
-    description = EXCLUDED.description;
+    description = EXCLUDED.description,
+    subtitle = EXCLUDED.subtitle,
+    price_label = EXCLUDED.price_label,
+    quote = EXCLUDED.quote,
+    specs = EXCLUDED.specs;
 
   -- 5.4 Generic Archivist 1 Listings
-  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description) VALUES
-    ('eeeeeeee-eeee-4eee-aeee-eeeeeeeeeeee', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 2, 'Earthen Vessel No. 04', 420, 'USD', 'excellent', 'active', 'Hand-thrown stoneware with natural ash glaze.'),
-    ('ffffffff-ffff-4fff-afff-ffffffffffff', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 1, 'The Artek Lounge', 1850, 'USD', 'good', 'active', 'Classic Scandinavian design, restored teak frame.'),
-    ('00000000-0000-4000-a000-000000000000', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 8, 'Brushed Brass Task Lamp', 315, 'USD', 'excellent', 'active', 'Minimalist lighting with architectural precision.'),
-    ('10101010-1010-4101-b010-101010101010', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 5, 'Minimalist Wall Clock', 450, 'USD', 'excellent', 'active', 'Steel frame clock with silent movement.')
+  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description, subtitle, price_label, quote, specs) VALUES
+    ('eeeeeeee-eeee-4eee-aeee-eeeeeeeeeeee', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 2, 'Earthen Vessel No. 04', 420, 'USD', 'excellent', 'active', 'Hand-thrown by master ceramicist in rural Japan, each vessel carries the unique imprint of its maker''s hands. The irregular glaze pattern emerges from a 72-hour firing process in a wood-fired kiln.\n\nThis particular piece demonstrates exceptional balance between function and form, suitable for both dried floral arrangements and as a standalone sculptural presence.', 'Ceramic • Stoneware', 'Available for immediate acquisition', 'A definitive expression of minimal form, this vessel embodies the essence of wabi-sabi aesthetics.', '{"year": "2024", "diameter": "18cm", "caseMaterial": "Stoneware", "condition": "Excellent", "accessories": "Certificate of Authenticity"}'),
+    ('ffffffff-ffff-4fff-afff-ffffffffffff', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 1, 'The Artek Lounge', 1850, 'USD', 'good', 'active', 'Designed in the 1960s by Finnish master craftsman, this lounge chair represents the pinnacle of Scandinavian design philosophy.\n\nCrafted from sustainably sourced Finnish teak with hand-stitched leather upholstery.', 'Furniture • Teak', 'Limited availability', 'A masterclass in organic modernism, where every curve serves purpose.', '{"year": "1965", "diameter": "N/A", "caseMaterial": "Teak & Leather", "condition": "Very Good", "accessories": "Original Certificate"}'),
+    ('00000000-0000-4000-a000-000000000000', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 8, 'Brushed Brass Task Lamp', 315, 'USD', 'excellent', 'active', 'Minimalist lighting with architectural precision.', 'Lighting • Brass', 'In stock', 'Form follows light.', '{"year": "2023", "diameter": "15cm", "caseMaterial": "Brushed Brass", "condition": "New", "accessories": "Bulb included"}'),
+    ('10101010-1010-4101-b010-101010101010', 'dabeb621-4eb2-4160-a9d1-6306e6d9cbf9', 5, 'Minimalist Wall Clock', 450, 'USD', 'excellent', 'active', 'Steel frame clock with silent movement.', 'Objects • Steel', NULL, NULL, NULL)
   ON CONFLICT (id) DO UPDATE SET 
     title = EXCLUDED.title,
     price = EXCLUDED.price,
-    description = EXCLUDED.description;
+    description = EXCLUDED.description,
+    subtitle = EXCLUDED.subtitle,
+    price_label = EXCLUDED.price_label,
+    quote = EXCLUDED.quote,
+    specs = EXCLUDED.specs;
 
   -- 5.5 Generic Archivist 2 Listings
-  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description) VALUES
-    ('20202020-2020-4202-b020-202020202020', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 2, 'Porous Vessel No. 14', 240, 'USD', 'excellent', 'active', 'Organic ceramic form with unique surface texture.'),
-    ('30303030-3030-4303-b030-303030303030', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 4, 'Obsidian Pillar Mount', 165, 'USD', 'excellent', 'active', 'Sharp geometry in volcanic stone.'),
-    ('40404040-4040-4404-b040-404040404040', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 9, 'Raw Flax Runner', 95, 'USD', 'good', 'active', 'Hand-woven textile with natural fibers.'),
-    ('50505050-5050-4505-b050-505050505050', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 13, 'Charred Oak Plinth', 310, 'USD', 'good', 'active', 'Shou Sugi Ban treated oak block.')
+  INSERT INTO listings (id, archivist_id, category_id, title, price, currency, condition, status, description, subtitle, price_label, quote, specs) VALUES
+    ('20202020-2020-4202-b020-202020202020', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 2, 'Porous Vessel No. 14', 240, 'USD', 'excellent', 'active', 'Organic ceramic form with unique surface texture.', 'Ceramics • Texture', NULL, NULL, NULL),
+    ('30303030-3030-4303-b030-303030303030', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 4, 'Obsidian Pillar Mount', 165, 'USD', 'excellent', 'active', 'Sharp geometry in volcanic stone.', 'Sculpture • Obsidian', NULL, NULL, NULL),
+    ('40404040-4040-4404-b040-404040404040', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 9, 'Raw Flax Runner', 95, 'USD', 'good', 'active', 'Hand-woven textile with natural fibers.', 'Textiles • Flax', NULL, NULL, NULL),
+    ('50505050-5050-4505-b050-505050505050', '0e02c120-55bc-4b0d-a467-aa7e0187b50f', 13, 'Charred Oak Plinth', 310, 'USD', 'good', 'active', 'Shou Sugi Ban treated oak block.', 'Woodwork • Oak', NULL, NULL, NULL)
   ON CONFLICT (id) DO UPDATE SET 
     title = EXCLUDED.title,
     price = EXCLUDED.price,
-    description = EXCLUDED.description;
+    description = EXCLUDED.description,
+    subtitle = EXCLUDED.subtitle,
+    price_label = EXCLUDED.price_label,
+    quote = EXCLUDED.quote,
+    specs = EXCLUDED.specs;
 
   -- 6. Seed Listing Images
   INSERT INTO listing_images (id, listing_id, image_path, display_order) VALUES
