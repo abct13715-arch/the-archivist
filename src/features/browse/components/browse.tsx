@@ -1,8 +1,10 @@
 import {useEffect, useRef, useState} from 'react';
 import {Pagination} from '@/components';
 import {Colors} from '@/constants/theme';
+import {useAuth} from '@/contexts/auth-context';
 import {LoginBottomSheet} from '@/features/auth';
 import {usePaginatedListings} from '@/features/listing/hooks/use-paginated-listings';
+import {useGetSavedListings} from '@/features/saved/hooks/use-saved-items';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
 
@@ -26,6 +28,9 @@ export const Browse = () => {
   const [inputValue, setInputValue] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [filters, setFilters] = useState<FilterCriteria>({});
+
+  const {user} = useAuth();
+  const {data: savedItems} = useGetSavedListings(user?.id ?? '');
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -112,15 +117,24 @@ export const Browse = () => {
       ) : (
         <>
           <View className="flex-row flex-wrap justify-between gap-y-2 px-6 pt-10">
-            {listings.map(listing => (
-              <BrowseListingCard
-                key={listing.id}
-                listing={listing}
-                onRequireAuth={() => {
-                  authBottomSheetReference.current?.present();
-                }}
-              />
-            ))}
+            {listings.map(listing => {
+              const isBookmarked = savedItems?.some(
+                item => item.listing_id === listing.id,
+              );
+
+              return (
+                <BrowseListingCard
+                  key={listing.id}
+                  listing={listing}
+                  isBookmarked={isBookmarked}
+                  onRequireAuth={() => {
+                    if (!user) {
+                      authBottomSheetReference.current?.present();
+                    }
+                  }}
+                />
+              );
+            })}
           </View>
           {totalPages > 1 && (
             <Pagination

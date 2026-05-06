@@ -1,4 +1,11 @@
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {useAuth} from '@/contexts/auth-context';
+import {LoginBottomSheet} from '@/features/auth';
+import {
+  useCheckIsSaved,
+  useToggleSavedCollection,
+} from '@/features/saved/hooks/use-saved-items';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {Image} from 'expo-image';
 import {useLocalSearchParams} from 'expo-router';
 import {
@@ -16,8 +23,40 @@ const ITEMS_PER_PAGE = 3;
 
 export const CollectionDetail = () => {
   const {id} = useLocalSearchParams<{id: string}>();
+  const authBottomSheetReference = useRef<BottomSheetModal>(null);
+
+  const {user} = useAuth();
   const {data: collection, isLoading, error} = useGetCollectionById(id);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  const {data: isSavedQuery} = useCheckIsSaved(
+    user?.id ?? '',
+    id,
+    'collection',
+  );
+
+  const toggleSaved = useToggleSavedCollection();
+  const [isSavedLocal, setIsSavedLocal] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    if (isSavedQuery !== undefined) {
+      setIsSavedLocal(isSavedQuery);
+    }
+  }, [isSavedQuery]);
+
+  const handleToggleSaved = () => {
+    if (!user) {
+      authBottomSheetReference.current?.present();
+      return;
+    }
+
+    const nextState = !isSavedLocal;
+    setIsSavedLocal(nextState);
+
+    if (id) {
+      toggleSaved.mutate({userId: user.id, collectionId: id});
+    }
+  };
 
   if (isLoading) {
     return (
@@ -91,7 +130,18 @@ export const CollectionDetail = () => {
           </TouchableOpacity>
         )}
       </View>
-
+      <View className="items-center">
+        <TouchableOpacity
+          onPress={handleToggleSaved}
+          className={`border px-6 py-2 ${isSavedLocal ? 'border-secondary-500' : 'border-primary-900'}`}
+        >
+          <Text
+            className={`text-[10px] font-bold uppercase tracking-widest ${isSavedLocal ? 'text-secondary-500' : 'text-primary-900'}`}
+          >
+            {isSavedLocal ? 'SAVED' : 'SAVE COLLECTION'}
+          </Text>
+        </TouchableOpacity>
+      </View>
       <View className="mx-2 my-8 items-center gap-6 px-8 py-12">
         <Text className="text-center text-xs tracking-label-xl text-primary-900">
           THE ARCHIVE IS NEVER COMPLETE
@@ -110,6 +160,8 @@ export const CollectionDetail = () => {
           </Text>
         </TouchableOpacity>
       </View>
+
+      <LoginBottomSheet ref={authBottomSheetReference} />
     </ScrollView>
   );
 };

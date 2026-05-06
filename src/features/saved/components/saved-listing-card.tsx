@@ -25,7 +25,7 @@ export const SavedListingCard = ({listing}: Props) => {
         />
       </View>
 
-      <View className="border-t border-neutral-300 px-6 pt-6">
+      <View className="border-t border-neutral-300 px-4 pt-6">
         <View className="mb-2 flex-row items-start justify-between">
           <Text
             className="mr-2 flex-1 font-playfair text-2xl leading-tight text-primary-900"

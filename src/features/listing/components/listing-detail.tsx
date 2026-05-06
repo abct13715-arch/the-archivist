@@ -1,4 +1,5 @@
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
+import {useAuth} from '@/contexts/auth-context';
 import {Image} from 'expo-image';
 import {
   Dimensions,
@@ -10,6 +11,10 @@ import {
 
 import {IconSymbol} from '@/components/ui/icon-symbol';
 
+import {
+  useCheckIsSaved,
+  useToggleSavedItem,
+} from '../../saved/hooks/use-saved-items';
 import type {TListingDetail} from '../data';
 import {ListingProvenance} from './listing-provenance';
 import {ListingSpecs} from './listing-specs';
@@ -32,6 +37,47 @@ export const ListingDetail = ({
   showFullDetails = false,
   onRelatedListingPress,
 }: ListingDetailProps) => {
+  const {user} = useAuth();
+  const {data: isSavedQuery} = useCheckIsSaved(
+    user?.id ?? '',
+    listing.id,
+    'listing',
+  );
+  const toggleSaved = useToggleSavedItem();
+
+  const [isSavedLocal, setIsSavedLocal] = useState<boolean | undefined>();
+  const debounceTimer = useRef<number | null>(null);
+
+  // Sync local state when query data changes
+  useEffect(() => {
+    if (isSavedQuery !== undefined) {
+      setIsSavedLocal(isSavedQuery);
+    }
+  }, [isSavedQuery]);
+
+  const handleToggleSaved = () => {
+    if (!user?.id) {
+      onSaveLater?.();
+      return;
+    }
+
+    // 1. Immediate UI update
+    const nextState = !isSavedLocal;
+    setIsSavedLocal(nextState);
+
+    // 2. Debounce the actual API call
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+
+    debounceTimer.current = setTimeout(() => {
+      // Only trigger if the final local state differs from the server state
+      if (nextState !== isSavedQuery) {
+        toggleSaved.mutate({userId: user.id, listingId: listing.id});
+      }
+    }, 500);
+  };
+
   const allImages = useMemo(() => {
     const images: (typeof listing.image)[] = [];
 
@@ -125,12 +171,22 @@ export const ListingDetail = ({
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={onSaveLater}
-          className="flex-row items-center justify-center gap-2 border border-brand-primary py-5"
+          onPress={handleToggleSaved}
+          className={`flex-row items-center justify-center gap-2 border py-5 ${
+            isSavedLocal ? 'border-secondary-500' : 'border-brand-primary'
+          }`}
         >
-          <IconSymbol name="bookmark" size={14} color="#1A1A1A" />
-          <Text className="text-sm tracking-label-lg text-brand-primary">
-            SAVE FOR LATER
+          <IconSymbol
+            name={isSavedLocal ? 'bookmark.fill' : 'bookmark'}
+            size={14}
+            color={isSavedLocal ? '#C8522A' : '#1A1A1A'}
+          />
+          <Text
+            className={`text-sm font-bold tracking-label-lg ${
+              isSavedLocal ? 'text-secondary-500' : 'text-brand-primary'
+            }`}
+          >
+            {isSavedLocal ? 'SAVED' : 'SAVE'}
           </Text>
         </TouchableOpacity>
 

@@ -21,7 +21,7 @@ export const SavedLoadMore = ({
         className="bg-secondary-500 px-12 py-4"
       >
         <Text className="text-[11px] font-bold uppercase tracking-[0.2em] text-white">
-          LOAD MORE ARCHIVE
+          LOAD MORE
         </Text>
       </TouchableOpacity>
     </View>

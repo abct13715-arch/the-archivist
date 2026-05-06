@@ -1,8 +1,12 @@
 import {useState} from 'react';
 import {Colors} from '@/constants/theme';
-import {ScrollView, Text, View} from 'react-native';
+import {useAuth} from '@/contexts/auth-context';
+import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
 
-import {savedCollections, savedListings} from '../data';
+import {
+  useGetSavedCollections,
+  useGetSavedListings,
+} from '../hooks/use-saved-items';
 import {SavedCollections} from './saved-collections';
 import {SavedListingCard} from './saved-listing-card';
 import {SavedLoadMore} from './saved-load-more';
@@ -12,6 +16,23 @@ export const Saved = () => {
   const [activeTab, setActiveTab] = useState<'objects' | 'collections'>(
     'objects',
   );
+  const [visibleCount, setVisibleCount] = useState(4);
+  const {user, isLoading: isUserLoading} = useAuth();
+
+  const {data: savedListings, isLoading: isListingsLoading} =
+    useGetSavedListings(user?.id ?? '');
+  const {data: savedCollections, isLoading: isCollectionsLoading} =
+    useGetSavedCollections(user?.id ?? '');
+
+  const displayedListings = savedListings?.slice(0, visibleCount);
+
+  if (isUserLoading) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView
@@ -35,26 +56,65 @@ export const Saved = () => {
 
         <SavedTabToggle activeTab={activeTab} onTabChange={setActiveTab} />
 
-        {activeTab === 'objects' ? (
+        {isListingsLoading || isCollectionsLoading ? (
+          <View className="py-20">
+            <ActivityIndicator size="large" />
+          </View>
+        ) : activeTab === 'objects' ? (
           <>
             <View className="flex-row flex-wrap justify-between gap-y-6">
-              {savedListings.map(listing => (
-                <View
-                  key={listing.id}
-                  className="w-[48%]"
-                  style={{
-                    marginBottom: 32,
-                  }}
-                >
-                  <SavedListingCard listing={listing} />
-                </View>
-              ))}
+              {displayedListings?.map(item => {
+                return (
+                  <View
+                    key={item.id}
+                    className="w-[48%]"
+                    style={{
+                      marginBottom: 32,
+                    }}
+                  >
+                    {item.listing ? (
+                      <SavedListingCard
+                        listing={{
+                          id: item.listing.id,
+                          title: item.listing.title,
+                          studio:
+                            item.listing.archivist?.display_name ?? 'Unknown',
+                          price: `$${item.listing.price}`,
+                          image: {
+                            uri:
+                              item.listing.listing_images?.[0]?.image_path ??
+                              '',
+                          },
+                        }}
+                      />
+                    ) : (
+                      <Text>Listing data missing</Text>
+                    )}
+                  </View>
+                );
+              })}
             </View>
 
-            <SavedLoadMore shownCount={savedListings.length} totalCount={28} />
+            {(savedListings?.length ?? 0) > visibleCount && (
+              <SavedLoadMore
+                shownCount={displayedListings?.length ?? 0}
+                totalCount={savedListings?.length ?? 0}
+                onLoadMore={() => setVisibleCount(previous => previous + 4)}
+              />
+            )}
           </>
         ) : (
-          <SavedCollections collections={savedCollections} />
+          <SavedCollections
+            collections={
+              savedCollections?.map(sc => ({
+                id: sc.collection?.id ?? '',
+                image: {uri: sc.collection?.cover_path ?? ''},
+                title: sc.collection?.title ?? '',
+                curator: sc.collection?.archivist?.display_name ?? 'Unknown',
+                itemCount: 0,
+              })) ?? []
+            }
+          />
         )}
       </View>
     </ScrollView>

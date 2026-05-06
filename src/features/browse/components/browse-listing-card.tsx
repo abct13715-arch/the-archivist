@@ -1,6 +1,8 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Colors} from '@/constants/theme';
+import {useAuth} from '@/contexts/auth-context';
 import {TListing} from '@/features/listing/models';
+import {useToggleSavedItem} from '@/features/saved/hooks/use-saved-items';
 import {MaterialIcons} from '@expo/vector-icons';
 import {Image} from 'expo-image';
 import {router} from 'expo-router';
@@ -18,25 +20,44 @@ export const BrowseListingCard = ({
   onRequireAuth,
 }: Props) => {
   const [bookmarked, setBookmarked] = useState(isBookmarked);
+  const {user} = useAuth();
+  const {mutate: toggleSave} = useToggleSavedItem();
+
+  useEffect(() => {
+    setBookmarked(isBookmarked);
+  }, [isBookmarked]);
 
   const handleToggle = useCallback(() => {
-    if (onRequireAuth) {
-      onRequireAuth();
+    if (!user) {
+      onRequireAuth?.();
       return;
     }
-    const newState = !bookmarked;
-    setBookmarked(newState);
-  }, [bookmarked, onRequireAuth]);
+
+    setBookmarked(!bookmarked);
+
+    toggleSave(
+      {
+        userId: user.id,
+        listingId: listing.id,
+      },
+      {
+        onSuccess: () => console.log('Save toggle successful'),
+        onError: error => console.error('Save toggle failed:', error),
+      },
+    );
+  }, [bookmarked, user, onRequireAuth, toggleSave, listing.id]);
 
   const handlePress = useCallback(() => {
     router.push(`/listing/${listing.id}`);
   }, [listing.id]);
 
+  const imageUrl = listing.images?.[0]?.image_path;
+
   return (
     <TouchableOpacity onPress={handlePress} className="mb-10 w-[46%]">
       <View className="relative mb-4 border border-neutral-300">
         <Image
-          source={listing.images[0].image_path}
+          source={imageUrl}
           style={{width: '100%', aspectRatio: 3 / 4}}
           contentFit="cover"
         />
